@@ -1,10 +1,14 @@
 package LoginAndRegister;
 
 import java.awt.EventQueue;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
@@ -15,11 +19,14 @@ public class Login {
 	private JPasswordField passwordField;
 
 	
-	public Login() {
+	public Login() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize() throws ClassNotFoundException, SQLException {
+		
+		SlqAndFuctions saf= new SlqAndFuctions();
+		saf.getConn(null, null, null, null);
 		loginFrame = new JFrame();
 		loginFrame.setResizable(false);
 		loginFrame.setTitle("LOGIN");
