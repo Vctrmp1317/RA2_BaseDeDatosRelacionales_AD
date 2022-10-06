@@ -27,6 +27,7 @@ public class Login {
 		
 		SlqAndFuctions saf= new SlqAndFuctions();
 		saf.getConn(null, null, null, null);
+		
 		loginFrame = new JFrame();
 		loginFrame.setResizable(false);
 		loginFrame.setTitle("LOGIN");
