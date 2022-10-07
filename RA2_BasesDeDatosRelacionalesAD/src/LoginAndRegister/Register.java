@@ -26,9 +26,8 @@ import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
-public class Register {
+public class Register extends JFrame{
 
-	private JFrame registerFrame;
 	private JTextField textDni;
 	private JPasswordField passwordField;
 	private JLabel lblName;
@@ -50,80 +49,79 @@ public class Register {
 	}
 
 	private void initialize() {
-		registerFrame = new JFrame();
-		registerFrame.setResizable(false);
-		registerFrame.setBounds(100, 100, 450, 300);
-		registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		registerFrame.getContentPane().setLayout(null);
+		setResizable(false);
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setBounds(37, 48, 73, 14);
-		registerFrame.getContentPane().add(lblDni);
+		getContentPane().add(lblDni);
 
 		textDni = new JTextField();
 		textDni.setBounds(37, 73, 86, 20);
-		registerFrame.getContentPane().add(textDni);
+		getContentPane().add(textDni);
 		textDni.setColumns(10);
 
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(37, 104, 86, 14);
-		registerFrame.getContentPane().add(lblPassword);
+		getContentPane().add(lblPassword);
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(37, 129, 86, 20);
-		registerFrame.getContentPane().add(passwordField);
+		getContentPane().add(passwordField);
 
 		lblName = new JLabel("NAME");
 		lblName.setBounds(37, 160, 46, 14);
-		registerFrame.getContentPane().add(lblName);
+		getContentPane().add(lblName);
 
 		textName = new JTextField();
 		textName.setBounds(37, 185, 86, 20);
-		registerFrame.getContentPane().add(textName);
+		getContentPane().add(textName);
 		textName.setColumns(10);
 
 		lblSecondName = new JLabel("SECOND NAME");
 		lblSecondName.setBounds(174, 48, 73, 14);
-		registerFrame.getContentPane().add(lblSecondName);
+		getContentPane().add(lblSecondName);
 
 		textSecondName = new JTextField();
 		textSecondName.setBounds(174, 73, 86, 20);
-		registerFrame.getContentPane().add(textSecondName);
+		getContentPane().add(textSecondName);
 		textSecondName.setColumns(10);
 
 		lblImage = new JLabel("IMAGE ");
 		lblImage.setBounds(178, 160, 46, 14);
-		registerFrame.getContentPane().add(lblImage);
+		getContentPane().add(lblImage);
 
 		lblEmail = new JLabel("EMAIL");
 		lblEmail.setBounds(174, 104, 46, 14);
-		registerFrame.getContentPane().add(lblEmail);
+		getContentPane().add(lblEmail);
 
 		textEmail = new JTextField();
 		textEmail.setBounds(174, 129, 86, 20);
-		registerFrame.getContentPane().add(textEmail);
+		getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 
 		btnAddImage = new JButton("ADD IMAGE");
 		btnAddImage.setBounds(171, 184, 89, 23);
-		registerFrame.getContentPane().add(btnAddImage);
+		getContentPane().add(btnAddImage);
 
 		lblBirthdate = new JLabel("BIRTHDATE");
 		lblBirthdate.setBounds(310, 48, 73, 14);
-		registerFrame.getContentPane().add(lblBirthdate);
+		getContentPane().add(lblBirthdate);
 
 		textBirthdate = new JTextField();
 		textBirthdate.setBounds(310, 73, 86, 20);
-		registerFrame.getContentPane().add(textBirthdate);
+		getContentPane().add(textBirthdate);
 		textBirthdate.setColumns(10);
 
 		btnCancel = new JButton("CANCEL");
 		btnCancel.setBounds(37, 216, 89, 23);
-		registerFrame.getContentPane().add(btnCancel);
+		getContentPane().add(btnCancel);
 
 		btnAccept = new JButton("ACCEPT");
 		btnAccept.setBounds(310, 216, 89, 23);
-		registerFrame.getContentPane().add(btnAccept);
+		getContentPane().add(btnAccept);
 
 		Fc = new JFileChooser();
 	}
@@ -141,7 +139,7 @@ public class Register {
 			Object o = e.getSource();
 			if (o == btnAddImage) {
 
-				registerFrame.add(Fc);
+				add(Fc);
 				Fc.setVisible(true);
 
 				int seleccion = Fc.showOpenDialog(null);
@@ -168,18 +166,26 @@ public class Register {
 					birthDate = (Date) format.parse(textBirthdate.getText());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
-					Users u=new Users(textDni.getText(),passwordField.getText(),"Student");
-						SlqAndFuctions saf=new SlqAndFuctions();
-						saf.insert(s);
-						saf.inserUser(u);
+					Users u=new Users(textDni.getText(),passwordField.getSelectedText(),"Student");
+						SlqAndFuctions.insert(s);
+						SlqAndFuctions.inserUser(u);
 				} catch (ParseException | ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
 			}else if(o == btnCancel) {
+				Login frame = null;
+				try {
+					frame = new Login();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					dispose();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				registerFrame.dispose();
 				
 			}
 

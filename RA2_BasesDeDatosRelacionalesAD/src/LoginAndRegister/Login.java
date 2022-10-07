@@ -68,8 +68,10 @@ public class Login extends JFrame {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 			if(o == btnRegister) {
-				setVisible(false);
-				new Register();
+				Register frame = new Register();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			}
 			
 		}
