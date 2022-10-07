@@ -26,8 +26,9 @@ import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
-public class Register extends JFrame{
-
+public class Register {
+	
+	private JFrame registerFrame;
 	private JTextField textDni;
 	private JPasswordField passwordField;
 	private JLabel lblName;
@@ -49,81 +50,89 @@ public class Register extends JFrame{
 	}
 
 	private void initialize() {
-		setResizable(false);
-		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
+		registerFrame=new JFrame();
+		registerFrame.setResizable(false);
+		registerFrame.setBounds(100, 100, 450, 300);
+		registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		registerFrame.getContentPane().setLayout(null);
+		registerFrame.setLocationRelativeTo(null);
 
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setBounds(37, 48, 73, 14);
-		getContentPane().add(lblDni);
+		registerFrame.getContentPane().add(lblDni);
 
 		textDni = new JTextField();
 		textDni.setBounds(37, 73, 86, 20);
-		getContentPane().add(textDni);
+		registerFrame.getContentPane().add(textDni);
 		textDni.setColumns(10);
 
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(37, 104, 86, 14);
-		getContentPane().add(lblPassword);
+		registerFrame.getContentPane().add(lblPassword);
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(37, 129, 86, 20);
-		getContentPane().add(passwordField);
+		registerFrame.getContentPane().add(passwordField);
 
 		lblName = new JLabel("NAME");
 		lblName.setBounds(37, 160, 46, 14);
-		getContentPane().add(lblName);
+		registerFrame.getContentPane().add(lblName);
 
 		textName = new JTextField();
 		textName.setBounds(37, 185, 86, 20);
-		getContentPane().add(textName);
+		registerFrame.getContentPane().add(textName);
 		textName.setColumns(10);
 
 		lblSecondName = new JLabel("SECOND NAME");
 		lblSecondName.setBounds(174, 48, 73, 14);
-		getContentPane().add(lblSecondName);
+		registerFrame.getContentPane().add(lblSecondName);
 
 		textSecondName = new JTextField();
 		textSecondName.setBounds(174, 73, 86, 20);
-		getContentPane().add(textSecondName);
+		registerFrame.getContentPane().add(textSecondName);
 		textSecondName.setColumns(10);
 
 		lblImage = new JLabel("IMAGE ");
 		lblImage.setBounds(178, 160, 46, 14);
-		getContentPane().add(lblImage);
+		registerFrame.getContentPane().add(lblImage);
 
 		lblEmail = new JLabel("EMAIL");
 		lblEmail.setBounds(174, 104, 46, 14);
-		getContentPane().add(lblEmail);
+		registerFrame.getContentPane().add(lblEmail);
 
 		textEmail = new JTextField();
 		textEmail.setBounds(174, 129, 86, 20);
-		getContentPane().add(textEmail);
+		registerFrame.getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 
 		btnAddImage = new JButton("ADD IMAGE");
 		btnAddImage.setBounds(171, 184, 89, 23);
-		getContentPane().add(btnAddImage);
+		registerFrame.getContentPane().add(btnAddImage);
 
 		lblBirthdate = new JLabel("BIRTHDATE");
 		lblBirthdate.setBounds(310, 48, 73, 14);
-		getContentPane().add(lblBirthdate);
+		registerFrame.getContentPane().add(lblBirthdate);
 
 		textBirthdate = new JTextField();
 		textBirthdate.setBounds(310, 73, 86, 20);
-		getContentPane().add(textBirthdate);
+		registerFrame.getContentPane().add(textBirthdate);
 		textBirthdate.setColumns(10);
 
 		btnCancel = new JButton("CANCEL");
 		btnCancel.setBounds(37, 216, 89, 23);
-		getContentPane().add(btnCancel);
+		registerFrame.getContentPane().add(btnCancel);
 
 		btnAccept = new JButton("ACCEPT");
 		btnAccept.setBounds(310, 216, 89, 23);
-		getContentPane().add(btnAccept);
+		registerFrame.getContentPane().add(btnAccept);
 
 		Fc = new JFileChooser();
+		registerFrame.setVisible(true);
+		ManEven man=new ManEven();
+		btnAddImage.addActionListener(man);
+		btnCancel.addActionListener(man);
+		btnAccept.addActionListener(man);
+		
 	}
 
 	private void copyFileUsingJava7Files(File source, File dest) throws IOException {
@@ -131,7 +140,7 @@ public class Register extends JFrame{
 
 	}
 
-	private class ManEvent implements ActionListener {
+	private class ManEven implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -139,7 +148,7 @@ public class Register extends JFrame{
 			Object o = e.getSource();
 			if (o == btnAddImage) {
 
-				add(Fc);
+				registerFrame.add(Fc);
 				Fc.setVisible(true);
 
 				int seleccion = Fc.showOpenDialog(null);
@@ -161,9 +170,9 @@ public class Register extends JFrame{
 			} else if (o == btnAccept) {
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 				String route = "imgs/" + textDni.getText() + textName.getText() + ".jpg";
-				Date birthDate;
+				java.sql.Date birthDate;
 				try {
-					birthDate = (Date) format.parse(textBirthdate.getText());
+					birthDate = (java.sql.Date) format.parse(textBirthdate.getText());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
 					Users u=new Users(textDni.getText(),passwordField.getSelectedText(),"Student");
@@ -177,10 +186,9 @@ public class Register extends JFrame{
 			}else if(o == btnCancel) {
 				Login frame = null;
 				try {
-					frame = new Login();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-					dispose();
+					new Login();
+					
+					registerFrame.dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
