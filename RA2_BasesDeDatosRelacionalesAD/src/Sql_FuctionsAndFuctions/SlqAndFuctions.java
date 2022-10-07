@@ -3,6 +3,7 @@ package Sql_FuctionsAndFuctions;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Classes.Student;
@@ -21,8 +22,10 @@ public class SlqAndFuctions {
 		return conn;
 	}
 	
-	public static void insertStudent(Student s) throws ClassNotFoundException, SQLException {
-		
+	public static void insert(Object o) throws ClassNotFoundException, SQLException {
+		if(o.getClass()==Student.class) {
+			
+		Student s=(Student) o;
 		PreparedStatement stmt=null;
 		stmt=getConn(null, null, null, null).prepareStatement("INSERT INTO student VALUES (?,?,?,?,?,?");
 		stmt.setString(1, s.getDni());
@@ -32,17 +35,21 @@ public class SlqAndFuctions {
 		stmt.setString(5, s.getRouteImg());
 		stmt.setDate(6, s.getBirthdate());
 		stmt.executeUpdate();
+		stmt.close();
+		}
+		else if(o.getClass()==Teacher.class) {
+			Teacher t=(Teacher) o;
+			PreparedStatement stmt=null;
+			stmt=getConn(null, null, null, null).prepareStatement("INSERT INTO teachers VALUES (?,?,?,?");
+			stmt.setString(1, t.getDni());
+			stmt.setString(2,t.getName());
+			stmt.setString(3, t.getSecondName());
+			stmt.setString(4, t.getEmail());
+			stmt.executeUpdate();
+			stmt.close();
+		}
 		
-	}
-	
-	public static void insertTeacher(Teacher t) throws ClassNotFoundException, SQLException {
-		PreparedStatement stmt=null;
-		stmt=getConn(null, null, null, null).prepareStatement("INSERT INTO teachers VALUES (?,?,?,?");
-		stmt.setString(1, t.getDni());
-		stmt.setString(2,t.getName());
-		stmt.setString(3, t.getSecondName());
-		stmt.setString(4, t.getEmail());
-		stmt.executeUpdate();
+		
 	}
 	
 	public static void inserUser(Users s) throws ClassNotFoundException, SQLException {
@@ -51,7 +58,13 @@ public class SlqAndFuctions {
 		stmt.setString(1, s.getDni());
 		stmt.setString(2,s.getPassword());
 		stmt.setString(3, s.getRol());
-
+		stmt.close();
+	}
+	
+	public static ResultSet consultDB(String table,String dataConsult) throws ClassNotFoundException, SQLException {
+		PreparedStatement stmt=getConn(null,null,null,null).prepareStatement("SELECT * FROM "+table+" WHERE"+dataConsult+" = ?");
+		ResultSet rs=stmt.executeQuery();
+		return rs;
 	}
 
 }

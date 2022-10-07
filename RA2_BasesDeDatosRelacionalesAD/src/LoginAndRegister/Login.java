@@ -1,6 +1,8 @@
 package LoginAndRegister;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ public class Login {
 	private JFrame loginFrame;
 	private JTextField textDni;
 	private JPasswordField passwordField;
+	private JButton btnRegister,btnLogin;
 
 	
 	public Login() throws ClassNotFoundException, SQLException {
@@ -52,13 +55,27 @@ public class Login {
 		passwordField.setBounds(45, 178, 86, 20);
 		loginFrame.getContentPane().add(passwordField);
 		
-		JButton btnLogin = new JButton("LOGIN");
+		btnLogin = new JButton("LOGIN");
 		btnLogin.setBounds(186, 177, 89, 23);
 		loginFrame.getContentPane().add(btnLogin);
 		
-		JButton btnRegister = new JButton("REGISTER");
+		btnRegister = new JButton("REGISTER");
 		btnRegister.setBounds(305, 177, 89, 23);
 		loginFrame.getContentPane().add(btnRegister);
+		
+	}
+	private class ManEvent implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Object o = e.getSource();
+			if(o == btnRegister) {
+				loginFrame.setVisible(false);
+				new Register();
+			}
+			
+		}
 		
 	}
 }
