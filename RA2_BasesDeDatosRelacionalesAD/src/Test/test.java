@@ -1,14 +1,22 @@
 package Test;
 
-import java.sql.SQLException;
+import java.awt.EventQueue;
 
 import LoginAndRegister.Login;
 
 public class test {
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		new Login();
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login frame = new Login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
