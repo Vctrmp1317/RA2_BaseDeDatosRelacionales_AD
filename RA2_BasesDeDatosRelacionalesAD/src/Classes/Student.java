@@ -5,9 +5,9 @@ import java.sql.Date;
 
 public class Student {
 	private String dni,name,secondName,email,routeImg;
-	private Date birthdate;
+	private java.sql.Date birthdate;
 	
-	public Student(String dni, String name, String secondName, String email, String routeImg, Date birthdate) {
+	public Student(String dni, String name, String secondName, String email, String routeImg, java.sql.Date birthdate) {
 		super();
 		this.dni = dni;
 		this.name = name;

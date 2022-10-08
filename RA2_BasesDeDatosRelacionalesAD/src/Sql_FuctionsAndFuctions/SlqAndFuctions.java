@@ -68,5 +68,12 @@ public class SlqAndFuctions {
 		ResultSet rs=stmt.executeQuery();
 		return rs;
 	}
+	
+	public static void delete(String table,String primaryKey,String valor) throws ClassNotFoundException, SQLException {
+		PreparedStatement stmt=null;
+		stmt=getConn().prepareStatement("DELETE FROM "+table+" WHERE "+primaryKey+" = "+valor);
+		
+	}
+	
 
 }

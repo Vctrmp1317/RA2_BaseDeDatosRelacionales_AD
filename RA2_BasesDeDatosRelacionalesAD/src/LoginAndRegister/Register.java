@@ -172,10 +172,11 @@ public class Register {
 				String route = "imgs/" + textDni.getText() + textName.getText() + ".jpg";
 				java.sql.Date birthDate;
 				try {
-					birthDate = (java.sql.Date) format.parse(textBirthdate.getText());
+					
+					birthDate =new Date(format.parse(textBirthdate.getText()).getTime());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
-					Users u=new Users(textDni.getText(),passwordField.getSelectedText(),"Student");
+					Users u=new Users(textDni.getText(),passwordField.getText(),"Student");
 						SlqAndFuctions.insert(s);
 						SlqAndFuctions.inserUser(u);
 				} catch (ParseException | ClassNotFoundException | SQLException e1) {
