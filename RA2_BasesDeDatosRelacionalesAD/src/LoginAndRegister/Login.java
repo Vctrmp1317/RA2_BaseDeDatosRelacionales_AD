@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
@@ -65,6 +66,7 @@ public class Login {
 
 		ManEvent man = new ManEvent();
 		btnRegister.addActionListener(man);
+		btnLogin.addActionListener(man);
 
 	}
 
@@ -80,27 +82,34 @@ public class Login {
 				loginFrame.setVisible(false);
 			} else if (o == btnLogin) {
 				SlqAndFuctions sql = new SlqAndFuctions();
-				try {
-					String pass = passwordField.getText();
-					ResultSet res = sql.consultDB("users", "rol");
-					while (res.next()) {
-						String pass2 = res.getString("passsword");
-						if (pass.equals(pass2)) {
-						String rol = res.getString("rol");
-						
-						if (rol.equals("student")) {
+				if (textDni.getText().isEmpty() || passwordField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(loginFrame, "THERE ARE EMPTY FIELDS");
+				} else {
+					try {
+						String pass = passwordField.getText();
+						ResultSet res = sql.consultDB("users");
+						while (res.next()) {
+							String pass2 = res.getString("PASSWORD");
+							String dniQuery = res.getString("DNI");
+							if (pass.equals(pass2) && textDni.getText().equals(dniQuery)) {
+								String rol = res.getString("ROL");
 
-						} else if (rol.equals("teacher")) {
+								if (rol.equals("Student")) {
+									System.out.println("Hola");
+								} else if (rol.equals("Teacher")) {
 
-						} else if (rol.equals("admin")) {
+								} else if (rol.equals("admin")) {
 
+								}
+							} else {
+								JOptionPane.showMessageDialog(loginFrame, "DNI OR PASSWORD INCORRECT");
+							}
 						}
-					}
-					}
 
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 
 			}

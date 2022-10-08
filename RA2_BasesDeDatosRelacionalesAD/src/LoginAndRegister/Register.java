@@ -176,9 +176,15 @@ public class Register {
 					birthDate =new Date(format.parse(textBirthdate.getText()).getTime());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
+				
 					Users u=new Users(textDni.getText(),passwordField.getText(),"Student");
+					
 						SlqAndFuctions.insert(s);
+						System.out.println("ssss");
 						SlqAndFuctions.inserUser(u);
+						System.out.println("ssss");
+						Login frame=new Login();
+						registerFrame.dispose();
 				} catch (ParseException | ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -60,12 +60,14 @@ public class SlqAndFuctions {
 		stmt.setString(1, s.getDni());
 		stmt.setString(2,s.getPassword());
 		stmt.setString(3, s.getRol());
+		stmt.executeUpdate();
 		stmt.close();
 	}
 	
-	public static ResultSet consultDB(String table,String dataConsult) throws ClassNotFoundException, SQLException {
-		PreparedStatement stmt=getConn().prepareStatement("SELECT * FROM "+table+" WHERE"+dataConsult+" = ?");
+	public static ResultSet consultDB(String table) throws ClassNotFoundException, SQLException {
+		PreparedStatement stmt=getConn().prepareStatement("SELECT * FROM "+table);
 		ResultSet rs=stmt.executeQuery();
+	
 		return rs;
 	}
 	
