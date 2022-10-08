@@ -1,6 +1,7 @@
 package LoginAndRegister;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -12,9 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import Student.StudentMenu;
 
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class Login {
 
@@ -37,7 +41,8 @@ public class Login {
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.getContentPane().setLayout(null);
 		loginFrame.setLocationRelativeTo(null);
-
+	
+		
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setBounds(45, 31, 37, 28);
 		loginFrame.getContentPane().add(lblDni);
@@ -95,7 +100,7 @@ public class Login {
 								String rol = res.getString("ROL");
 
 								if (rol.equals("Student")) {
-									System.out.println("Hola");
+									StudentMenu sm=new StudentMenu();
 								} else if (rol.equals("Teacher")) {
 
 								} else if (rol.equals("admin")) {
