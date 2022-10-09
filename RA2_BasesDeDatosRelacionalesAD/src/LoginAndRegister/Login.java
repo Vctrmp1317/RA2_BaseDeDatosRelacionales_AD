@@ -41,8 +41,7 @@ public class Login {
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.getContentPane().setLayout(null);
 		loginFrame.setLocationRelativeTo(null);
-	
-		
+
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setBounds(45, 31, 37, 28);
 		loginFrame.getContentPane().add(lblDni);
@@ -100,7 +99,7 @@ public class Login {
 								String rol = res.getString("ROL");
 
 								if (rol.equals("Student")) {
-									StudentMenu sm=new StudentMenu();
+									StudentMenu sm = new StudentMenu();
 								} else if (rol.equals("Teacher")) {
 
 								} else if (rol.equals("admin")) {
@@ -116,6 +115,7 @@ public class Login {
 						e1.printStackTrace();
 					}
 				}
+				loginFrame.setVisible(false);
 
 			}
 

@@ -27,7 +27,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 public class Register {
-	
+
 	private JFrame registerFrame;
 	private JTextField textDni;
 	private JPasswordField passwordField;
@@ -50,7 +50,7 @@ public class Register {
 	}
 
 	private void initialize() {
-		registerFrame=new JFrame();
+		registerFrame = new JFrame();
 		registerFrame.setResizable(false);
 		registerFrame.setBounds(100, 100, 450, 300);
 		registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,11 +128,11 @@ public class Register {
 
 		Fc = new JFileChooser();
 		registerFrame.setVisible(true);
-		ManEven man=new ManEven();
+		ManEven man = new ManEven();
 		btnAddImage.addActionListener(man);
 		btnCancel.addActionListener(man);
 		btnAccept.addActionListener(man);
-		
+
 	}
 
 	private void copyFileUsingJava7Files(File source, File dest) throws IOException {
@@ -172,36 +172,33 @@ public class Register {
 				String route = "imgs/" + textDni.getText() + textName.getText() + ".jpg";
 				java.sql.Date birthDate;
 				try {
-					
-					birthDate =new Date(format.parse(textBirthdate.getText()).getTime());
+
+					birthDate = new Date(format.parse(textBirthdate.getText()).getTime());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
-				
-					Users u=new Users(textDni.getText(),passwordField.getText(),"Student");
-					
-						SlqAndFuctions.insert(s);
-						System.out.println("ssss");
-						SlqAndFuctions.inserUser(u);
-						System.out.println("ssss");
-						Login frame=new Login();
-						registerFrame.dispose();
+
+					Users u = new Users(textDni.getText(), passwordField.getText(), "Student");
+
+					SlqAndFuctions.inserUser(u);
+
+					Login frame = new Login();
+					registerFrame.dispose();
 				} catch (ParseException | ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-			}else if(o == btnCancel) {
+
+			} else if (o == btnCancel) {
 				Login frame = null;
 				try {
 					new Login();
-					
+
 					registerFrame.dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
+
 			}
 
 		}

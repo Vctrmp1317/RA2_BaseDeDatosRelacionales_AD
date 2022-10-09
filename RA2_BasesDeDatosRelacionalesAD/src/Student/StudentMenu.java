@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import LoginAndRegister.Login;
+
 import javax.swing.JButton;
 
 public class StudentMenu {
@@ -17,6 +21,7 @@ public class StudentMenu {
 	private JMenuBar mb;
 	private JMenu menu1, menu2, menu3;
 	private JMenuItem mi1, mi2, mi3, mi4;
+	private JButton btnClose;
 
 	public StudentMenu() {
 		initialize();
@@ -56,7 +61,7 @@ public class StudentMenu {
 		menuFrame.getContentPane().setLayout(null);
 		mi4.addActionListener(mm);
 		
-		JButton btnClose = new JButton("Close");
+		btnClose = new JButton("Close");
 		btnClose.setBounds(213, 205, 89, 23);
 		menuFrame.getContentPane().add(btnClose);
 		
@@ -76,6 +81,10 @@ public class StudentMenu {
 				//Class to subjects
 			} else if (o == mi3) {
 				//Class to marks
+			}else if(o == mi4) {
+				menuFrame.dispose();
+			}else if(o == btnClose) {
+				menuFrame.dispose();
 			}
 
 		}
