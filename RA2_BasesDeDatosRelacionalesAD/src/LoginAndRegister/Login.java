@@ -22,11 +22,12 @@ import java.awt.Toolkit;
 
 public class Login {
 
-	public static JTextField textDni;
+	public JTextField textDni;
 	private JPasswordField passwordField;
 	private JButton btnRegister, btnLogin;
 	private JFrame loginFrame;
-
+	public static String dni;
+	
 	public Login() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
@@ -86,6 +87,7 @@ public class Login {
 				loginFrame.setVisible(false);
 			} else if (o == btnLogin) {
 				SlqAndFuctions sql = new SlqAndFuctions();
+				
 				if (textDni.getText().isEmpty() || passwordField.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(loginFrame, "THERE ARE EMPTY FIELDS");
 				} else {
@@ -99,17 +101,19 @@ public class Login {
 							String dniQuery = res.getString("DNI");
 							if (pass.equals(pass2) && textDni.getText().equals(dniQuery)) {
 								bol = false;
+								dni=res.getString("DNI");
 							} else {
 								res.next();
 								incorrect = true;
 							}
 						}
+						
 						String rol = res.getString("ROL");
-
+						
 						if (rol.equals("Student")) {
 							StudentMenu sm = new StudentMenu();
 							loginFrame.setVisible(false);
-
+							
 						} else if (rol.equals("Teacher")) {
 							loginFrame.setVisible(false);
 

@@ -27,7 +27,6 @@ public class StudentMenu {
 	private JMenuItem mi1, mi2, mi3, mi4;
 	public static JTable table;
 	private JButton btnClose;
-	private String dni;
 
 	public StudentMenu() {
 		initialize();
@@ -83,7 +82,6 @@ public class StudentMenu {
 		btnClose.setBounds(213, 205, 89, 23);
 		menuFrame.getContentPane().add(btnClose);
 		
-		dni=Login.textDni.getText();
 		menuFrame.setVisible(true);
 	}
 
@@ -95,7 +93,12 @@ public class StudentMenu {
 			Object o = e.getSource();
 			if (o == mi1) {
 				//Class to details
-				Details d=new Details();
+				try {
+					Details d=new Details();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else if (o == mi2) {
 				//Class to subjects
 			} else if (o == mi3) {

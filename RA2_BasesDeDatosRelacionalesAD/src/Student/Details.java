@@ -1,25 +1,46 @@
 package Student;
 
 import java.awt.EventQueue;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import LoginAndRegister.Login;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
+
 public class Details {
 
 	private JFrame detailsFrame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textName;
+	private JTextField textSecondName;
+	private JTextField textDni;
+	private JTextField textEmail;
+	private JTextField textBirthdate;
+	private String dni;
 
-	public Details() {
+	public Details() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize() throws ClassNotFoundException, SQLException {
+		dni= Login.dni;
+		
+		PreparedStatement stmt=SlqAndFuctions.getConn().prepareStatement("SELECT * FROM student");
+		ResultSet rs=stmt.executeQuery();
+		boolean search =rs.next();
+		boolean incorrect=false;
+		while(search) {
+			if(dni.equals(rs.getString("DNI")))
+				search=false;
+			else {
+				rs.next();
+				incorrect = true;
+			}
+		}
 		detailsFrame = new JFrame();
 		detailsFrame.setTitle("DETAILS");
 		detailsFrame.setResizable(false);
@@ -35,46 +56,56 @@ public class Details {
 		lblName.setBounds(10, 126, 40, 14);
 		detailsFrame.getContentPane().add(lblName);
 		
-		textField = new JTextField();
-		textField.setBounds(92, 124, 86, 20);
-		detailsFrame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textName = new JTextField();
+		textName.setBounds(92, 124, 86, 20);
+		detailsFrame.getContentPane().add(textName);
+		textName.setColumns(10);
+		textName.setText(rs.getString("NAME"));
+		textName.setEditable(false);
 		
 		JLabel lblSecondName = new JLabel("SECOND NAME");
 		lblSecondName.setBounds(10, 160, 78, 14);
 		detailsFrame.getContentPane().add(lblSecondName);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(92, 157, 86, 20);
-		detailsFrame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		textSecondName = new JTextField();
+		textSecondName.setBounds(92, 157, 86, 20);
+		detailsFrame.getContentPane().add(textSecondName);
+		textSecondName.setColumns(10);
+		textSecondName.setText(rs.getString("SECOND_NAME"));
+		textSecondName.setEditable(false);
 		
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setBounds(14, 191, 46, 14);
 		detailsFrame.getContentPane().add(lblDni);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(92, 188, 86, 20);
-		detailsFrame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		textDni = new JTextField();
+		textDni.setBounds(92, 188, 86, 20);
+		detailsFrame.getContentPane().add(textDni);
+		textDni.setColumns(10);
+		textDni.setText(rs.getString("DNI"));
+		textDni.setEditable(false);
 		
 		JLabel lblEmail = new JLabel("EMAIL");
 		lblEmail.setBounds(10, 224, 46, 14);
 		detailsFrame.getContentPane().add(lblEmail);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(92, 221, 86, 20);
-		detailsFrame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		textEmail = new JTextField();
+		textEmail.setBounds(92, 221, 86, 20);
+		detailsFrame.getContentPane().add(textEmail);
+		textEmail.setColumns(10);
+		textEmail.setText(rs.getString("EMAIL"));
+		textEmail.setEditable(false);
 		
 		JLabel lblBirthDate = new JLabel("BIRTHDATE");
 		lblBirthDate.setBounds(10, 258, 72, 14);
 		detailsFrame.getContentPane().add(lblBirthDate);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(92, 255, 86, 20);
-		detailsFrame.getContentPane().add(textField_4);
-		textField_4.setColumns(10);
+		textBirthdate = new JTextField();
+		textBirthdate.setBounds(92, 255, 86, 20);
+		detailsFrame.getContentPane().add(textBirthdate);
+		textBirthdate.setColumns(10);
+		textBirthdate.setText(rs.getDate("BIRTHDATE").toString());
+		textBirthdate.setEditable(false);
 		
 		detailsFrame.setVisible(true);
 	}
