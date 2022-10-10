@@ -110,6 +110,7 @@ public class Login {
 						}
 						
 						String rol = res.getString("ROL");
+						dni=textDni.getText();
 						
 						if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin")) || (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
 							SelectButton frame = new SelectButton();

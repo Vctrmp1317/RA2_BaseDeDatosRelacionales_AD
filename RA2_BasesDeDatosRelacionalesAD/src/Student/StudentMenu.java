@@ -101,6 +101,12 @@ public class StudentMenu {
 				}
 			} else if (o == mi2) {
 				//Class to subjects
+				try {
+					Subjects sub=new Subjects();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			} else if (o == mi3) {
 				//Class to marks
 			}else if(o == mi4) {
