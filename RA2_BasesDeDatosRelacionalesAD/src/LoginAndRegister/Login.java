@@ -22,7 +22,7 @@ import java.awt.Toolkit;
 
 public class Login {
 
-	private JTextField textDni;
+	public static JTextField textDni;
 	private JPasswordField passwordField;
 	private JButton btnRegister, btnLogin;
 	private JFrame loginFrame;
@@ -92,30 +92,37 @@ public class Login {
 					try {
 						String pass = passwordField.getText();
 						ResultSet res = sql.consultDB("users");
-						while (res.next()) {
+						boolean bol = res.next();
+						boolean incorrect = false;
+						while (bol) {
 							String pass2 = res.getString("PASSWORD");
 							String dniQuery = res.getString("DNI");
 							if (pass.equals(pass2) && textDni.getText().equals(dniQuery)) {
-								String rol = res.getString("ROL");
-
-								if (rol.equals("Student")) {
-									StudentMenu sm = new StudentMenu();
-								} else if (rol.equals("Teacher")) {
-
-								} else if (rol.equals("admin")) {
-
-								}
+								bol = false;
 							} else {
-								JOptionPane.showMessageDialog(loginFrame, "DNI OR PASSWORD INCORRECT");
+								res.next();
+								incorrect = true;
 							}
+						}
+						String rol = res.getString("ROL");
+
+						if (rol.equals("Student")) {
+							StudentMenu sm = new StudentMenu();
+							loginFrame.setVisible(false);
+
+						} else if (rol.equals("Teacher")) {
+							loginFrame.setVisible(false);
+
+						} else if (rol.equals("admin")) {
+							loginFrame.setVisible(false);
+
 						}
 
 					} catch (ClassNotFoundException | SQLException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(loginFrame, "DNI OR PASSWORD INCORRECT");
 					}
 				}
-				loginFrame.setVisible(false);
 
 			}
 

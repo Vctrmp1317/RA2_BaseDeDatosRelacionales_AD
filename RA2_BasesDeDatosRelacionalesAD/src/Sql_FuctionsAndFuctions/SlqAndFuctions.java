@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Classes.Student;
+import Classes.Subject;
 import Classes.Teacher;
 import Classes.Users;
 
@@ -47,6 +48,17 @@ public class SlqAndFuctions {
 			stmt.setString(2,t.getName());
 			stmt.setString(3, t.getSecondName());
 			stmt.setString(4, t.getEmail());
+			stmt.executeUpdate();
+			stmt.close();
+		}
+		else if(o.getClass()==Subject.class) {
+			Subject sub=(Subject)o;
+			PreparedStatement stmt=null;
+			stmt=getConn().prepareStatement("INSERT INTO subjects VALUES (?,?,?,?)");
+			stmt.setInt(1, sub.getCod());
+			stmt.setInt(2, sub.getHours());
+			stmt.setString(3, sub.getName());
+			stmt.setString(4, sub.getDniTeacher());
 			stmt.executeUpdate();
 			stmt.close();
 		}

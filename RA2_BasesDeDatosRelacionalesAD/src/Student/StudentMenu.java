@@ -1,6 +1,8 @@
 package Student;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import LoginAndRegister.Login;
 
@@ -21,7 +25,9 @@ public class StudentMenu {
 	private JMenuBar mb;
 	private JMenu menu1, menu2, menu3;
 	private JMenuItem mi1, mi2, mi3, mi4;
+	public static JTable table;
 	private JButton btnClose;
+	private String dni;
 
 	public StudentMenu() {
 		initialize();
@@ -32,6 +38,7 @@ public class StudentMenu {
 	 */
 	private void initialize() {
 		menuFrame = new JFrame();
+		menuFrame.setResizable(false);
 		menuFrame.setBounds(100, 100, 328, 300);
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ManMenu mm = new ManMenu();
@@ -61,11 +68,22 @@ public class StudentMenu {
 		menuFrame.getContentPane().setLayout(null);
 		mi4.addActionListener(mm);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 26, 134, 182);
+		menuFrame.getContentPane().add(scrollPane);
+
+		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setFont(new Font("Segoe UI Symbol", Font.BOLD, 11));
+		table.setForeground(new Color(0, 0, 0));
+		table.setBackground(Color.LIGHT_GRAY);
+		scrollPane.setViewportView(table);
+		
 		btnClose = new JButton("Close");
 		btnClose.setBounds(213, 205, 89, 23);
 		menuFrame.getContentPane().add(btnClose);
 		
-
+		dni=Login.textDni.getText();
 		menuFrame.setVisible(true);
 	}
 
@@ -77,11 +95,18 @@ public class StudentMenu {
 			Object o = e.getSource();
 			if (o == mi1) {
 				//Class to details
+				Details d=new Details();
 			} else if (o == mi2) {
 				//Class to subjects
 			} else if (o == mi3) {
 				//Class to marks
 			}else if(o == mi4) {
+				try {
+					new Login();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				menuFrame.dispose();
 			}else if(o == btnClose) {
 				menuFrame.dispose();
