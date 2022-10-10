@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Classes.Calification;
+import Classes.Enrollment;
+import Classes.Ra;
 import Classes.Student;
 import Classes.Subject;
 import Classes.Teacher;
@@ -56,11 +59,40 @@ public class SlqAndFuctions {
 			PreparedStatement stmt=null;
 			stmt=getConn().prepareStatement("INSERT INTO subjects VALUES (?,?,?,?)");
 			stmt.setInt(1, sub.getCod());
-			stmt.setInt(2, sub.getHours());
-			stmt.setString(3, sub.getName());
+			stmt.setString(2, sub.getName());
+			stmt.setInt(3, sub.getHours());
 			stmt.setString(4, sub.getDniTeacher());
 			stmt.executeUpdate();
 			stmt.close();
+		}
+		else if(o.getClass()==Ra.class) {
+			Ra r=(Ra)o;
+			PreparedStatement stmt=null;
+			stmt=getConn().prepareStatement("INSERT INTO ra VALUES (?,?,?,?,?)");
+			stmt.setInt(1, r.getId());
+			stmt.setString(2, r.getName());
+			stmt.setString(3, r.getDescription());
+			stmt.setFloat(4, r.getPercentage());
+			stmt.setInt(5, r.getCodSubject());
+			stmt.executeUpdate();
+			stmt.close();
+		}
+		else if(o.getClass()==Enrollment.class) {
+			Enrollment en=(Enrollment)o;
+			PreparedStatement stmt=null;
+			stmt=getConn().prepareStatement("INSERT INTO enrollment VALUES (?,?)");
+			stmt.setString(1, en.getDniStudent());
+			stmt.setInt(2, en.getCodSubject());
+			stmt.executeUpdate();
+			stmt.close();
+		}
+		else if(o.getClass()==Calification.class) {
+			Calification ca=(Calification)o;
+			PreparedStatement stmt=null;
+			stmt=getConn().prepareStatement("INSERT INTO calification VALUES (?,?,?)");
+			stmt.setString(1, ca.getDniStudent());
+			stmt.setInt(2, ca.getIdRa());
+			stmt.setFloat(3, ca.getMark());
 		}
 		
 		
@@ -87,6 +119,74 @@ public class SlqAndFuctions {
 		PreparedStatement stmt=null;
 		stmt=getConn().prepareStatement("DELETE FROM "+table+" WHERE "+primaryKey+" = "+valor);
 		
+	}
+	public static void Update(Object o) throws ClassNotFoundException, SQLException {
+		if(o.getClass()==Student.class) {
+			
+			Student s=(Student) o;
+			PreparedStatement stmt=null;
+			stmt=getConn().prepareStatement("UPDATE student SET DNI=?, NAME=?,SECOND_NAME=?,EMAIL=?,ROUTE_IMG=?,BIRTHDATE=?");
+			stmt.setString(1, s.getDni());
+			stmt.setString(2,s.getName());
+			stmt.setString(3, s.getSecondName());
+			stmt.setString(4, s.getEmail());
+			stmt.setString(5, s.getRouteImg());
+			stmt.setDate(6, s.getBirthdate());
+			stmt.executeUpdate();
+			stmt.close();
+			}
+			else if(o.getClass()==Teacher.class) {
+				Teacher t=(Teacher) o;
+				PreparedStatement stmt=null;
+				stmt=getConn().prepareStatement("UPDATE teachers SET DNI=?,NAME=?,SECOND_NAME=?,EMAIL=?");
+				stmt.setString(1, t.getDni());
+				stmt.setString(2,t.getName());
+				stmt.setString(3, t.getSecondName());
+				stmt.setString(4, t.getEmail());
+				stmt.executeUpdate();
+				stmt.close();
+			}
+			else if(o.getClass()==Subject.class) {
+				Subject sub=(Subject)o;
+				PreparedStatement stmt=null;
+				stmt=getConn().prepareStatement("UPDATE  subjects SET COD=?,NAME=?,HOURS=?,DNI_TEACHER=?");
+				stmt.setInt(1, sub.getCod());
+				stmt.setString(2, sub.getName());
+				stmt.setInt(3, sub.getHours());
+				stmt.setString(4, sub.getDniTeacher());
+				stmt.executeUpdate();
+				stmt.close();
+			}
+			else if(o.getClass()==Ra.class) {
+				Ra r=(Ra)o;
+				PreparedStatement stmt=null;
+				stmt=getConn().prepareStatement("UPDATE ra SET ID=?,NAME=?,DESCRIPTION=?,PERCENTAGE=?,COD_SUBJECT=?");
+				stmt.setInt(1, r.getId());
+				stmt.setString(2, r.getName());
+				stmt.setString(3, r.getDescription());
+				stmt.setFloat(4, r.getPercentage());
+				stmt.setInt(5, r.getCodSubject());
+				stmt.executeUpdate();
+				stmt.close();
+			}
+			else if(o.getClass()==Enrollment.class) {
+				Enrollment en=(Enrollment)o;
+				PreparedStatement stmt=null;
+				stmt=getConn().prepareStatement("UPDATE enrollment SET DNI_STUDENT=?,COND_SUBJECT=?");
+				stmt.setString(1, en.getDniStudent());
+				stmt.setInt(2, en.getCodSubject());
+				stmt.executeUpdate();
+				stmt.close();
+			}
+			else if(o.getClass()==Calification.class) {
+				Calification ca=(Calification)o;
+				PreparedStatement stmt=null;
+				stmt=getConn().prepareStatement("UPDATE calification SET DNI_STUDENT=?,ID_RA=?,MARK=?");
+				stmt.setString(1, ca.getDniStudent());
+				stmt.setInt(2, ca.getIdRa());
+				stmt.setFloat(3, ca.getMark());
+			}
+			
 	}
 	
 
