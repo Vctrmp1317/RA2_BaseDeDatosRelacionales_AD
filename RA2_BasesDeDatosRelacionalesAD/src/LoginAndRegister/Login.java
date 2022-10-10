@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import Student.StudentMenu;
+import admin.SelectButton;
+import admin.StudentsDetails;
 
 import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
@@ -22,12 +24,12 @@ import java.awt.Toolkit;
 
 public class Login {
 
-	public JTextField textDni;
+	public static JTextField textDni;
 	private JPasswordField passwordField;
 	private JButton btnRegister, btnLogin;
 	private JFrame loginFrame;
 	public static String dni;
-	
+
 	public Login() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
@@ -86,14 +88,12 @@ public class Login {
 
 				loginFrame.setVisible(false);
 			} else if (o == btnLogin) {
-				SlqAndFuctions sql = new SlqAndFuctions();
-				
 				if (textDni.getText().isEmpty() || passwordField.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(loginFrame, "THERE ARE EMPTY FIELDS");
 				} else {
 					try {
 						String pass = passwordField.getText();
-						ResultSet res = sql.consultDB("users");
+						ResultSet res = SlqAndFuctions.consultDB("users");
 						boolean bol = res.next();
 						boolean incorrect = false;
 						while (bol) {
@@ -101,7 +101,8 @@ public class Login {
 							String dniQuery = res.getString("DNI");
 							if (pass.equals(pass2) && textDni.getText().equals(dniQuery)) {
 								bol = false;
-								dni=res.getString("DNI");
+							} else if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin")) || (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
+								bol = false;
 							} else {
 								res.next();
 								incorrect = true;
@@ -110,20 +111,26 @@ public class Login {
 						
 						String rol = res.getString("ROL");
 						
-						if (rol.equals("Student")) {
-							StudentMenu sm = new StudentMenu();
-							loginFrame.setVisible(false);
-							
-						} else if (rol.equals("Teacher")) {
-							loginFrame.setVisible(false);
-
-						} else if (rol.equals("admin")) {
+						if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin")) || (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
+							SelectButton frame = new SelectButton();
+							frame.setVisible(true);
+							frame.setLocationRelativeTo(null);
 							loginFrame.setVisible(false);
 
+						} else {
+							if (rol.equals("Student")) {
+								StudentMenu sm = new StudentMenu();
+								loginFrame.setVisible(false);
+
+							} else if (rol.equals("Teacher")) {
+								loginFrame.setVisible(false);
+
+							}
 						}
 
 					} catch (ClassNotFoundException | SQLException e1) {
 						// TODO Auto-generated catch block
+						System.out.println(e1.getMessage());
 						JOptionPane.showMessageDialog(loginFrame, "DNI OR PASSWORD INCORRECT");
 					}
 				}

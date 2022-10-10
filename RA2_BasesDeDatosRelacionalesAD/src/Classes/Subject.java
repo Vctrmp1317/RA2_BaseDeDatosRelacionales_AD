@@ -1,7 +1,5 @@
 package Classes;
 
-import java.util.HashMap;
-
 public class Subject {
 	private int cod,hours;
 	private String name,dniTeacher;

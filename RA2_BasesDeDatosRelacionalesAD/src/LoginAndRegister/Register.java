@@ -178,8 +178,7 @@ public class Register {
 							textEmail.getText(), route, birthDate);
 
 					Users u = new Users(textDni.getText(), passwordField.getText(), "Student");
-					
-					SlqAndFuctions.insert(s);
+
 					SlqAndFuctions.inserUser(u);
 
 					Login frame = new Login();
