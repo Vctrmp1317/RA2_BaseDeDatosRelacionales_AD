@@ -1,6 +1,5 @@
 package admin;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,22 +17,6 @@ public class SelectButton extends JFrame {
 	private JButton btnStudents, btnTeachers, btnSubjects, btnRAs, btnExit, btnMatriculate;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SelectButton frame = new SelectButton();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public SelectButton() {
@@ -48,27 +31,27 @@ public class SelectButton extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnStudents = new JButton("Students");
-		btnStudents.setBounds(81, 72, 100, 50);
+		btnStudents.setBounds(81, 72, 120, 50);
 		contentPane.add(btnStudents);
 		
 		btnTeachers = new JButton("Teachers");
-		btnTeachers.setBounds(389, 72, 100, 50);
+		btnTeachers.setBounds(369, 72, 120, 50);
 		contentPane.add(btnTeachers);
 		
 		btnSubjects = new JButton("Subjects");
-		btnSubjects.setBounds(81, 201, 100, 50);
+		btnSubjects.setBounds(81, 201, 120, 50);
 		contentPane.add(btnSubjects);
 		
 		btnRAs = new JButton("RA's");
-		btnRAs.setBounds(389, 201, 100, 50);
+		btnRAs.setBounds(369, 201, 120, 50);
 		contentPane.add(btnRAs);
 		
-		btnMatriculate = new JButton("Matriculate");
-		btnMatriculate.setBounds(81, 331, 100, 50);
+		btnMatriculate = new JButton("Enrollments");
+		btnMatriculate.setBounds(81, 331, 120, 50);
 		contentPane.add(btnMatriculate);
 		
 		btnExit = new JButton("Exit");
-		btnExit.setBounds(389, 331, 100, 50);
+		btnExit.setBounds(369, 331, 120, 50);
 		contentPane.add(btnExit);
 		
 		ManEvent mE = new ManEvent();

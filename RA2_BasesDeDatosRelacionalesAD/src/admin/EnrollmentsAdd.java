@@ -8,25 +8,26 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classes.Enrollment;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class EnrollmentsDetails extends JFrame {
+public class EnrollmentsAdd extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnReturn;
+	private JButton btnAdd, btnReturn;
 	private JTextField txtDniStudent;
 	private JTextField txtCodSubject;
-	private Enrollment enrollmentSelected;
 
 	/**
 	 * Create the frame.
 	 */
-	public EnrollmentsDetails(Enrollment enrollmentSelected) {
-		super("DETAILS");
+	public EnrollmentsAdd() {
+		super("ADD");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -35,43 +36,42 @@ public class EnrollmentsDetails extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
-		this.enrollmentSelected = enrollmentSelected;
 
-		JLabel lblTitle = new JLabel("These are the details of the enrollment");
+		JLabel lblTitle = new JLabel("Enter the data of the enrollment to add");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(192, 21, 202, 13);
+		lblTitle.setBounds(176, 21, 233, 13);
 		contentPane.add(lblTitle);
 
 		JLabel lblDniStudent = new JLabel("Student's ID:");
 		lblDniStudent.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDniStudent.setBounds(50, 144, 85, 13);
+		lblDniStudent.setBounds(50, 141, 85, 13);
 		contentPane.add(lblDniStudent);
 
-		JLabel lblCodSubject = new JLabel("Subject's code:");
+		JLabel lblCodSubject = new JLabel("Subject's Code:");
 		lblCodSubject.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodSubject.setBounds(50, 268, 85, 13);
+		lblCodSubject.setBounds(50, 258, 85, 13);
 		contentPane.add(lblCodSubject);
 
 		txtDniStudent = new JTextField();
-		txtDniStudent.setBounds(161, 141, 329, 19);
-		txtDniStudent.setText(this.enrollmentSelected.getDniStudent());
-		txtDniStudent.setEditable(false);
+		txtDniStudent.setBounds(161, 138, 329, 19);
 		contentPane.add(txtDniStudent);
-		txtDniStudent.setColumns(10);
+		txtDniStudent.setColumns(11);
 
 		txtCodSubject = new JTextField();
-		txtCodSubject.setColumns(10);
-		txtCodSubject.setBounds(161, 265, 329, 19);
-		txtCodSubject.setText(String.valueOf(this.enrollmentSelected.getCodSubject()));
-		txtCodSubject.setEditable(false);
+		txtCodSubject.setColumns(11);
+		txtCodSubject.setBounds(161, 255, 329, 19);
 		contentPane.add(txtCodSubject);
 
+		btnAdd = new JButton("Add");
+		btnAdd.setBounds(161, 396, 85, 21);
+		contentPane.add(btnAdd);
+
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(250, 390, 85, 21);
+		btnReturn.setBounds(322, 396, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
+		btnAdd.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 
 	}
@@ -82,8 +82,20 @@ public class EnrollmentsDetails extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if (o == btnReturn) {
-				Ras frame = new Ras();
+			
+			if (o == btnAdd) {
+				try {
+					Enrollment e2 = new Enrollment(txtDniStudent.getText(), Integer.parseInt(txtCodSubject.getText()));
+					SlqAndFuctions.insert(e2);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "The enrollment could not be added. The student's ID or the subject's code does not belong to any enrollment in the database or there are missing data to enter. You will return to the previous tab.", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
+				Enrollments frame = new Enrollments();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (o == btnReturn) {
+				Enrollments frame = new Enrollments();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();

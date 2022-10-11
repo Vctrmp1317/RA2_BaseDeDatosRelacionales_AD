@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 
 import javax.swing.JFrame;
@@ -26,7 +25,7 @@ public class Subjects extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private MyModel model = new MyModel();
 	private JButton btnAdd, btnUpdate, btnDelete, btnReturn;
 	private Subject subjectSelected;
 
@@ -47,28 +46,8 @@ public class Subjects extends JFrame {
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
-
-		try {
-			model = new DefaultTableModel();
-			String[] columnas = { "DNI", "Name", "Second Name", "E-mail" };
-			model.setColumnIdentifiers(columnas);
-			ResultSet rs = SlqAndFuctions.consultDB("subjects");
-			while (rs.next()) {
-				int cod = rs.getInt("COD");
-				int hours = rs.getInt("HOURS");
-				String name = rs.getString("NAME");
-				String dniTeacher = rs.getString("DNI_TEACHER");
-
-				Object[] fila = new Object[4];
-				fila[0] = cod;
-				fila[1] = hours;
-				fila[2] = name;
-				fila[3] = dniTeacher;
-
-				model.addRow(fila);
-			}
-		} catch (Exception ex) {
-		}
+		model = new MyModel();
+		model.Model();
 		table.setModel(model);
 		panel1.add(new JScrollPane(table));
 		contentPane.add(panel1);
@@ -111,12 +90,6 @@ public class Subjects extends JFrame {
 					String nameSelected = (String) table.getValueAt(table.getSelectedRow(), 2);
 					String dniTeacherSelected = (String) table.getValueAt(table.getSelectedRow(), 3);
 
-					Object[] filaSelected = new Object[4];
-					filaSelected[0] = codSelected;
-					filaSelected[1] = hoursSelected;
-					filaSelected[2] = nameSelected;
-					filaSelected[3] = dniTeacherSelected;
-
 					try {
 						ResultSet rs = SlqAndFuctions.consultDB("subjects");
 						while (rs.next()) {
@@ -125,18 +98,9 @@ public class Subjects extends JFrame {
 							String name = rs.getString("NAME");
 							String dniTeacher = rs.getString("DNI_TEACHER");
 
-							Object[] fila = new Object[4];
-							fila[0] = cod;
-							fila[1] = hours;
-							fila[2] = name;
-							fila[3] = dniTeacher;
-
-							if (filaSelected[0].equals(fila[0]) && filaSelected[1].equals(fila[1])
-									&& filaSelected[2].equals(fila[2]) && filaSelected[3].equals(fila[3])) {
-								subjectSelected.setCod(cod);
-								subjectSelected.setHours(hours);
-								subjectSelected.setName(name);
-								subjectSelected.setDniTeacher(dniTeacher);
+							if (codSelected == cod && hoursSelected == hours
+									&& nameSelected.equals(name) && dniTeacherSelected.equals(dniTeacher)) {
+								subjectSelected = new Subject(cod, hours, name, dniTeacher);
 							}
 						}
 					} catch (Exception ex) {
@@ -160,8 +124,11 @@ public class Subjects extends JFrame {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 
-			if (o == btnUpdate) {
-
+			if (o == btnAdd) {
+				SubjectsAdd frame = new SubjectsAdd();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnUpdate) {
 
 			} else if (o == btnDelete) {
@@ -175,5 +142,34 @@ public class Subjects extends JFrame {
 
 		}
 
+	}
+	
+	private class MyModel extends DefaultTableModel {
+
+		public boolean isCellEditable(int filas, int columnas) {
+			return false;
+		}
+
+		private void Model() {
+			try {
+				String[] columnas = { "Code", "Hours", "Name", "DNI Teacher" };
+				model.setColumnIdentifiers(columnas);
+				ResultSet rs = SlqAndFuctions.consultDB("subjects");
+				while (rs.next()) {
+					int cod = rs.getInt("COD");
+					int hours = rs.getInt("HOURS");
+					String name = rs.getString("NAME");
+					String dniTeacher = rs.getString("DNI_TEACHER");
+
+					Object[] fila = new Object[4];
+					fila[0] = cod;
+					fila[1] = hours;
+					fila[2] = name;
+					fila[3] = dniTeacher;
+
+					model.addRow(fila);
+				}
+			}catch(Exception ex) {}
+		}
 	}
 }

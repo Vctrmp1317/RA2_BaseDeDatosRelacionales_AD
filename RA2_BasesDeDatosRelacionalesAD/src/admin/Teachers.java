@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,12 +27,14 @@ public class Teachers extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private MyModel model = new MyModel();
 	private JButton btnAdd, btnUpdate, btnDelete, btnReturn;
 	private Teacher teacherSelected;
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	public Teachers() {
 		super("TEACHERS");
@@ -47,28 +50,8 @@ public class Teachers extends JFrame {
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
-
-		try {
-			model = new DefaultTableModel();
-			String[] columnas = { "DNI", "Name", "Second Name", "E-mail" };
-			model.setColumnIdentifiers(columnas);
-			ResultSet rs = SlqAndFuctions.consultDB("teachers");
-			while (rs.next()) {
-				String dni = rs.getString("DNI");
-				String name = rs.getString("NAME");
-				String secondName = rs.getString("SECOND_NAME");
-				String email = rs.getString("EMAIL");
-
-				Object[] fila = new Object[4];
-				fila[0] = dni;
-				fila[1] = name;
-				fila[2] = secondName;
-				fila[3] = email;
-
-				model.addRow(fila);
-			}
-		} catch (Exception ex) {
-		}
+		model = new MyModel();
+		model.Model();
 		table.setModel(model);
 		panel1.add(new JScrollPane(table));
 		contentPane.add(panel1);
@@ -105,17 +88,11 @@ public class Teachers extends JFrame {
 				JTable table = (JTable) Mouse_evt.getSource();
 				Point point = Mouse_evt.getPoint();
 				int row = table.rowAtPoint(point);
-				if (Mouse_evt.getClickCount() == 1) {
-					String dniSelected = (String) table.getValueAt(table.getSelectedRow(), 0);
-					String nameSelected = (String) table.getValueAt(table.getSelectedRow(), 1);
-					String secondNameSelected = (String) table.getValueAt(table.getSelectedRow(), 2);
-					String emailSelected = (String) table.getValueAt(table.getSelectedRow(), 3);
-
-					Object[] filaSelected = new Object[4];
-					filaSelected[0] = dniSelected;
-					filaSelected[1] = nameSelected;
-					filaSelected[2] = secondNameSelected;
-					filaSelected[3] = emailSelected;
+				if (Mouse_evt.getClickCount() == 2) {
+					String dniSelected = String.valueOf(table.getValueAt(table.getSelectedRow(), 0));
+					String nameSelected = String.valueOf(table.getValueAt(table.getSelectedRow(), 1));
+					String secondNameSelected = String.valueOf(table.getValueAt(table.getSelectedRow(), 2));
+					String emailSelected = String.valueOf(table.getValueAt(table.getSelectedRow(), 3));
 
 					try {
 						ResultSet rs = SlqAndFuctions.consultDB("teachers");
@@ -125,24 +102,13 @@ public class Teachers extends JFrame {
 							String secondName = rs.getString("SECOND_NAME");
 							String email = rs.getString("EMAIL");
 
-							Object[] fila = new Object[5];
-							fila[0] = dni;
-							fila[1] = name;
-							fila[2] = secondName;
-							fila[3] = email;
-
-							if (filaSelected[0].equals(fila[0]) && filaSelected[1].equals(fila[1])
-									&& filaSelected[2].equals(fila[2]) && filaSelected[3].equals(fila[3])) {
-								teacherSelected.setDni(dni);
-								teacherSelected.setName(name);
-								teacherSelected.setSecondName(secondName);
-								teacherSelected.setEmail(email);
+							if (dniSelected.equals(dni) && nameSelected.equals(name)
+									&& secondNameSelected.equals(secondName) && emailSelected.equals(email)) {
+								teacherSelected = new Teacher(dni, name, secondName, email);
 							}
 						}
 					} catch (Exception ex) {
 					}
-
-				} else if (Mouse_evt.getClickCount() == 2) {
 					TeachersDetails frame = new TeachersDetails(teacherSelected);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
@@ -150,7 +116,7 @@ public class Teachers extends JFrame {
 				}
 			}
 		});
-
+		
 	}
 
 	private class ManEvent implements ActionListener {
@@ -160,8 +126,11 @@ public class Teachers extends JFrame {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 
-			if (o == btnUpdate) {
-
+			if (o == btnAdd) {
+				TeachersAdd frame = new TeachersAdd();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnUpdate) {
 
 			} else if (o == btnDelete) {
@@ -175,5 +144,34 @@ public class Teachers extends JFrame {
 
 		}
 
+	}
+
+	private class MyModel extends DefaultTableModel {
+
+		public boolean isCellEditable(int filas, int columnas) {
+			return false;
+		}
+
+		private void Model() {
+			try {
+				String[] columnas = { "DNI", "Name", "Second Name", "E-mail" };
+				model.setColumnIdentifiers(columnas);
+				ResultSet rs = SlqAndFuctions.consultDB("teachers");
+				while (rs.next()) {
+					String dni = rs.getString("DNI");
+					String name = rs.getString("NAME");
+					String secondName = rs.getString("SECOND_NAME");
+					String email = rs.getString("EMAIL");
+
+					Object[] fila = new Object[4];
+					fila[0] = dni;
+					fila[1] = name;
+					fila[2] = secondName;
+					fila[3] = email;
+
+					model.addRow(fila);
+				}
+			}catch(Exception ex) {}
+		}
 	}
 }
