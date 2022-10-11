@@ -116,10 +116,14 @@ public class SlqAndFuctions {
 	
 		return rs;
 	}
-	public static ResultSet consultDBSpec(String table,String primarykey,String valor) throws ClassNotFoundException, SQLException {
+	public <T> ResultSet consultDBSpec(String table,String primarykey,T valor) throws ClassNotFoundException, SQLException {
 		String sql="SELECT * FROM "+table+" WHERE "+primarykey+" = ?;";
 		PreparedStatement stmt=getConn().prepareStatement(sql);
-		stmt.setString(1, valor);
+		if(valor.getClass()==Integer.class) {
+			stmt.setInt(1, (int) valor);
+		}else if(valor.getClass()==String.class) {
+		stmt.setString(1, (String) valor);
+		}
 		ResultSet rs=stmt.executeQuery();
 	
 		return rs;

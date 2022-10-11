@@ -177,10 +177,15 @@ public class Register {
 				try {
 					SlqAndFuctions saf=new SlqAndFuctions();
 					ResultSet rs=saf.consultDB("users");
-					
+					boolean exist =false;
 					while(rs.next()) {
-						rs.getString("DNI").equals(textDni.getText());
+						if(rs.getString("DNI").equals(textDni.getText()))
+							exist=true;
+						
 					}
+					if(exist) {
+						
+					}else {
 					birthDate = new Date(format.parse(textBirthdate.getText()).getTime());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
@@ -190,11 +195,12 @@ public class Register {
 					SlqAndFuctions.inserUser(u);
 					SlqAndFuctions.insert(s);
 					Login frame = new Login();
-					registerFrame.dispose();
+					registerFrame.dispose();}
 				} catch (ParseException | ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 
 			} else if (o == btnCancel) {
 				Login frame = null;
@@ -208,9 +214,9 @@ public class Register {
 				}
 
 			}
-
+			}
+			
 		}
 
 	}
-
-}
+	

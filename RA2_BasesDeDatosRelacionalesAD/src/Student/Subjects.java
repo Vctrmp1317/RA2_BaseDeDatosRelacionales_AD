@@ -23,7 +23,7 @@ public class Subjects {
 
 	private JFrame subjectsFrame;
 	private JTable table;
-	public static String codSub;
+	public static int codSub;
 
 	public Subjects() throws ClassNotFoundException, SQLException {
 		initialize();
@@ -57,10 +57,9 @@ public class Subjects {
 
 				if (e.getClickCount() == 2) {
 					try {
-						JTable source = (JTable) e.getSource();
-						 source.getSelectedRow();
+						
 						 SlqAndFuctions saf = new SlqAndFuctions();
-						 codSub = String.valueOf( table.getValueAt(table.getSelectedRow(), 1));
+						 codSub =  (int) table.getValueAt(table.getSelectedRow(), 1);
 						new Marks();
 					} catch (ClassNotFoundException | SQLException e1) {
 						// TODO Auto-generated catch block
@@ -94,9 +93,9 @@ public class Subjects {
 
 			ResultSet rs = saf.consultDBSpec("enrollment", "DNI_STUDENT", dni);
 			ResultSet res = null;
-			codSub = "";
+			codSub = 0;
 			while (rs.next()) {
-				codSub = String.valueOf(rs.getInt("COD_SUBJECT"));
+				codSub = rs.getInt("COD_SUBJECT");
 				res = saf.consultDBSpec("subjects", "COD", codSub);
 				res.next();
 				m.addRow(new Object[] { res.getString("NAME"), res.getInt("COD") });
