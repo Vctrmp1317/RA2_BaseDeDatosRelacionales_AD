@@ -66,7 +66,7 @@ public class StudentMenu {
 		menu3.add(mi4);
 		menuFrame.getContentPane().setLayout(null);
 		mi4.addActionListener(mm);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 26, 134, 182);
 		menuFrame.getContentPane().add(scrollPane);
@@ -77,11 +77,11 @@ public class StudentMenu {
 		table.setForeground(new Color(0, 0, 0));
 		table.setBackground(Color.LIGHT_GRAY);
 		scrollPane.setViewportView(table);
-		
+
 		btnClose = new JButton("Close");
 		btnClose.setBounds(213, 205, 89, 23);
 		menuFrame.getContentPane().add(btnClose);
-		
+
 		menuFrame.setVisible(true);
 	}
 
@@ -92,24 +92,30 @@ public class StudentMenu {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 			if (o == mi1) {
-				//Class to details
+				// Class to details
 				try {
-					Details d=new Details();
+					Details d = new Details();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else if (o == mi2) {
-				//Class to subjects
+				// Class to subjects
 				try {
-					Subjects sub=new Subjects();
+					Subjects sub = new Subjects();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else if (o == mi3) {
-				//Class to marks
-			}else if(o == mi4) {
+				// Class to marks
+				try {
+					new Marks();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} else if (o == mi4) {
 				try {
 					new Login();
 				} catch (ClassNotFoundException | SQLException e1) {
@@ -117,7 +123,7 @@ public class StudentMenu {
 					e1.printStackTrace();
 				}
 				menuFrame.dispose();
-			}else if(o == btnClose) {
+			} else if (o == btnClose) {
 				menuFrame.dispose();
 			}
 

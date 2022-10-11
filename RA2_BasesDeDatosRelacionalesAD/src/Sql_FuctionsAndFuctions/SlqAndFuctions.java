@@ -109,7 +109,17 @@ public class SlqAndFuctions {
 	}
 	
 	public static ResultSet consultDB(String table) throws ClassNotFoundException, SQLException {
-		PreparedStatement stmt=getConn().prepareStatement("SELECT * FROM "+table);
+		String sql="SELECT * FROM "+table;
+		PreparedStatement stmt=getConn().prepareStatement(sql);
+		
+		ResultSet rs=stmt.executeQuery();
+	
+		return rs;
+	}
+	public static ResultSet consultDBSpec(String table,String primarykey,String valor) throws ClassNotFoundException, SQLException {
+		String sql="SELECT * FROM "+table+" WHERE "+primarykey+" = ?;";
+		PreparedStatement stmt=getConn().prepareStatement(sql);
+		stmt.setString(1, valor);
 		ResultSet rs=stmt.executeQuery();
 	
 		return rs;
@@ -117,8 +127,9 @@ public class SlqAndFuctions {
 	
 	public static void delete(String table,String primaryKey,String valor) throws ClassNotFoundException, SQLException {
 		PreparedStatement stmt=null;
-		stmt=getConn().prepareStatement("DELETE FROM "+table+" WHERE "+primaryKey+" = "+valor);
-		
+		stmt=getConn().prepareStatement("DELETE FROM "+table+" WHERE "+primaryKey+" = ?");
+		stmt.setString(1, valor);
+		stmt.executeUpdate();
 	}
 	public static void Update(Object o) throws ClassNotFoundException, SQLException {
 		if(o.getClass()==Student.class) {

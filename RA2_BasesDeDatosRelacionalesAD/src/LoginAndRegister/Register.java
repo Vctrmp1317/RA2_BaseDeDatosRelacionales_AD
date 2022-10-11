@@ -1,5 +1,7 @@
 package LoginAndRegister;
 
+
+
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 import static javax.swing.JFileChooser.CANCEL_OPTION;
 
@@ -10,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -172,7 +175,12 @@ public class Register {
 				String route = "imgs/" + textDni.getText() + textName.getText() + ".jpg";
 				java.sql.Date birthDate;
 				try {
-
+					SlqAndFuctions saf=new SlqAndFuctions();
+					ResultSet rs=saf.consultDB("users");
+					
+					while(rs.next()) {
+						rs.getString("DNI").equals(textDni.getText());
+					}
 					birthDate = new Date(format.parse(textBirthdate.getText()).getTime());
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), route, birthDate);
@@ -180,7 +188,7 @@ public class Register {
 					Users u = new Users(textDni.getText(), passwordField.getText(), "Student");
 
 					SlqAndFuctions.inserUser(u);
-
+					SlqAndFuctions.insert(s);
 					Login frame = new Login();
 					registerFrame.dispose();
 				} catch (ParseException | ClassNotFoundException | SQLException e1) {

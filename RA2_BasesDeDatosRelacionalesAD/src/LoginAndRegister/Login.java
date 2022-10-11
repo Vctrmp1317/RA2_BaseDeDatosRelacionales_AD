@@ -91,9 +91,20 @@ public class Login {
 				if (textDni.getText().isEmpty() || passwordField.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(loginFrame, "THERE ARE EMPTY FIELDS");
 				} else {
+
+					if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin"))
+							|| (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
+						SelectButton frame = new SelectButton();
+						frame.setVisible(true);
+						frame.setLocationRelativeTo(null);
+						loginFrame.setVisible(false);
+
+					}else {
 					try {
+
 						String pass = passwordField.getText();
 						ResultSet res = SlqAndFuctions.consultDB("users");
+
 						boolean bol = res.next();
 						boolean incorrect = false;
 						while (bol) {
@@ -101,32 +112,25 @@ public class Login {
 							String dniQuery = res.getString("DNI");
 							if (pass.equals(pass2) && textDni.getText().equals(dniQuery)) {
 								bol = false;
-							} else if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin")) || (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
+							} else if ((textDni.getText().equalsIgnoreCase("admin")
+									&& passwordField.getText().equalsIgnoreCase("admin"))) {
 								bol = false;
 							} else {
 								res.next();
 								incorrect = true;
 							}
 						}
-						
+
 						String rol = res.getString("ROL");
-						dni=textDni.getText();
-						
-						if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin")) || (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
-							SelectButton frame = new SelectButton();
-							frame.setVisible(true);
-							frame.setLocationRelativeTo(null);
+						dni = textDni.getText();
+
+						if (rol.equals("Student")) {
+							StudentMenu sm = new StudentMenu();
 							loginFrame.setVisible(false);
 
-						} else {
-							if (rol.equals("Student")) {
-								StudentMenu sm = new StudentMenu();
-								loginFrame.setVisible(false);
+						} else if (rol.equals("Teacher")) {
+							loginFrame.setVisible(false);
 
-							} else if (rol.equals("Teacher")) {
-								loginFrame.setVisible(false);
-
-							}
 						}
 
 					} catch (ClassNotFoundException | SQLException e1) {
@@ -141,4 +145,5 @@ public class Login {
 		}
 
 	}
+}
 }
