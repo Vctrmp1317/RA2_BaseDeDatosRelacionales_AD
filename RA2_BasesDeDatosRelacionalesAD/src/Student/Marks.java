@@ -176,7 +176,8 @@ public class Marks {
 		
 		stmt.setInt(1, Subjects.codSub);
 		res = stmt.executeQuery();
-		res.next();
+		while(res.next()) {
+		
 		ResultSet rs = null;
 
 		stmt = saf.getConn()
@@ -185,6 +186,7 @@ public class Marks {
 		stmt.setInt(2, res.getInt("ID"));
 		rs = stmt.executeQuery();
 		rs.next();
+		}
 		
 		return FinalMark;
 		
