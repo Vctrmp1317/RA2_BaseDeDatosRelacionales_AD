@@ -29,7 +29,7 @@ public class StudentMenu {
 	private JMenu menu1, menu2, menu3;
 	private JMenuItem mi1, mi2, mi3, mi4;
 	public static JTable table;
-	private JButton btnClose;
+	private JButton btnClose, btnViewMarks;
 
 	public StudentMenu() throws ClassNotFoundException, SQLException {
 		initialize();
@@ -88,8 +88,12 @@ public class StudentMenu {
 		btnClose.setBounds(213, 205, 89, 23);
 		btnClose.addActionListener(mm);
 		menuFrame.getContentPane().add(btnClose);
-		MyModel m = new MyModel();
-		m.Model();
+		
+		btnViewMarks = new JButton("View Marks");
+		btnViewMarks.setBounds(213, 171, 89, 23);
+		btnViewMarks.addActionListener(mm);
+		menuFrame.getContentPane().add(btnViewMarks);
+		
 		menuFrame.setVisible(true);
 	}
 
@@ -174,6 +178,15 @@ public class StudentMenu {
 					e1.printStackTrace();
 				}
 				menuFrame.dispose();
+			}else if(o == btnViewMarks) {
+				MyModel m= new MyModel();
+				try {
+					m.Model();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 
 		}

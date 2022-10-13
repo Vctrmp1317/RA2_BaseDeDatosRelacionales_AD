@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import Student.StudentMenu;
+import Teacher.TeacherMenu;
 import admin.SelectButton;
 import admin.StudentsDetails;
 
@@ -40,7 +41,7 @@ public class Login {
 		loginFrame = new JFrame();
 		loginFrame.setResizable(false);
 		loginFrame.setTitle("LOGIN");
-		loginFrame.setBounds(100, 100, 450, 300);
+		loginFrame.setBounds(100, 100, 450, 257);
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.getContentPane().setLayout(null);
 		loginFrame.setLocationRelativeTo(null);
@@ -63,11 +64,11 @@ public class Login {
 		loginFrame.getContentPane().add(passwordField);
 
 		btnLogin = new JButton("LOGIN");
-		btnLogin.setBounds(186, 177, 89, 23);
+		btnLogin.setBounds(163, 177, 119, 23);
 		loginFrame.getContentPane().add(btnLogin);
 
 		btnRegister = new JButton("REGISTER");
-		btnRegister.setBounds(305, 177, 89, 23);
+		btnRegister.setBounds(305, 177, 119, 23);
 		loginFrame.getContentPane().add(btnRegister);
 		loginFrame.setVisible(true);
 
@@ -129,6 +130,8 @@ public class Login {
 							loginFrame.setVisible(false);
 
 						} else if (rol.equals("Teacher")) {
+							TeacherMenu tm=new TeacherMenu();
+							
 							loginFrame.setVisible(false);
 
 						}
