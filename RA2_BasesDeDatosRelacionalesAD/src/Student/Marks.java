@@ -31,6 +31,7 @@ public class Marks {
 	private JTextField textField;
 	private JPanel panelMarks;
 	private JTextArea textArea;
+	private float FinalMark;
 
 	public Marks() throws ClassNotFoundException, SQLException {
 		initialize();
@@ -156,10 +157,37 @@ public class Marks {
 
 			}
 		});
+		
+		
+		
 		MyModel m = new MyModel();
 		m.Model();
 
 		markFrame.setVisible(true);
+	}
+	
+	private float MarkFinal() throws ClassNotFoundException, SQLException {
+		FinalMark=0;
+		ResultSet res = null;
+		SlqAndFuctions saf=new SlqAndFuctions();
+		
+		PreparedStatement stmt = saf.getConn()
+				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
+		
+		stmt.setInt(1, Subjects.codSub);
+		res = stmt.executeQuery();
+		res.next();
+		ResultSet rs = null;
+
+		stmt = saf.getConn()
+				.prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
+		stmt.setString(1, Login.dni);
+		stmt.setInt(2, res.getInt("ID"));
+		rs = stmt.executeQuery();
+		rs.next();
+		
+		return FinalMark;
+		
 	}
 
 	private class MyModel extends DefaultTableModel {
