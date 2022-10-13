@@ -8,6 +8,12 @@ import javax.swing.JFrame;
 
 public class TeacherMenu {
 	private JFrame menuFrame;
+	
+	public TeacherMenu()
+	{
+		initialize();
+	}
+	
 	private void initialize() {
 		menuFrame = new JFrame();
 		menuFrame.setResizable(false);
