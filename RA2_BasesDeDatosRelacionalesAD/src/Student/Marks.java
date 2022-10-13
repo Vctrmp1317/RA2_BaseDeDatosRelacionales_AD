@@ -158,7 +158,6 @@ public class Marks {
 			}
 		});
 		
-		MarkFinal();
 		
 		
 		MyModel m = new MyModel();
@@ -186,16 +185,7 @@ public class Marks {
 		stmt.setString(1, Login.dni);
 		stmt.setInt(2, res.getInt("ID"));
 		rs = stmt.executeQuery();
-		PreparedStatement stm = saf.getConn()
-				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=? AND ID =?");
-		
-		stm.setInt(1, Subjects.codSub);
-		stm.setInt(2, res.getInt("ID"));
-		 
-		ResultSet rst=stm.executeQuery();
-		FinalMark=rs.getFloat("MARK")*rst.getFloat("PERCENTAGE");
-		
-		
+		rs.next();
 		}
 		
 		return FinalMark;
