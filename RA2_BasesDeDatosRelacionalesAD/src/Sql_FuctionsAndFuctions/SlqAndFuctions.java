@@ -13,6 +13,8 @@ import Classes.Student;
 import Classes.Subject;
 import Classes.Teacher;
 import Classes.Users;
+import LoginAndRegister.Login;
+import Student.Subjects;
 
 public class SlqAndFuctions {
 	
@@ -203,6 +205,41 @@ public class SlqAndFuctions {
 				stmt.setFloat(3, ca.getMark());
 			}
 			
+	}
+	public static float getMark(String dni, int codSubject) throws SQLException, ClassNotFoundException {
+		float mark=0;
+		
+		ResultSet res = null;
+		SlqAndFuctions saf=new SlqAndFuctions();
+		
+		PreparedStatement stmt = saf.getConn()
+				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
+		
+		stmt.setInt(1, codSubject);
+		res = stmt.executeQuery();
+		while(res.next()) {
+		
+		ResultSet rs = null;
+
+		stmt = saf.getConn()
+				.prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
+		stmt.setString(1, dni);
+		stmt.setInt(2, res.getInt("ID"));
+		rs = stmt.executeQuery();
+		rs.next();
+		ResultSet rst=null;
+		PreparedStatement stm = saf.getConn()
+				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
+		
+		stm.setInt(1, codSubject);
+		stm.setInt(2, res.getInt("ID"));
+		rst = stm.executeQuery();
+		rst.next();
+		mark=rs.getFloat("MARK")*rst.getFloat("PERCENTAGE");
+		}
+		
+		return mark;
+		
 	}
 	
 

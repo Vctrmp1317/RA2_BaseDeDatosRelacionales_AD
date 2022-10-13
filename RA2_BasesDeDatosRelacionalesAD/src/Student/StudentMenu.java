@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -14,8 +15,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import LoginAndRegister.Login;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
 import javax.swing.JButton;
 
@@ -28,14 +31,17 @@ public class StudentMenu {
 	public static JTable table;
 	private JButton btnClose;
 
-	public StudentMenu() {
+	public StudentMenu() throws ClassNotFoundException, SQLException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	private void initialize() {
+	private void initialize() throws ClassNotFoundException, SQLException {
 		menuFrame = new JFrame();
 		menuFrame.setResizable(false);
 		menuFrame.setBounds(100, 100, 328, 300);
@@ -80,9 +86,46 @@ public class StudentMenu {
 
 		btnClose = new JButton("Close");
 		btnClose.setBounds(213, 205, 89, 23);
+		btnClose.addActionListener(mm);
 		menuFrame.getContentPane().add(btnClose);
-
+		MyModel m = new MyModel();
+		m.Model();
 		menuFrame.setVisible(true);
+	}
+
+	private class MyModel extends DefaultTableModel {
+
+		public boolean isCellEditable(int filas, int columnas) {
+			return false;
+		}
+
+		private void Model() throws ClassNotFoundException, SQLException {
+			String[] columns = { "NAME", "MARK" };
+			float mark = 0;
+			int count=0;
+			MyModel m = new MyModel();
+			m.setColumnIdentifiers(columns);
+			SlqAndFuctions saf = new SlqAndFuctions();
+
+			String dni = Login.dni;
+			ResultSet rs = saf.consultDB("subjects");
+			while(!rs.next()) {
+				count++;
+			}
+			if(count!=0) {
+				
+			}else {
+				 rs = saf.consultDB("subjects");
+			while (rs.next()) {
+				mark = saf.getMark(dni, rs.getInt("COD"));
+				String name = rs.getString("NAME");
+				m.addRow(new Object[] { name, mark });
+
+			}
+			}
+
+			table.setModel(m);
+		}
 	}
 
 	private class ManMenu implements ActionListener {
@@ -124,6 +167,12 @@ public class StudentMenu {
 				}
 				menuFrame.dispose();
 			} else if (o == btnClose) {
+				try {
+					new Login();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				menuFrame.dispose();
 			}
 

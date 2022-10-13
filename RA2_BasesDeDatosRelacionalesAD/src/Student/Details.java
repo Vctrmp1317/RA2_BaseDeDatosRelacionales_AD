@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import LoginAndRegister.Login;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import javax.swing.JButton;
 
 public class Details {
 
@@ -106,6 +107,10 @@ public class Details {
 		textBirthdate.setColumns(10);
 		textBirthdate.setText(rs.getDate("BIRTHDATE").toString());
 		textBirthdate.setEditable(false);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.setBounds(320, 254, 89, 23);
+		detailsFrame.getContentPane().add(btnClose);
 		
 		detailsFrame.setVisible(true);
 	}
