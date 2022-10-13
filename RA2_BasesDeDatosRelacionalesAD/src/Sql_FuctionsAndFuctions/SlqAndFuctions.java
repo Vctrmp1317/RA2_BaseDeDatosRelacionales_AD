@@ -210,7 +210,7 @@ public class SlqAndFuctions {
 			}
 			
 	}
-	public static float getMark(String dni, int codSubject) throws SQLException, ClassNotFoundException {
+	public float getMark(String dni, int codSubject) throws SQLException, ClassNotFoundException {
 		float mark=0;
 		
 		ResultSet res = null;

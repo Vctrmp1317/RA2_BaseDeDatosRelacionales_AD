@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +28,7 @@ public class StudentMenu {
 	private JFrame menuFrame;
 	private JMenuBar mb;
 	private JMenu menu1, menu2, menu3;
-	private JMenuItem mi1, mi2, mi3, mi4;
+	private JMenuItem mi1, mi2, mi3;
 	public static JTable table;
 	private JButton btnClose, btnViewMarks;
 
@@ -64,17 +65,14 @@ public class StudentMenu {
 		menu2.add(mi2);
 		mi2.addActionListener(mm);
 
-		mi3 = new JMenuItem("Marks");
-		menu2.add(mi3);
+
+		mi3 = new JMenuItem("Disconnect");
+		menu3.add(mi3);
+		menuFrame.getContentPane().setLayout(null);
 		mi3.addActionListener(mm);
 
-		mi4 = new JMenuItem("Disconnect");
-		menu3.add(mi4);
-		menuFrame.getContentPane().setLayout(null);
-		mi4.addActionListener(mm);
-
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 26, 134, 182);
+		scrollPane.setBounds(10, 26, 134, 202);
 		menuFrame.getContentPane().add(scrollPane);
 
 		table = new JTable();
@@ -85,15 +83,17 @@ public class StudentMenu {
 		scrollPane.setViewportView(table);
 
 		btnClose = new JButton("Close");
-		btnClose.setBounds(213, 205, 89, 23);
+		btnClose.setBounds(194, 205, 108, 23);
 		btnClose.addActionListener(mm);
 		menuFrame.getContentPane().add(btnClose);
 		
 		btnViewMarks = new JButton("View Marks");
-		btnViewMarks.setBounds(213, 171, 89, 23);
+		btnViewMarks.setBounds(194, 171, 108, 23);
 		btnViewMarks.addActionListener(mm);
 		menuFrame.getContentPane().add(btnViewMarks);
 		
+		MyModel m=new MyModel();
+		m.Model();
 		menuFrame.setVisible(true);
 	}
 
@@ -104,7 +104,7 @@ public class StudentMenu {
 		}
 
 		private void Model() throws ClassNotFoundException, SQLException {
-			String[] columns = { "NAME", "MARK" };
+			String[] columns = { "SUBJECT", "MARK" };
 			float mark = 0;
 			int count=0;
 			MyModel m = new MyModel();
@@ -113,12 +113,10 @@ public class StudentMenu {
 
 			String dni = Login.dni;
 			ResultSet rs = saf.consultDB("subjects");
-			while(!rs.next()) {
-				count++;
-			}
-			if(count!=0) {
+			
+			try {
 				
-			}else {
+			
 				 rs = saf.consultDB("subjects");
 			while (rs.next()) {
 				mark = saf.getMark(dni, rs.getInt("COD"));
@@ -126,6 +124,8 @@ public class StudentMenu {
 				m.addRow(new Object[] { name, mark });
 
 			}
+			}catch(SQLException e1) {
+				JOptionPane.showMessageDialog(menuFrame, "THIS USER HAS NOT SUBJECTS");
 			}
 
 			table.setModel(m);
@@ -154,15 +154,8 @@ public class StudentMenu {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			
 			} else if (o == mi3) {
-				// Class to marks
-				try {
-					new Marks();
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			} else if (o == mi4) {
 				try {
 					new Login();
 				} catch (ClassNotFoundException | SQLException e1) {

@@ -26,7 +26,7 @@ public class Enrollments extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private MyModel model = new MyModel();
 	private JButton btnAdd, btnUpdate, btnDelete, btnReturn;
 	private Enrollment enrollmentSelected;
 
@@ -47,24 +47,8 @@ public class Enrollments extends JFrame {
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
-
-		try {
-			model = new DefaultTableModel();
-			String[] columnas = { "Dni Student", "Cod Subject" };
-			model.setColumnIdentifiers(columnas);
-			ResultSet rs = SlqAndFuctions.consultDB("enrollment");
-			while (rs.next()) {
-				String dniStudent = rs.getString("DNI_STUDENT");
-				int codSubject = rs.getInt("COD_SUBJECT");
-
-				Object[] fila = new Object[2];
-				fila[0] = dniStudent;
-				fila[1] = codSubject;
-
-				model.addRow(fila);
-			}
-		} catch (Exception ex) {
-		}
+		model = new MyModel();
+		model.Model();
 		table.setModel(model);
 		panel1.add(new JScrollPane(table));
 		contentPane.add(panel1);
@@ -105,23 +89,14 @@ public class Enrollments extends JFrame {
 					String dniStudentSelected = (String) table.getValueAt(table.getSelectedRow(), 0);
 					int codSubjectSelected = (Integer) table.getValueAt(table.getSelectedRow(), 1);
 
-					Object[] filaSelected = new Object[2];
-					filaSelected[0] = dniStudentSelected;
-					filaSelected[1] = codSubjectSelected;
-
 					try {
 						ResultSet rs = SlqAndFuctions.consultDB("enrollment");
 						while (rs.next()) {
 							String dniStudent = rs.getString("DNI_STUDENT");
 							int codSubject = rs.getInt("COD_SUBJECT");
 
-							Object[] fila = new Object[2];
-							fila[0] = dniStudent;
-							fila[1] = codSubject;
-
-							if (filaSelected[0].equals(fila[0]) && filaSelected[1].equals(fila[1])) {
-								enrollmentSelected.setDniStudent(dniStudent);
-								enrollmentSelected.setCodSubject(codSubject);
+							if (dniStudentSelected.equals(dniStudent) && codSubjectSelected == codSubject) {
+								enrollmentSelected = new Enrollment(dniStudent, codSubject);
 							}
 						}
 					} catch (Exception ex) {
@@ -145,14 +120,20 @@ public class Enrollments extends JFrame {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 
-			if (o == btnUpdate) {
-
+			if (o == btnAdd) {
+				EnrollmentsAdd frame = new EnrollmentsAdd();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnUpdate) {
 
 			} else if (o == btnDelete) {
-
+				EnrollmentsDelete frame = new EnrollmentsDelete(enrollmentSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnReturn) {
-				SelectButton frame = new SelectButton();
+				AdminMenu frame = new AdminMenu();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -160,5 +141,30 @@ public class Enrollments extends JFrame {
 
 		}
 
+	}
+	
+	private class MyModel extends DefaultTableModel {
+
+		public boolean isCellEditable(int filas, int columnas) {
+			return false;
+		}
+
+		private void Model() {
+			try {
+				String[] columnas = { "Student's ID", "Subject's code" };
+				model.setColumnIdentifiers(columnas);
+				ResultSet rs = SlqAndFuctions.consultDB("enrollment");
+				while (rs.next()) {
+					String dniStudent = rs.getString("DNI_STUDENT");
+					int codSubject = rs.getInt("COD_SUBJECT");
+
+					Object[] fila = new Object[2];
+					fila[0] = dniStudent;
+					fila[1] = codSubject;
+
+					model.addRow(fila);
+				}
+			}catch(Exception ex) {}
+		}
 	}
 }

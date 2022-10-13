@@ -26,7 +26,7 @@ public class Students extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private MyModel model = new MyModel();
 	private JButton btnUpdate, btnDelete, btnReturn;
 	private Student studentSelected;
 
@@ -47,30 +47,8 @@ public class Students extends JFrame {
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
-
-		try {
-			model = new DefaultTableModel();
-			String[] columnas = { "DNI", "Name", "Second Name", "E-mail", "Birthdate" };
-			model.setColumnIdentifiers(columnas);
-			ResultSet rs = SlqAndFuctions.consultDB("student");
-			while (rs.next()) {
-				String dni = rs.getString("DNI");
-				String name = rs.getString("NAME");
-				String secondName = rs.getString("SECOND_NAME");
-				String email = rs.getString("EMAIL");
-				Date birthdate = rs.getDate("BIRTHDATE");
-
-				Object[] fila = new Object[5];
-				fila[0] = dni;
-				fila[1] = name;
-				fila[2] = secondName;
-				fila[3] = email;
-				fila[4] = birthdate;
-
-				model.addRow(fila);
-			}
-		} catch (Exception ex) {
-		}
+		model = new MyModel();
+		model.Model();
 		table.setModel(model);
 		panel1.add(new JScrollPane(table));
 		contentPane.add(panel1);
@@ -109,13 +87,6 @@ public class Students extends JFrame {
 					String emailSelected = (String) table.getValueAt(table.getSelectedRow(), 3);
 					Date birthdateSelected = (Date) table.getValueAt(table.getSelectedRow(), 4);
 
-					Object[] filaSelected = new Object[5];
-					filaSelected[0] = dniSelected;
-					filaSelected[1] = nameSelected;
-					filaSelected[2] = secondNameSelected;
-					filaSelected[3] = emailSelected;
-					filaSelected[4] = birthdateSelected;
-
 					try {
 						ResultSet rs = SlqAndFuctions.consultDB("student");
 						while (rs.next()) {
@@ -123,30 +94,16 @@ public class Students extends JFrame {
 							String name = rs.getString("NAME");
 							String secondName = rs.getString("SECOND_NAME");
 							String email = rs.getString("EMAIL");
+							String route = rs.getString("ROUTE_IMG");
 							Date birthdate = rs.getDate("BIRTHDATE");
 
-							Object[] fila = new Object[5];
-							fila[0] = dni;
-							fila[1] = name;
-							fila[2] = secondName;
-							fila[3] = email;
-							fila[4] = birthdate;
-
-							if (filaSelected[0].equals(fila[0]) && filaSelected[1].equals(fila[1])
-									&& filaSelected[2].equals(fila[2]) && filaSelected[3].equals(fila[3])
-									&& filaSelected[4].equals(fila[4])) {
-								studentSelected.setDni(dni);
-								studentSelected.setName(name);
-								studentSelected.setSecondName(secondName);
-								studentSelected.setEmail(email);
-								studentSelected.setRouteImg(rs.getString("ROUTEIMG"));
-								studentSelected.setBirthdate(birthdate);
+							if (dniSelected.equals(dni) && nameSelected.equals(name) && secondNameSelected.equals(secondName) && emailSelected.equals(email) && birthdateSelected.equals(birthdate)) {
+								studentSelected = new Student(dni, name, secondName, email, route, birthdate);
 							}
 						}
 					} catch (Exception ex) {
 					}
-
-				} else if (Mouse_evt.getClickCount() == 2) {
+				} else if(Mouse_evt.getClickCount() == 2) {
 					StudentsDetails frame = new StudentsDetails(studentSelected);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
@@ -167,9 +124,12 @@ public class Students extends JFrame {
 			if (o == btnUpdate) {
 
 			} else if (o == btnDelete) {
-
+				StudentsDelete frame = new StudentsDelete(studentSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnReturn) {
-				SelectButton frame = new SelectButton();
+				AdminMenu frame = new AdminMenu();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -177,5 +137,36 @@ public class Students extends JFrame {
 
 		}
 
+	}
+	
+	private class MyModel extends DefaultTableModel {
+
+		public boolean isCellEditable(int filas, int columnas) {
+			return false;
+		}
+
+		private void Model() {
+			try {
+				String[] columnas = { "DNI", "Name", "Second Name", "E-mail", "Birthdate" };
+				model.setColumnIdentifiers(columnas);
+				ResultSet rs = SlqAndFuctions.consultDB("student");
+				while (rs.next()) {
+					String dni = rs.getString("DNI");
+					String name = rs.getString("NAME");
+					String secondName = rs.getString("SECOND_NAME");
+					String email = rs.getString("EMAIL");
+					Date birthdate = rs.getDate("BIRTHDATE");
+
+					Object[] fila = new Object[5];
+					fila[0] = dni;
+					fila[1] = name;
+					fila[2] = secondName;
+					fila[3] = email;
+					fila[4] = birthdate;
+
+					model.addRow(fila);
+				}
+			}catch(Exception ex) {}
+		}
 	}
 }

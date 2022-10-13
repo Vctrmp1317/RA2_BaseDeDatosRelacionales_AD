@@ -26,7 +26,7 @@ public class Ras extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private MyModel model = new MyModel();
 	private JButton btnAdd, btnUpdate, btnDelete, btnReturn;
 	private Ra raSelected;
 
@@ -47,30 +47,8 @@ public class Ras extends JFrame {
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
-
-		try {
-			model = new DefaultTableModel();
-			String[] columnas = { "Id", "Cod Subject", "Name", "Description", "Percentage" };
-			model.setColumnIdentifiers(columnas);
-			ResultSet rs = SlqAndFuctions.consultDB("ra");
-			while (rs.next()) {
-				int id = rs.getInt("ID");
-				int codSubject = rs.getInt("COD_SUBJECT");
-				String name = rs.getString("NAME");
-				String description = rs.getString("DESCRIPTION");
-				float percentage = rs.getFloat("PERCENTAGE");
-
-				Object[] fila = new Object[5];
-				fila[0] = id;
-				fila[1] = codSubject;
-				fila[2] = name;
-				fila[3] = description;
-				fila[4] = percentage;
-
-				model.addRow(fila);
-			}
-		} catch (Exception ex) {
-		}
+		model = new MyModel();
+		model.Model();
 		table.setModel(model);
 		panel1.add(new JScrollPane(table));
 		contentPane.add(panel1);
@@ -109,17 +87,10 @@ public class Ras extends JFrame {
 				int row = table.rowAtPoint(point);
 				if (Mouse_evt.getClickCount() == 1) {
 					int idSelected = (Integer) table.getValueAt(table.getSelectedRow(), 0);
-					int codSelected = (Integer) table.getValueAt(table.getSelectedRow(), 1);
+					int codSubjectSelected = (Integer) table.getValueAt(table.getSelectedRow(), 1);
 					String nameSelected = (String) table.getValueAt(table.getSelectedRow(), 2);
 					String descriptionSelected = (String) table.getValueAt(table.getSelectedRow(), 3);
 					float percentageSelected = (Float) table.getValueAt(table.getSelectedRow(), 4);
-
-					Object[] filaSelected = new Object[4];
-					filaSelected[0] = idSelected;
-					filaSelected[1] = codSelected;
-					filaSelected[2] = nameSelected;
-					filaSelected[3] = descriptionSelected;
-					filaSelected[4] = percentageSelected;
 
 					try {
 						ResultSet rs = SlqAndFuctions.consultDB("ra");
@@ -130,21 +101,10 @@ public class Ras extends JFrame {
 							String description = rs.getString("DESCRIPTION");
 							float percentage = rs.getFloat("PERCENTAGE");
 
-							Object[] fila = new Object[5];
-							fila[0] = id;
-							fila[1] = codSubject;
-							fila[2] = name;
-							fila[3] = description;
-							fila[4] = percentage;
-
-							if (filaSelected[0].equals(fila[0]) && filaSelected[1].equals(fila[1])
-									&& filaSelected[2].equals(fila[2]) && filaSelected[3].equals(fila[3])
-									&& filaSelected[4].equals(fila[4])) {
-								raSelected.setId(id);
-								raSelected.setCodSubject(codSubject);
-								raSelected.setName(name);
-								raSelected.setDescription(description);
-								raSelected.setPercentage(percentage);
+							if (idSelected == id && codSubjectSelected == codSubject
+									&& nameSelected.equals(name) && descriptionSelected.equals(description)
+									&& percentageSelected == percentage) {
+								raSelected = new Ra(id, codSubject, name, description, percentage);
 							}
 						}
 					} catch (Exception ex) {
@@ -168,14 +128,20 @@ public class Ras extends JFrame {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 
-			if (o == btnUpdate) {
-
+			if (o == btnAdd) {
+				RasAdd frame = new RasAdd();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnUpdate) {
 
 			} else if (o == btnDelete) {
-
+				RasDelete frame = new RasDelete(raSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnReturn) {
-				SelectButton frame = new SelectButton();
+				AdminMenu frame = new AdminMenu();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -183,5 +149,36 @@ public class Ras extends JFrame {
 
 		}
 
+	}
+	
+	private class MyModel extends DefaultTableModel {
+
+		public boolean isCellEditable(int filas, int columnas) {
+			return false;
+		}
+
+		private void Model() {
+			try {
+				String[] columnas = { "Id", "Subject's code", "Name", "Description", "Percentage" };
+				model.setColumnIdentifiers(columnas);
+				ResultSet rs = SlqAndFuctions.consultDB("ra");
+				while (rs.next()) {
+					int id = rs.getInt("ID");
+					int codSubject = rs.getInt("COD_SUBJECT");
+					String name = rs.getString("NAME");
+					String description = rs.getString("DESCRIPTION");
+					float percentage = rs.getFloat("PERCENTAGE");
+
+					Object[] fila = new Object[5];
+					fila[0] = id;
+					fila[1] = codSubject;
+					fila[2] = name;
+					fila[3] = description;
+					fila[4] = percentage;
+
+					model.addRow(fila);
+				}
+			}catch(Exception ex) {}
+		}
 	}
 }
