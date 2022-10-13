@@ -14,7 +14,6 @@ public class TeacherMenu {
 		initialize();
 	}
 	
-	
 	private void initialize() {
 		menuFrame = new JFrame();
 		menuFrame.setResizable(false);
