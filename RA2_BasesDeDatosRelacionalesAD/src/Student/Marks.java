@@ -162,7 +162,7 @@ public class Marks {
 		
 		MyModel m = new MyModel();
 		m.Model();
-
+		textField.setText(String.valueOf(MarkFinal()));
 		markFrame.setVisible(true);
 	}
 	
@@ -186,6 +186,15 @@ public class Marks {
 		stmt.setInt(2, res.getInt("ID"));
 		rs = stmt.executeQuery();
 		rs.next();
+		ResultSet rst=null;
+		PreparedStatement stm = saf.getConn()
+				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=? ADN ID=?");
+		
+		stm.setInt(1, Subjects.codSub);
+		stm.setInt(2, res.getInt("ID"));
+		rst = stm.executeQuery();
+		rst.next();
+		FinalMark=rs.getFloat("MARK")*rst.getFloat("PERCENTAGE");
 		}
 		
 		return FinalMark;
