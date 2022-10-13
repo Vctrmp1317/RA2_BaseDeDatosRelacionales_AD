@@ -3,6 +3,7 @@ package admin;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,14 +13,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Classes.Student;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class StudentsDetails extends JFrame {
+public class StudentsDelete extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnReturn;
+	private JButton btnConfirm, btnReturn;
 	private Student studentSelected;
 	private JTextField txtDni;
 	private JTextField txtName;
@@ -32,8 +34,8 @@ public class StudentsDetails extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StudentsDetails(Student studentSelected) {
-		super("DETAILS");
+	public StudentsDelete(Student studentSelected) {
+		super("DELETE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -45,7 +47,7 @@ public class StudentsDetails extends JFrame {
 		
 		this.studentSelected = studentSelected;
 		
-		JLabel lblTitle = new JLabel("These are the details of the student");
+		JLabel lblTitle = new JLabel("Are you sure to delete this student?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(192, 21, 202, 13);
 		contentPane.add(lblTitle);
@@ -117,12 +119,17 @@ public class StudentsDetails extends JFrame {
 		} catch (InstantiationException e) {
 		}
 		contentPane.add(lblImagen);
+		
+		btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(244, 419, 85, 21);
+		contentPane.add(btnConfirm);
 
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(250, 419, 85, 21);
+		btnReturn.setBounds(405, 419, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
+		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 		
 	}	
@@ -133,13 +140,24 @@ public class StudentsDetails extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			
-			  if(o == btnReturn) {
-				  Students frame = new Students();
-				  frame.setVisible(true);
-				  frame.setLocationRelativeTo(null);
-				  dispose();
-			  }
+			if(o == btnConfirm) {
+				try {
+					SlqAndFuctions.delete("STUDENT", "DNI", txtDni.getText());
+					SlqAndFuctions.delete("USERS", "DNI", txtDni.getText());
+				} catch (ClassNotFoundException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				Students frame = new Students();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if(o == btnReturn) {
+				Students frame = new Students();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			}
 			 
 		}
 		

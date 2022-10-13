@@ -2,31 +2,31 @@ package admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import Classes.Enrollment;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-
-public class EnrollmentsDetails extends JFrame {
+public class EnrollmentsDelete extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnReturn;
-	private JTextField txtDniStudent;
-	private JTextField txtCodSubject;
 	private Enrollment enrollmentSelected;
+	private JTextField txtDniStudent, txtCodSubject;
+	private JButton btnConfirm, btnReturn;
 
 	/**
 	 * Create the frame.
 	 */
-	public EnrollmentsDetails(Enrollment enrollmentSelected) {
-		super("DETAILS");
+	public EnrollmentsDelete(Enrollment enrollmentSelected) {
+		super("DELETE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -38,9 +38,9 @@ public class EnrollmentsDetails extends JFrame {
 		
 		this.enrollmentSelected = enrollmentSelected;
 
-		JLabel lblTitle = new JLabel("These are the details of the enrollment");
+		JLabel lblTitle = new JLabel("Are you sure to delete this enrollment?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(192, 21, 202, 13);
+		lblTitle.setBounds(172, 21, 241, 13);
 		contentPane.add(lblTitle);
 
 		JLabel lblDniStudent = new JLabel("Student's ID:");
@@ -66,12 +66,17 @@ public class EnrollmentsDetails extends JFrame {
 		txtCodSubject.setText(String.valueOf(this.enrollmentSelected.getCodSubject()));
 		txtCodSubject.setEditable(false);
 		contentPane.add(txtCodSubject);
+		
+		btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(121, 390, 85, 21);
+		contentPane.add(btnConfirm);
 
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(250, 390, 85, 21);
+		btnReturn.setBounds(378, 390, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
+		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 
 	}
@@ -82,8 +87,21 @@ public class EnrollmentsDetails extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if (o == btnReturn) {
-				Ras frame = new Ras();
+			if (o == btnConfirm) {
+				try {
+					PreparedStatement stmt=null;
+					stmt=SlqAndFuctions.getConn().prepareStatement("DELETE FROM ENROLLMENT WHERE DNI_STUDENT = ? AND COD_SUBJECT = ?");
+					stmt.setString(1, txtDniStudent.getText());
+					stmt.setInt(2, Integer.parseInt(txtCodSubject.getText()));
+					stmt.executeUpdate();
+				} catch (Exception ex) {
+				}
+				Enrollments frame = new Enrollments();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (o == btnReturn) {
+				Enrollments frame = new Enrollments();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
@@ -92,4 +110,6 @@ public class EnrollmentsDetails extends JFrame {
 		}
 
 	}
+	
+
 }

@@ -2,22 +2,24 @@ package admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classes.Ra;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class RasDetails extends JFrame {
+public class RasDelete extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnReturn;
+	private JButton btnConfirm, btnReturn;
 	private JTextField txtId;
 	private JTextField txtCodSubject;
 	private JTextField txtName;
@@ -28,7 +30,7 @@ public class RasDetails extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RasDetails(Ra raSelected) {
+	public RasDelete(Ra raSelected) {
 		super("DETAILS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
@@ -41,9 +43,9 @@ public class RasDetails extends JFrame {
 		
 		this.raSelected = raSelected;
 
-		JLabel lblTitle = new JLabel("These are the details of the RA");
+		JLabel lblTitle = new JLabel("Are you sure to delete this RA?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(192, 21, 202, 13);
+		lblTitle.setBounds(182, 21, 222, 13);
 		contentPane.add(lblTitle);
 
 		JLabel lblId = new JLabel("ID:");
@@ -105,12 +107,17 @@ public class RasDetails extends JFrame {
 		txtPercentage.setColumns(10);
 		txtPercentage.setBounds(161, 306, 329, 19);
 		contentPane.add(txtPercentage);
+		
+		btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(98, 390, 85, 21);
+		contentPane.add(btnConfirm);
 
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(250, 390, 85, 21);
+		btnReturn.setBounds(386, 390, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
+		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 
 	}
@@ -121,7 +128,16 @@ public class RasDetails extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if (o == btnReturn) {
+			if (o == btnConfirm) {
+				try {
+					SlqAndFuctions.delete("RA", "ID", txtId.getText());
+				} catch (Exception ex) {
+				}
+				Ras frame = new Ras();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (o == btnReturn) {
 				Ras frame = new Ras();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);

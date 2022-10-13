@@ -14,8 +14,7 @@ import javax.swing.JTextField;
 
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import Student.StudentMenu;
-import Teacher.TeacherMenu;
-import admin.SelectButton;
+import admin.AdminMenu;
 import admin.StudentsDetails;
 
 import javax.swing.JPasswordField;
@@ -95,7 +94,7 @@ public class Login {
 
 					if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin"))
 							|| (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
-						SelectButton frame = new SelectButton();
+						AdminMenu frame = new AdminMenu();
 						frame.setVisible(true);
 						frame.setLocationRelativeTo(null);
 						loginFrame.setVisible(false);
@@ -130,8 +129,8 @@ public class Login {
 							loginFrame.setVisible(false);
 
 						} else if (rol.equals("Teacher")) {
-							TeacherMenu tm=new TeacherMenu();
 							loginFrame.setVisible(false);
+
 						}
 
 					} catch (ClassNotFoundException | SQLException e1) {

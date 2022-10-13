@@ -2,22 +2,26 @@ package admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Classes.Subject;
 import Classes.Teacher;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class TeachersDetails extends JFrame {
+public class TeachersDelete extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnReturn;
+	private JButton btnConfirm, btnReturn;
 	private JTextField txtDni;
 	private JTextField txtName;
 	private JTextField txtSecondName;
@@ -27,7 +31,7 @@ public class TeachersDetails extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TeachersDetails(Teacher teacherSelected) {
+	public TeachersDelete(Teacher teacherSelected) {
 		super("DETAILS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
@@ -40,9 +44,9 @@ public class TeachersDetails extends JFrame {
 		
 		this.teacherSelected = teacherSelected;
 
-		JLabel lblTitle = new JLabel("These are the details of the teacher");
+		JLabel lblTitle = new JLabel("Are you sure to delete this teacher?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(192, 21, 202, 13);
+		lblTitle.setBounds(169, 21, 248, 13);
 		contentPane.add(lblTitle);
 
 		JLabel lblDni = new JLabel("DNI:");
@@ -92,12 +96,17 @@ public class TeachersDetails extends JFrame {
 		txtEmail.setText(this.teacherSelected.getEmail());
 		txtEmail.setEditable(false);
 		contentPane.add(txtEmail);
+		
+		btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(100, 390, 85, 21);
+		contentPane.add(btnConfirm);
 
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(250, 390, 85, 21);
+		btnReturn.setBounds(400, 390, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
+		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 
 	}
@@ -106,9 +115,25 @@ public class TeachersDetails extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method stubz
 			Object o = e.getSource();
-			if (o == btnReturn) {
+			if (o == btnConfirm) {
+				try {
+					PreparedStatement stmt=null;
+					stmt=SlqAndFuctions.getConn().prepareStatement("UPDATE subjects SET DNI_TEACHER=?");
+					stmt.setString(1, "null");
+					stmt.executeUpdate();
+					SlqAndFuctions.delete("TEACHERS", "DNI", txtDni.getText());
+					SlqAndFuctions.delete("USERS", "DNI", txtDni.getText());
+				} catch (ClassNotFoundException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				Teachers frame = new Teachers();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (o == btnReturn) {
 				Teachers frame = new Teachers();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);

@@ -2,22 +2,24 @@ package admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classes.Subject;
+import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class SubjectsDetails extends JFrame {
+public class SubjectsDelete extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnReturn;
+	private JButton btnConfirm, btnReturn;
 	private JTextField txtCode;
 	private JTextField txtHours;
 	private JTextField txtName;
@@ -27,8 +29,8 @@ public class SubjectsDetails extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SubjectsDetails(Subject subjectSelected) {
-		super("DETAILS");
+	public SubjectsDelete(Subject subjectSelected) {
+		super("DELETE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -40,9 +42,9 @@ public class SubjectsDetails extends JFrame {
 		
 		this.subjectSelected = subjectSelected;
 
-		JLabel lblTitle = new JLabel("These are the details of the subject");
+		JLabel lblTitle = new JLabel("Are you sure to delete this subject?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(192, 21, 202, 13);
+		lblTitle.setBounds(152, 21, 281, 13);
 		contentPane.add(lblTitle);
 
 		JLabel lblCode = new JLabel("Code:");
@@ -92,12 +94,17 @@ public class SubjectsDetails extends JFrame {
 		txtDniTeacher.setText(this.subjectSelected.getDniTeacher());
 		txtDniTeacher.setEditable(false);
 		contentPane.add(txtDniTeacher);
-
+		
+		btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(100, 390, 85, 21);
+		contentPane.add(btnConfirm);
+		
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(250, 390, 85, 21);
+		btnReturn.setBounds(400, 390, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
+		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 
 	}
@@ -108,7 +115,18 @@ public class SubjectsDetails extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if (o == btnReturn) {
+			if (o == btnConfirm) {
+				try {
+					SlqAndFuctions.delete("SUBJECTS", "COD", txtCode.getText());
+				} catch (ClassNotFoundException | SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				Subjects frame = new Subjects();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			} else if (o == btnReturn) {
 				Subjects frame = new Subjects();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);

@@ -11,7 +11,7 @@ import LoginAndRegister.Login;
 
 import javax.swing.JButton;
 
-public class SelectButton extends JFrame {
+public class AdminMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnStudents, btnTeachers, btnSubjects, btnRAs, btnExit, btnMatriculate;
@@ -19,7 +19,7 @@ public class SelectButton extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SelectButton() {
+	public AdminMenu() {
 		super("ADMIN");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);

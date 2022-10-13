@@ -128,12 +128,12 @@ public class TeachersAdd extends JFrame {
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "The teacher could not be added. Missing data to enter. You will return to the previous tab.", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}
-				SelectButton frame = new SelectButton();
+				AdminMenu frame = new AdminMenu();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (o == btnReturn) {
-				SelectButton frame = new SelectButton();
+				AdminMenu frame = new AdminMenu();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
