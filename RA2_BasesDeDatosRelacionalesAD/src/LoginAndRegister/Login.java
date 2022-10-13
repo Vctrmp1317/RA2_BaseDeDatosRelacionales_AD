@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import Student.StudentMenu;
+import Teacher.TeacherMenu;
 import admin.SelectButton;
 import admin.StudentsDetails;
 
@@ -129,8 +130,8 @@ public class Login {
 							loginFrame.setVisible(false);
 
 						} else if (rol.equals("Teacher")) {
+							TeacherMenu tm=new TeacherMenu();
 							loginFrame.setVisible(false);
-
 						}
 
 					} catch (ClassNotFoundException | SQLException e1) {
