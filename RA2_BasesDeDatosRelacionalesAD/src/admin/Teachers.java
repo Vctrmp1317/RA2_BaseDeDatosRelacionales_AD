@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -133,7 +132,10 @@ public class Teachers extends JFrame {
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (o == btnUpdate) {
-
+				TeachersUpdate frame = new TeachersUpdate(teacherSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnDelete) {
 				TeachersDelete frame = new TeachersDelete(teacherSelected);
 				frame.setVisible(true);

@@ -1,7 +1,5 @@
 package LoginAndRegister;
 
-import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -16,15 +14,10 @@ import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import Student.StudentMenu;
 
 import Teacher.TeacherMenu;
-import admin.SelectButton;
 import admin.AdminMenu;
 
-import admin.StudentsDetails;
-
 import javax.swing.JPasswordField;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Toolkit;
 
 public class Login {
 

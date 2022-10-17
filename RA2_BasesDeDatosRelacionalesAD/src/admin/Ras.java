@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 
 import javax.swing.JFrame;
@@ -134,7 +133,10 @@ public class Ras extends JFrame {
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (o == btnUpdate) {
-
+				RasUpdate frame = new RasUpdate(raSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnDelete) {
 				RasDelete frame = new RasDelete(raSelected);
 				frame.setVisible(true);

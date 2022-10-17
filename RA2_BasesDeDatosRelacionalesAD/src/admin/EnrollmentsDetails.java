@@ -83,7 +83,7 @@ public class EnrollmentsDetails extends JFrame {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
 			if (o == btnReturn) {
-				Ras frame = new Ras();
+				Enrollments frame = new Enrollments();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();

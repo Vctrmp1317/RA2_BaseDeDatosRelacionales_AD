@@ -2,7 +2,6 @@ package admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -17,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class TeachersDelete extends JFrame {
+public class TeachersUpdate extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnConfirm, btnReturn;
@@ -30,8 +29,8 @@ public class TeachersDelete extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TeachersDelete(Teacher teacherSelected) {
-		super("DETAILS");
+	public TeachersUpdate(Teacher teacherSelected) {
+		super("UPDATE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -43,7 +42,7 @@ public class TeachersDelete extends JFrame {
 		
 		this.teacherSelected = teacherSelected;
 
-		JLabel lblTitle = new JLabel("Are you sure to delete this teacher?");
+		JLabel lblTitle = new JLabel("Are you sure to update this teacher?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(169, 21, 248, 13);
 		contentPane.add(lblTitle);
@@ -79,21 +78,18 @@ public class TeachersDelete extends JFrame {
 		txtName.setColumns(10);
 		txtName.setBounds(161, 155, 329, 19);
 		txtName.setText(this.teacherSelected.getName());
-		txtName.setEditable(false);
 		contentPane.add(txtName);
 
 		txtSecondName = new JTextField();
 		txtSecondName.setColumns(10);
 		txtSecondName.setBounds(161, 227, 329, 19);
 		txtSecondName.setText(this.teacherSelected.getSecondName());
-		txtSecondName.setEditable(false);
 		contentPane.add(txtSecondName);
 
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(161, 306, 329, 19);
 		txtEmail.setText(this.teacherSelected.getEmail());
-		txtEmail.setEditable(false);
 		contentPane.add(txtEmail);
 		
 		btnConfirm = new JButton("Confirm");
@@ -118,12 +114,7 @@ public class TeachersDelete extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					PreparedStatement stmt=null;
-					stmt=SlqAndFuctions.getConn().prepareStatement("UPDATE subjects SET DNI_TEACHER=?");
-					stmt.setString(1, "null");
-					stmt.executeUpdate();
-					SlqAndFuctions.delete("TEACHERS", "DNI", txtDni.getText());
-					SlqAndFuctions.delete("USERS", "DNI", txtDni.getText());
+					SlqAndFuctions.Update(new Teacher(txtDni.getText(), txtName.getText(), txtSecondName.getText(), txtEmail.getText()));
 				} catch (ClassNotFoundException | SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();

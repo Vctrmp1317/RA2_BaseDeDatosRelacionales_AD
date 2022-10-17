@@ -122,7 +122,10 @@ public class Students extends JFrame {
 			Object o = e.getSource();
 
 			if (o == btnUpdate) {
-
+				StudentsUpdate frame = new StudentsUpdate(studentSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnDelete) {
 				StudentsDelete frame = new StudentsDelete(studentSelected);
 				frame.setVisible(true);

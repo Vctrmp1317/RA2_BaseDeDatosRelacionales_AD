@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 
 import javax.swing.JFrame;
@@ -27,7 +26,7 @@ public class Enrollments extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private MyModel model = new MyModel();
-	private JButton btnAdd, btnUpdate, btnDelete, btnReturn;
+	private JButton btnAdd, btnDelete, btnReturn;
 	private Enrollment enrollmentSelected;
 
 	/**
@@ -59,24 +58,19 @@ public class Enrollments extends JFrame {
 		contentPane.add(lblTitle);
 
 		btnAdd = new JButton("Add");
-		btnAdd.setBounds(44, 396, 85, 21);
+		btnAdd.setBounds(63, 396, 85, 21);
 		contentPane.add(btnAdd);
 
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(180, 396, 85, 21);
-		contentPane.add(btnUpdate);
-
 		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(321, 396, 85, 21);
+		btnDelete.setBounds(247, 396, 85, 21);
 		contentPane.add(btnDelete);
 
 		btnReturn = new JButton("Return");
-		btnReturn.setBounds(466, 396, 85, 21);
+		btnReturn.setBounds(434, 396, 85, 21);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
 		btnAdd.addActionListener(mE);
-		btnUpdate.addActionListener(mE);
 		btnDelete.addActionListener(mE);
 		btnReturn.addActionListener(mE);
 
@@ -125,8 +119,6 @@ public class Enrollments extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if (o == btnUpdate) {
-
 			} else if (o == btnDelete) {
 				EnrollmentsDelete frame = new EnrollmentsDelete(enrollmentSelected);
 				frame.setVisible(true);

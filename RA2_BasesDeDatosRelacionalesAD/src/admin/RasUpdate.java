@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
-public class RasDelete extends JFrame {
+public class RasUpdate extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnConfirm, btnReturn;
@@ -29,8 +29,8 @@ public class RasDelete extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RasDelete(Ra raSelected) {
-		super("DELETE");
+	public RasUpdate(Ra raSelected) {
+		super("UPDATE");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -42,7 +42,7 @@ public class RasDelete extends JFrame {
 		
 		this.raSelected = raSelected;
 
-		JLabel lblTitle = new JLabel("Are you sure to delete this RA?");
+		JLabel lblTitle = new JLabel("Are you sure to update this RA?");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(182, 21, 222, 13);
 		contentPane.add(lblTitle);
@@ -90,19 +90,16 @@ public class RasDelete extends JFrame {
 		txtName.setColumns(10);
 		txtName.setBounds(161, 194, 329, 19);
 		txtName.setText(this.raSelected.getName());
-		txtName.setEditable(false);
 		contentPane.add(txtName);
 
 		txtDescription = new JTextField();
 		txtDescription.setColumns(10);
 		txtDescription.setBounds(161, 249, 329, 19);
 		txtDescription.setText(this.raSelected.getDescription());
-		txtDescription.setEditable(false);
 		contentPane.add(txtDescription);
 		
 		txtPercentage = new JTextField();
 		txtPercentage.setText(String.valueOf(this.raSelected.getPercentage()));
-		txtPercentage.setEditable(false);
 		txtPercentage.setColumns(10);
 		txtPercentage.setBounds(161, 306, 329, 19);
 		contentPane.add(txtPercentage);
@@ -129,8 +126,9 @@ public class RasDelete extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					SlqAndFuctions.delete("RA", "ID", txtId.getText());
+					SlqAndFuctions.Update(new Ra(Integer.parseInt(txtId.getText()), Integer.parseInt(txtCodSubject.getText()), txtName.getText(), txtDescription.getText(), Float.parseFloat(txtPercentage.getText())));
 				} catch (Exception ex) {
+					System.out.println(ex);
 				}
 				Ras frame = new Ras();
 				frame.setVisible(true);
