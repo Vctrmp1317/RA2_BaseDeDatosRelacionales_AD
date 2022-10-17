@@ -50,7 +50,8 @@ public class Marks {
 		markFrame.setResizable(false);
 		markFrame.setLocationRelativeTo(null);
 		markFrame.getContentPane().setLayout(null);
-
+		markFrame.setLocationRelativeTo(null);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 158, 239);
 		markFrame.getContentPane().add(scrollPane);

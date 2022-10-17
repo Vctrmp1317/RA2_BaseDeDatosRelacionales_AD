@@ -147,13 +147,14 @@ public class SlqAndFuctions {
 			
 			Student s=(Student) o;
 			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("UPDATE student SET DNI=?, NAME=?,SECOND_NAME=?,EMAIL=?,ROUTE_IMG=?,BIRTHDATE=?");
-			stmt.setString(1, s.getDni());
-			stmt.setString(2,s.getName());
-			stmt.setString(3, s.getSecondName());
-			stmt.setString(4, s.getEmail());
-			stmt.setString(5, s.getRouteImg());
-			stmt.setDate(6, s.getBirthdate());
+			stmt=getConn().prepareStatement("UPDATE student SET NAME=?,SECOND_NAME=?,EMAIL=?,ROUTE_IMG=?,BIRTHDATE=? WHERE DNI= ?");
+			
+			stmt.setString(1,s.getName());
+			stmt.setString(2, s.getSecondName());
+			stmt.setString(3, s.getEmail());
+			stmt.setString(4, s.getRouteImg());
+			stmt.setDate(5, s.getBirthdate());
+			stmt.setString(6, s.getDni());
 			stmt.executeUpdate();
 			stmt.close();
 			}

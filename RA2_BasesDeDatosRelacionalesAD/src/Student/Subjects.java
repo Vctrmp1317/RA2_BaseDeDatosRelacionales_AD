@@ -42,6 +42,7 @@ public class Subjects {
 		subjectsFrame.setBounds(100, 100, 450, 300);
 		subjectsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		subjectsFrame.getContentPane().setLayout(null);
+		subjectsFrame.setLocationRelativeTo(null);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(21, 11, 126, 225);

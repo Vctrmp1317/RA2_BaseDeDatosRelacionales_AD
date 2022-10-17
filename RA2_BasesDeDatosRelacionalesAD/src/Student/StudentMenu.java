@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -47,6 +48,8 @@ public class StudentMenu {
 		menuFrame.setResizable(false);
 		menuFrame.setBounds(100, 100, 328, 300);
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		menuFrame.setLocationRelativeTo(null);
+		
 		ManMenu mm = new ManMenu();
 		mb = new JMenuBar();
 		menuFrame.setJMenuBar(mb);
@@ -87,11 +90,7 @@ public class StudentMenu {
 		btnClose.addActionListener(mm);
 		menuFrame.getContentPane().add(btnClose);
 		
-		btnViewMarks = new JButton("View Marks");
-		btnViewMarks.setBounds(194, 171, 108, 23);
-		btnViewMarks.addActionListener(mm);
-		menuFrame.getContentPane().add(btnViewMarks);
-		
+			
 		MyModel m=new MyModel();
 		m.Model();
 		menuFrame.setVisible(true);
@@ -142,7 +141,7 @@ public class StudentMenu {
 				// Class to details
 				try {
 					Details d = new Details();
-				} catch (ClassNotFoundException | SQLException e1) {
+				} catch (ClassNotFoundException | SQLException | ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -171,15 +170,6 @@ public class StudentMenu {
 					e1.printStackTrace();
 				}
 				menuFrame.dispose();
-			}else if(o == btnViewMarks) {
-				MyModel m= new MyModel();
-				try {
-					m.Model();
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
 			}
 
 		}
