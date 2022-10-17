@@ -3,12 +3,14 @@ package Student;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -45,12 +47,21 @@ public class Marks {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		markFrame = new JFrame();
+		markFrame.getContentPane().setFont(new Font("Rockwell", Font.BOLD, 11));
+		markFrame.getContentPane().setForeground(Color.LIGHT_GRAY);
+		markFrame.getContentPane().setBackground(Color.DARK_GRAY);
 		markFrame.setBounds(100, 100, 450, 300);
 		markFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		markFrame.setResizable(false);
 		markFrame.setLocationRelativeTo(null);
 		markFrame.getContentPane().setLayout(null);
 		markFrame.setLocationRelativeTo(null);
+		
+		ImageIcon imageIcon;
+		imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		markFrame.setIconImage(image);
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 158, 239);
@@ -65,31 +76,45 @@ public class Marks {
 		scrollPane.setViewportView(table);
 
 		panelMarks = new JPanel();
+		panelMarks.setBackground(Color.DARK_GRAY);
 		panelMarks.setBounds(206, 11, 218, 173);
 		markFrame.getContentPane().add(panelMarks);
 		panelMarks.setLayout(null);
 
 		lblMark = new JLabel("MARK");
-		lblMark.setBounds(10, 11, 46, 14);
+		lblMark.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblMark.setForeground(Color.LIGHT_GRAY);
+		lblMark.setBounds(0, 11, 46, 14);
 
 		textRaMark = new JTextField();
 		textRaMark.setBounds(89, 8, 86, 20);
 		textRaMark.setColumns(10);
 		textRaMark.setEditable(false);
+		textRaMark.setBorder(null);
+		textRaMark.setBackground(new Color(102, 102, 102));
+		
 
 		lblPercentage = new JLabel("PERCENTAGE");
-		lblPercentage.setBounds(10, 45, 65, 14);
+		lblPercentage.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblPercentage.setForeground(Color.LIGHT_GRAY);
+		lblPercentage.setBounds(0, 46, 81, 14);
 
 		textPercentage = new JTextField();
 		textPercentage.setBounds(89, 42, 86, 20);
 		textPercentage.setColumns(10);
+		textPercentage.setBorder(null);
+		textPercentage.setBackground(new Color(102, 102, 102));
+	
 		textPercentage.setEditable(false);
 
 		lblDescription = new JLabel("DESCRIPTION");
-		lblDescription.setBounds(10, 79, 75, 14);
+		lblDescription.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblDescription.setForeground(Color.LIGHT_GRAY);
+		lblDescription.setBounds(0, 80, 81, 14);
 
 		textArea = new JTextArea();
 		textArea.setBounds(89, 73, 119, 89);
+		textArea.setBackground(new Color(102, 102, 102));
 		textArea.setEditable(false);
 
 		panelMarks.add(lblDescription);
@@ -100,10 +125,16 @@ public class Marks {
 		lblMark.setVisible(false);
 
 		JLabel lblFinalMark = new JLabel("FINAL MARK");
+		lblFinalMark.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblFinalMark.setForeground(Color.LIGHT_GRAY);
 		lblFinalMark.setBounds(206, 211, 78, 14);
 		markFrame.getContentPane().add(lblFinalMark);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Rockwell", Font.PLAIN, 11));
+		textField.setForeground(new Color(0, 0, 0));
+		textField.setBorder(null);
+		textField.setBackground(new Color(128, 128, 128));
 		textField.setBounds(294, 208, 86, 20);
 		markFrame.getContentPane().add(textField);
 		textField.setColumns(10);

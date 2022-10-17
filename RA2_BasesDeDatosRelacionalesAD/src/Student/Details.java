@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Classes.Student;
@@ -28,6 +29,8 @@ import Sql_FuctionsAndFuctions.SlqAndFuctions;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Details {
 
@@ -60,6 +63,7 @@ public class Details {
 			}
 		}
 		detailsFrame = new JFrame();
+		detailsFrame.getContentPane().setBackground(Color.DARK_GRAY);
 		detailsFrame.setTitle("DETAILS");
 		detailsFrame.setResizable(false);
 		detailsFrame.setBounds(100, 100, 509, 257);
@@ -67,8 +71,14 @@ public class Details {
 		detailsFrame.getContentPane().setLayout(null);
 		detailsFrame.setLocationRelativeTo(null);
 		
-		 lblImage = new JLabel("New label");
-		lblImage.setBounds(269, 11, 108, 124);
+		ImageIcon imageIconWindow;
+		imageIconWindow = new ImageIcon("icons/icon.png");
+		Image imageWindow = imageIconWindow.getImage();
+		detailsFrame.setIconImage(imageWindow);
+
+		
+		 lblImage = new JLabel();
+		lblImage.setBounds(286, 11, 108, 124);
 		detailsFrame.getContentPane().add(lblImage);
 
 		ImageIcon imageIcon;
@@ -79,55 +89,85 @@ public class Details {
 
 		lblImage.setIcon(imageIcon2);
 		JLabel lblName = new JLabel("NAME ");
+		lblName.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblName.setForeground(Color.LIGHT_GRAY);
 		lblName.setBounds(10, 44, 40, 14);
 		detailsFrame.getContentPane().add(lblName);
 
 		textName = new JTextField();
-		textName.setBounds(92, 42, 140, 20);
+		textName.setFont(new Font("Rockwell", Font.PLAIN, 11));
+		textName.setForeground(new Color(0, 0, 0));
+		textName.setBorder(null);
+		textName.setBackground(new Color(105, 105, 105));
+		textName.setBounds(119, 41, 140, 20);
 		detailsFrame.getContentPane().add(textName);
 		textName.setColumns(10);
 		textName.setText(rs.getString("NAME"));
 		textName.setEditable(false);
 
 		JLabel lblSecondName = new JLabel("SECOND NAME");
-		lblSecondName.setBounds(10, 78, 78, 14);
+		lblSecondName.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblSecondName.setForeground(Color.LIGHT_GRAY);
+		lblSecondName.setBounds(10, 78, 99, 14);
 		detailsFrame.getContentPane().add(lblSecondName);
 
 		textSecondName = new JTextField();
-		textSecondName.setBounds(92, 75, 140, 20);
+		textSecondName.setFont(new Font("Rockwell", Font.PLAIN, 11));
+		textSecondName.setForeground(new Color(0, 0, 0));
+		textSecondName.setBorder(null);
+		textSecondName.setBackground(new Color(105, 105, 105));
+		textSecondName.setBounds(119, 73, 140, 20);
 		detailsFrame.getContentPane().add(textSecondName);
 		textSecondName.setColumns(10);
 		textSecondName.setText(rs.getString("SECOND_NAME"));
 		textSecondName.setEditable(false);
 
 		JLabel lblDni = new JLabel("DNI");
+		lblDni.setForeground(Color.LIGHT_GRAY);
+		lblDni.setFont(new Font("Rockwell", Font.BOLD, 11));
 		lblDni.setBounds(10, 16, 46, 14);
 		detailsFrame.getContentPane().add(lblDni);
 
 		textDni = new JTextField();
-		textDni.setBounds(92, 11, 140, 20);
+		textDni.setFont(new Font("Rockwell", Font.PLAIN, 11));
+		textDni.setForeground(new Color(0, 0, 0));
+		textDni.setBorder(null);
+		textDni.setBackground(new Color(105, 105, 105));
+		textDni.setBounds(119, 11, 140, 20);
 		detailsFrame.getContentPane().add(textDni);
 		textDni.setColumns(10);
 		textDni.setText(rs.getString("DNI"));
 		textDni.setEditable(false);
 
 		JLabel lblEmail = new JLabel("EMAIL");
+		lblEmail.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblEmail.setForeground(Color.LIGHT_GRAY);
 		lblEmail.setBounds(10, 109, 46, 14);
 		detailsFrame.getContentPane().add(lblEmail);
 
 		textEmail = new JTextField();
-		textEmail.setBounds(92, 106, 140, 20);
+		textEmail.setFont(new Font("Rockwell", Font.PLAIN, 11));
+		textEmail.setForeground(new Color(0, 0, 0));
+		textEmail.setBorder(null);
+		textEmail.setBackground(new Color(105, 105, 105));
+		textEmail.setBounds(119, 104, 140, 20);
 		detailsFrame.getContentPane().add(textEmail);
 		textEmail.setColumns(10);
 		textEmail.setText(rs.getString("EMAIL"));
 		textEmail.setEditable(false);
 
 		JLabel lblBirthDate = new JLabel("BIRTHDATE");
+		lblBirthDate.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblBirthDate.setForeground(Color.LIGHT_GRAY);
 		lblBirthDate.setBounds(10, 143, 72, 14);
 		detailsFrame.getContentPane().add(lblBirthDate);
 
 		textBirthdate = new JTextField();
-		textBirthdate.setBounds(92, 140, 140, 20);
+		textBirthdate.setFont(new Font("Rockwell", Font.PLAIN, 11));
+		textBirthdate.setForeground(new Color(0, 0, 0));
+		textBirthdate.setBorder(null);
+		textBirthdate.setBackground(new Color(105, 105, 105));
+		textBirthdate.setBounds(119, 135, 140, 20);
 		detailsFrame.getContentPane().add(textBirthdate);
 		textBirthdate.setColumns(10);
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -137,24 +177,44 @@ public class Details {
 		
 		ManEvent mm=new ManEvent();
 
-		btnClose = new JButton("Close");
-		btnClose.setBounds(394, 182, 89, 23);
+		btnClose = new JButton();
+		btnClose.setToolTipText("Close");
+		btnClose.setBackground(Color.DARK_GRAY);
+		btnClose.setBounds(450, 174, 33, 33);
 		btnClose.addActionListener(mm);
+		ImageIcon closeIcon=new ImageIcon("icons/cancel.png");
+		btnClose.setIcon(closeIcon);
+		btnClose.setBorderPainted(false);
 		detailsFrame.getContentPane().add(btnClose);
 		
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(10, 182, 89, 23);
+		btnUpdate = new JButton();
+		btnUpdate.setToolTipText("Update");
+		btnUpdate.setBackground(Color.DARK_GRAY);
+		btnUpdate.setBounds(301, 174, 25, 25);
 		btnUpdate.addActionListener(mm);
+		ImageIcon updateIcon=new ImageIcon("icons/uptadte.png");
+		btnUpdate.setIcon(updateIcon);
+		btnUpdate.setBorderPainted(false);
 		detailsFrame.getContentPane().add(btnUpdate);
 		
-		 btnSave = new JButton("Save");
-		btnSave.setBounds(109, 182, 89, 23);
+		 btnSave = new JButton();
+		 btnSave.setToolTipText("Save");
+		 btnSave.setBackground(Color.DARK_GRAY);
+		btnSave.setBounds(346, 173, 26, 26);
 		btnSave.addActionListener(mm);
+		btnSave.setBorderPainted(false);
+		ImageIcon saveIcon=new ImageIcon("icons/save.png");
+		btnSave.setIcon(saveIcon);
 		detailsFrame.getContentPane().add(btnSave);
 		
-		btnUptadteImage = new JButton("Update Image");
-		btnUptadteImage.setBounds(269, 182, 108, 23);
+		btnUptadteImage = new JButton();
+		btnUptadteImage.setBackground(Color.DARK_GRAY);
+		btnUptadteImage.setToolTipText("Update Image");
+		btnUptadteImage.setBounds(395, 174, 33, 33);
+		ImageIcon updateImageIcon=new ImageIcon("icons/agregar-documento.png");
+		btnUptadteImage.setIcon(updateImageIcon);
 		btnUptadteImage.addActionListener(mm);
+		btnUptadteImage.setBorderPainted(false);
 		detailsFrame.getContentPane().add(btnUptadteImage);
 		
 		Fc = new JFileChooser();
@@ -180,7 +240,7 @@ public class Details {
 			Object o = e.getSource();
 			if (o == btnClose) {
 				try {
-					new Login();
+					new StudentMenu();
 					detailsFrame.dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
@@ -188,7 +248,7 @@ public class Details {
 				}
 
 			}else if(o == btnUpdate) {
-				
+				JOptionPane.showMessageDialog(detailsFrame, "FIELDS EDITABLES NOW");
 				textName.setEditable(true);
 				textSecondName.setEditable(true);
 				textEmail.setEditable(true);

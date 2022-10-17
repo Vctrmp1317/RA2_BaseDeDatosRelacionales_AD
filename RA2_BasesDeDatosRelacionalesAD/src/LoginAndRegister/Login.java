@@ -25,6 +25,8 @@ import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Login {
 
@@ -42,6 +44,7 @@ public class Login {
 
 		SlqAndFuctions.getConn();
 		loginFrame = new JFrame();
+		loginFrame.getContentPane().setBackground(new Color(51, 51, 51));
 		loginFrame.setResizable(false);
 		loginFrame.setTitle("LOGIN");
 		loginFrame.setBounds(100, 100, 450, 257);
@@ -49,30 +52,53 @@ public class Login {
 		loginFrame.getContentPane().setLayout(null);
 		loginFrame.setLocationRelativeTo(null);
 
+		
+		ImageIcon imageIcon;
+		imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		loginFrame.setIconImage(image);
+		
+		
 		JLabel lblDni = new JLabel("DNI");
+		lblDni.setForeground(new Color(153, 153, 153));
+		lblDni.setFont(new Font("Rockwell", Font.BOLD, 11));
 		lblDni.setBounds(45, 31, 37, 28);
 		loginFrame.getContentPane().add(lblDni);
 
 		textDni = new JTextField();
+		textDni.setBorder(null);
+		textDni.setBackground(new Color(102, 102, 102));
 		textDni.setBounds(45, 70, 86, 20);
 		loginFrame.getContentPane().add(textDni);
 		textDni.setColumns(10);
 
 		JLabel lblPassword = new JLabel("PASSWORD");
-		lblPassword.setBounds(45, 126, 62, 14);
+		lblPassword.setForeground(new Color(153, 153, 153));
+		lblPassword.setFont(new Font("Rockwell", Font.BOLD, 11));
+		lblPassword.setBounds(45, 126, 72, 14);
 		loginFrame.getContentPane().add(lblPassword);
 
 		passwordField = new JPasswordField();
+		passwordField.setBorder(null);
+		passwordField.setBackground(new Color(102, 102, 102));
 		passwordField.setBounds(45, 178, 86, 20);
 		loginFrame.getContentPane().add(passwordField);
 
 		btnLogin = new JButton("LOGIN");
+		btnLogin.setForeground(new Color(0, 0, 0));
+		btnLogin.setBackground(new Color(102, 102, 102));
+		btnLogin.setFont(new Font("Rockwell", Font.BOLD, 11));
 		btnLogin.setBounds(163, 177, 119, 23);
+		btnLogin.setBorderPainted(false);
 		loginFrame.getContentPane().add(btnLogin);
 
 		btnRegister = new JButton("REGISTER");
+		btnRegister.setForeground(new Color(0, 0, 0));
+		btnRegister.setBackground(new Color(102, 102, 102));
+		btnRegister.setFont(new Font("Rockwell", Font.BOLD, 11));
 		btnRegister.setBounds(305, 177, 119, 23);
 		loginFrame.getContentPane().add(btnRegister);
+		btnRegister.setBorderPainted(false);
 		loginFrame.setVisible(true);
 
 		ManEvent man = new ManEvent();
