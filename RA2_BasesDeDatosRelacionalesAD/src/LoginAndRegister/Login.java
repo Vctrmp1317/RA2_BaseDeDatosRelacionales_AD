@@ -120,8 +120,8 @@ public class Login {
 					JOptionPane.showMessageDialog(loginFrame, "THERE ARE EMPTY FIELDS");
 				} else {
 
-					if ((textDni.getText().equals("admin") && passwordField.getText().equals("admin"))
-							|| (textDni.getText().equals("ADMIN") && passwordField.getText().equals("ADMIN"))) {
+					if ((textDni.getText().equalsIgnoreCase("admin") && passwordField.getText().equalsIgnoreCase("admin"))
+							|| (textDni.getText().equalsIgnoreCase("ADMIN") && passwordField.getText().equalsIgnoreCase("ADMIN"))) {
 						AdminMenu frame = new AdminMenu();
 						frame.setVisible(true);
 						frame.setLocationRelativeTo(null);

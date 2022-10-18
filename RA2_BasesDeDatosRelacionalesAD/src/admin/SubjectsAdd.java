@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import Classes.Subject;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -72,38 +73,54 @@ public class SubjectsAdd extends JFrame {
 		contentPane.add(lblName);
 
 		JLabel lblDniTeacher = new JLabel("Teacher's ID:");
-		lblDniTeacher.setFont(new Font("Ravie", Font.BOLD, 12));
+		lblDniTeacher.setFont(new Font("Rockwell", Font.BOLD, 12));
 		lblDniTeacher.setForeground(Color.LIGHT_GRAY);
 		lblDniTeacher.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDniTeacher.setBounds(50, 308, 85, 13);
 		contentPane.add(lblDniTeacher);
 
 		txtCode = new JTextField();
+		txtCode.setBorder(null);
+		txtCode.setBackground(Color.LIGHT_GRAY);
 		txtCode.setBounds(161, 85, 329, 19);
 		contentPane.add(txtCode);
 		txtCode.setColumns(10);
 
 		txtHours = new JTextField();
+		txtHours.setBorder(null);
+		txtHours.setBackground(Color.LIGHT_GRAY);
 		txtHours.setColumns(10);
 		txtHours.setBounds(161, 154, 329, 19);
 		contentPane.add(txtHours);
 
 		txtName = new JTextField();
+		txtName.setBorder(null);
+		txtName.setBackground(Color.LIGHT_GRAY);
 		txtName.setColumns(10);
 		txtName.setBounds(161, 226, 329, 19);
 		contentPane.add(txtName);
 
 		txtDniTeacher = new JTextField();
+		txtDniTeacher.setBorder(null);
+		txtDniTeacher.setBackground(Color.LIGHT_GRAY);
 		txtDniTeacher.setColumns(10);
 		txtDniTeacher.setBounds(161, 305, 329, 19);
 		contentPane.add(txtDniTeacher);
 
-		btnAdd = new JButton("Add");
-		btnAdd.setBounds(161, 396, 85, 21);
+		btnAdd = new JButton();
+		btnAdd.setBorderPainted(false);
+		btnAdd.setBackground(Color.DARK_GRAY);
+		btnAdd.setBounds(161, 396, 33, 33);
+		ImageIcon addIcon =new ImageIcon("icons/add.png");
+		btnAdd.setIcon(addIcon);
 		contentPane.add(btnAdd);
 
-		btnReturn = new JButton("Return");
-		btnReturn.setBounds(322, 396, 85, 21);
+		btnReturn = new JButton();
+		btnReturn.setBorderPainted(false);
+		btnReturn.setBackground(Color.DARK_GRAY);
+		btnReturn.setBounds(457, 396, 33, 33);
+		ImageIcon returnIcon =new ImageIcon("icons/disconnect.png");
+		btnReturn.setIcon(returnIcon);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
