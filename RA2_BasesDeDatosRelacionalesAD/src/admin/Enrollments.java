@@ -16,11 +16,14 @@ import javax.swing.table.DefaultTableModel;
 import Classes.Enrollment;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 public class Enrollments extends JFrame {
 
@@ -36,6 +39,7 @@ public class Enrollments extends JFrame {
 	public Enrollments() {
 		super("ENROLLMENTS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBackground(Color.DARK_GRAY);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
@@ -44,31 +48,60 @@ public class Enrollments extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
+		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 
 		JPanel panel1 = new JPanel();
+		panel1.setBackground(Color.DARK_GRAY);
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
 		model = new MyModel();
 		model.Model();
 		table.setModel(model);
-		panel1.add(new JScrollPane(table));
+		JScrollPane scrollPane = new JScrollPane(table);
+		panel1.add(scrollPane);
 		contentPane.add(panel1);
 
 		JLabel lblTitle = new JLabel("Enrollments");
+		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
+		lblTitle.setForeground(Color.LIGHT_GRAY);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(254, 23, 78, 28);
+		lblTitle.setBounds(238, 23, 109, 28);
 		contentPane.add(lblTitle);
 
-		btnAdd = new JButton("Add");
-		btnAdd.setBounds(63, 396, 85, 21);
+		btnAdd = new JButton();
+		btnAdd.setContentAreaFilled(false);
+		btnAdd.setFocusPainted(false);
+		btnAdd.setToolTipText("Add");
+		btnAdd.setBorderPainted(false);
+		btnAdd.setBackground(Color.DARK_GRAY);
+		btnAdd.setBounds(63, 396, 33, 33);
+		ImageIcon addImage = new ImageIcon("icons/add.png");
+		btnAdd.setIcon(addImage);
 		contentPane.add(btnAdd);
 
-		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(247, 396, 85, 21);
+		btnDelete = new JButton();
+		btnDelete.setContentAreaFilled(false);
+		btnDelete.setFocusPainted(false);
+		btnDelete.setToolTipText("Delete");
+		btnDelete.setBorderPainted(false);
+		btnDelete.setBackground(Color.DARK_GRAY);
+		btnDelete.setBounds(276, 396, 33, 33);
+		ImageIcon deleteImage = new ImageIcon("icons/delete.png");
+		btnDelete.setIcon(deleteImage);
 		contentPane.add(btnDelete);
 
-		btnReturn = new JButton("Return");
-		btnReturn.setBounds(434, 396, 85, 21);
+		btnReturn = new JButton();
+		btnReturn.setContentAreaFilled(false);
+		btnReturn.setFocusPainted(false);
+		btnReturn.setToolTipText("Return");
+		btnReturn.setBorderPainted(false);
+		btnReturn.setBackground(Color.DARK_GRAY);
+		btnReturn.setBounds(486, 396, 33, 33);
+		ImageIcon returnImage = new ImageIcon("icons/disconnect.png");
+		btnReturn.setIcon(returnImage);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();

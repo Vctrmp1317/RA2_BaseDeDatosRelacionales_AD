@@ -10,11 +10,15 @@ import javax.swing.border.EmptyBorder;
 import Classes.Enrollment;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 public class EnrollmentsAdd extends JFrame {
 
@@ -28,46 +32,74 @@ public class EnrollmentsAdd extends JFrame {
 	 */
 	public EnrollmentsAdd() {
 		super("ADD");
+		setBackground(Color.DARK_GRAY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
+		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 
 		JLabel lblTitle = new JLabel("Enter the data of the enrollment to add");
+		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
+		lblTitle.setForeground(Color.LIGHT_GRAY);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(176, 21, 233, 13);
+		lblTitle.setBounds(162, 39, 262, 19);
 		contentPane.add(lblTitle);
 
 		JLabel lblDniStudent = new JLabel("Student's ID:");
+		lblDniStudent.setFont(new Font("Rockwell", Font.BOLD, 13));
+		lblDniStudent.setForeground(Color.LIGHT_GRAY);
 		lblDniStudent.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDniStudent.setBounds(50, 141, 85, 13);
+		lblDniStudent.setBounds(29, 141, 122, 13);
 		contentPane.add(lblDniStudent);
 
 		JLabel lblCodSubject = new JLabel("Subject's Code:");
+		lblCodSubject.setFont(new Font("Rockwell", Font.BOLD, 13));
+		lblCodSubject.setForeground(Color.LIGHT_GRAY);
 		lblCodSubject.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodSubject.setBounds(50, 258, 85, 13);
+		lblCodSubject.setBounds(29, 258, 122, 13);
 		contentPane.add(lblCodSubject);
 
 		txtDniStudent = new JTextField();
+		txtDniStudent.setBackground(Color.LIGHT_GRAY);
 		txtDniStudent.setBounds(161, 138, 329, 19);
 		contentPane.add(txtDniStudent);
 		txtDniStudent.setColumns(11);
 
 		txtCodSubject = new JTextField();
+		txtCodSubject.setBackground(Color.LIGHT_GRAY);
 		txtCodSubject.setColumns(11);
 		txtCodSubject.setBounds(161, 255, 329, 19);
 		contentPane.add(txtCodSubject);
 
-		btnAdd = new JButton("Add");
-		btnAdd.setBounds(161, 396, 85, 21);
+		btnAdd = new JButton();
+		btnAdd.setFocusPainted(false);
+		btnAdd.setContentAreaFilled(false);
+		btnAdd.setBackground(Color.DARK_GRAY);
+		btnAdd.setBorderPainted(false);
+		btnAdd.setToolTipText("Add");
+		btnAdd.setBounds(202, 396, 33, 33);
+		ImageIcon addImage = new ImageIcon("icons/agregar-documento.png");
+		btnAdd.setIcon(addImage);
 		contentPane.add(btnAdd);
 
-		btnReturn = new JButton("Return");
-		btnReturn.setBounds(322, 396, 85, 21);
+		btnReturn = new JButton();
+		btnReturn.setFocusPainted(false);
+		btnReturn.setContentAreaFilled(false);
+		btnReturn.setBackground(Color.DARK_GRAY);
+		btnReturn.setBorderPainted(false);
+		btnReturn.setToolTipText("Return");
+		btnReturn.setBounds(376, 396, 33, 33);
+		ImageIcon returnImage = new ImageIcon("icons/cancel.png");
+		btnReturn.setIcon(returnImage);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();

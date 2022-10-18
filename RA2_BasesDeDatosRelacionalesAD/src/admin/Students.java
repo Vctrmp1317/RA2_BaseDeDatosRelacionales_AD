@@ -1,5 +1,6 @@
 package admin;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,10 +18,13 @@ import javax.swing.table.DefaultTableModel;
 import Classes.Student;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Students extends JFrame {
 
@@ -35,16 +39,23 @@ public class Students extends JFrame {
 	 */
 	public Students() {
 		super("STUDENTS");
+		setBackground(Color.DARK_GRAY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
+		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 
 		JPanel panel1 = new JPanel();
+		panel1.setBackground(Color.DARK_GRAY);
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
 		model = new MyModel();
@@ -54,20 +65,43 @@ public class Students extends JFrame {
 		contentPane.add(panel1);
 
 		JLabel lblTitle = new JLabel("Students");
+		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
+		lblTitle.setForeground(Color.LIGHT_GRAY);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(264, 23, 58, 28);
+		lblTitle.setBounds(257, 23, 72, 28);
 		contentPane.add(lblTitle);
 
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(77, 396, 85, 21);
+		btnUpdate = new JButton();
+		btnUpdate.setToolTipText("Update");
+		btnUpdate.setFocusPainted(false);
+		btnUpdate.setContentAreaFilled(false);
+		btnUpdate.setBorderPainted(false);
+		btnUpdate.setBackground(Color.DARK_GRAY);
+		btnUpdate.setBounds(77, 396, 33, 33);
+		ImageIcon updateImage = new ImageIcon("icons/uptadte.png");
+		btnUpdate.setIcon(updateImage);
 		contentPane.add(btnUpdate);
 
-		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(250, 396, 85, 21);
+		btnDelete = new JButton();
+		btnDelete.setToolTipText("Delete");
+		btnDelete.setFocusPainted(false);
+		btnDelete.setContentAreaFilled(false);
+		btnDelete.setBorderPainted(false);
+		btnDelete.setBackground(Color.DARK_GRAY);
+		btnDelete.setBounds(250, 396, 33, 33);
+		ImageIcon deleteImage = new ImageIcon("icons/delete.png");
+		btnDelete.setIcon(deleteImage);
 		contentPane.add(btnDelete);
 
-		btnReturn = new JButton("Return");
-		btnReturn.setBounds(422, 396, 85, 21);
+		btnReturn = new JButton();
+		btnReturn.setToolTipText("Return");
+		btnReturn.setFocusPainted(false);
+		btnReturn.setContentAreaFilled(false);
+		btnReturn.setBorderPainted(false);
+		btnReturn.setBackground(Color.DARK_GRAY);
+		btnReturn.setBounds(422, 396, 33, 33);
+		ImageIcon returnImage = new ImageIcon("icons/disconnect.png");
+		btnReturn.setIcon(returnImage);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
