@@ -47,6 +47,7 @@ public class Subjects {
 	private void initialize() throws ClassNotFoundException, SQLException {
 
 		subjectsFrame = new JFrame();
+		subjectsFrame.setTitle("SUBJECTS");
 		subjectsFrame.getContentPane().setBackground(Color.DARK_GRAY);
 		subjectsFrame.setResizable(false);
 		subjectsFrame.setBounds(100, 100, 450, 300);

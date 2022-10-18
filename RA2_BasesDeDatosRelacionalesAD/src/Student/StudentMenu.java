@@ -48,6 +48,7 @@ public class StudentMenu {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		menuFrame = new JFrame();
+		menuFrame.setTitle("MENU");
 		menuFrame.getContentPane().setBackground(new Color(51, 51, 51));
 		menuFrame.setResizable(false);
 		menuFrame.setBounds(100, 100, 328, 313);

@@ -51,6 +51,7 @@ public class Marks {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		markFrame = new JFrame();
+		markFrame.setTitle("MARKS");
 		markFrame.getContentPane().setFont(new Font("Rockwell", Font.BOLD, 11));
 		markFrame.getContentPane().setForeground(Color.LIGHT_GRAY);
 		markFrame.getContentPane().setBackground(Color.DARK_GRAY);

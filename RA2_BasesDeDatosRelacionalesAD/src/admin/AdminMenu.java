@@ -34,6 +34,7 @@ public class AdminMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnStudents = new JButton();
+		btnStudents.setToolTipText("Students");
 		btnStudents.setContentAreaFilled(false);
 		btnStudents.setBorderPainted(false);
 		btnStudents.setBackground(Color.DARK_GRAY);
@@ -43,6 +44,7 @@ public class AdminMenu extends JFrame {
 		contentPane.add(btnStudents);
 		
 		btnTeachers = new JButton();
+		btnTeachers.setToolTipText("Teachers");
 		btnTeachers.setBackground(Color.DARK_GRAY);
 		btnTeachers.setContentAreaFilled(false);
 		btnTeachers.setBounds(369, 72, 65, 65);
@@ -51,6 +53,7 @@ public class AdminMenu extends JFrame {
 		contentPane.add(btnTeachers);
 		
 		btnSubjects = new JButton();
+		btnSubjects.setToolTipText("Subjects");
 		btnSubjects.setBackground(Color.DARK_GRAY);
 		btnSubjects.setContentAreaFilled(false);
 		btnSubjects.setBounds(81, 201, 65, 65);
@@ -59,6 +62,7 @@ public class AdminMenu extends JFrame {
 		contentPane.add(btnSubjects);
 		
 		btnRAs = new JButton();
+		btnRAs.setToolTipText("RAs");
 		btnRAs.setBackground(Color.DARK_GRAY);
 		btnRAs.setContentAreaFilled(false);
 		btnRAs.setBounds(369, 201, 65, 65);
@@ -67,6 +71,7 @@ public class AdminMenu extends JFrame {
 		contentPane.add(btnRAs);
 		
 		btnMatriculate = new JButton();
+		btnMatriculate.setToolTipText("Enrollment");
 		btnMatriculate.setBackground(Color.DARK_GRAY);
 		btnMatriculate.setContentAreaFilled(false);
 		btnMatriculate.setBounds(81, 331, 65, 65);
@@ -75,6 +80,7 @@ public class AdminMenu extends JFrame {
 		contentPane.add(btnMatriculate);
 		
 		btnExit = new JButton();
+		btnExit.setToolTipText("Exit");
 		btnExit.setBackground(Color.DARK_GRAY);
 		btnExit.setContentAreaFilled(false);
 		btnExit.setBounds(369, 331, 65, 65);

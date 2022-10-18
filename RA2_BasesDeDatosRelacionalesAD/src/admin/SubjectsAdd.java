@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.Font;
 
 public class SubjectsAdd extends JFrame {
 
@@ -33,6 +35,8 @@ public class SubjectsAdd extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
+		contentPane.setForeground(Color.LIGHT_GRAY);
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setResizable(false);
@@ -40,26 +44,36 @@ public class SubjectsAdd extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblTitle = new JLabel("Enter the data of the subject to add");
+		lblTitle.setForeground(Color.LIGHT_GRAY);
+		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 14));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(192, 21, 202, 13);
+		lblTitle.setBounds(192, 21, 256, 13);
 		contentPane.add(lblTitle);
 
 		JLabel lblCode = new JLabel("Code:");
+		lblCode.setFont(new Font("Rockwell", Font.BOLD, 12));
+		lblCode.setForeground(Color.LIGHT_GRAY);
 		lblCode.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCode.setBounds(50, 88, 85, 13);
 		contentPane.add(lblCode);
 
 		JLabel lblHours = new JLabel("Hours:");
+		lblHours.setFont(new Font("Rockwell", Font.BOLD, 12));
+		lblHours.setForeground(Color.LIGHT_GRAY);
 		lblHours.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblHours.setBounds(50, 157, 85, 13);
 		contentPane.add(lblHours);
 
 		JLabel lblName = new JLabel("Name:");
+		lblName.setFont(new Font("Rockwell", Font.BOLD, 12));
+		lblName.setForeground(Color.LIGHT_GRAY);
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblName.setBounds(50, 229, 85, 13);
 		contentPane.add(lblName);
 
 		JLabel lblDniTeacher = new JLabel("Teacher's ID:");
+		lblDniTeacher.setFont(new Font("Ravie", Font.BOLD, 12));
+		lblDniTeacher.setForeground(Color.LIGHT_GRAY);
 		lblDniTeacher.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDniTeacher.setBounds(50, 308, 85, 13);
 		contentPane.add(lblDniTeacher);
