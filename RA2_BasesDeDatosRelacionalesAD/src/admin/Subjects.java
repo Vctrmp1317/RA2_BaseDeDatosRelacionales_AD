@@ -130,7 +130,10 @@ public class Subjects extends JFrame {
 				frame.setLocationRelativeTo(null);
 				dispose();
 			} else if (o == btnUpdate) {
-
+				SubjectsUpdate frame = new SubjectsUpdate(subjectSelected);
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
 			} else if (o == btnDelete) {
 				SubjectsDelete frame = new SubjectsDelete(subjectSelected);
 				frame.setVisible(true);

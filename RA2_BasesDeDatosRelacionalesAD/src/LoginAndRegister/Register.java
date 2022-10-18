@@ -1,12 +1,11 @@
 package LoginAndRegister;
 
-
-
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 import static javax.swing.JFileChooser.CANCEL_OPTION;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -228,7 +227,7 @@ public class Register {
 			} else if (o == btnAccept) {
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 				String route = "imgs/" + textDni.getText() + textName.getText() + ".jpg";
-				java.sql.Date birthDate;
+				Date birthDate;
 				try {
 					SlqAndFuctions saf=new SlqAndFuctions();
 					ResultSet rs=saf.consultDB("users");

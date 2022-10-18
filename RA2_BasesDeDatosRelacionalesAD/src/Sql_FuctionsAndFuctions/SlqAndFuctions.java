@@ -21,60 +21,58 @@ import LoginAndRegister.Login;
 import Student.Subjects;
 
 public class SlqAndFuctions {
-	
+
 	static Connection conn = null;
-	
+
 	public static Connection getConn() throws ClassNotFoundException, SQLException {
-		
-		
-			Class.forName("com.mysql.cj.jdbc.Driver");
-	
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/ra2_database?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
-		
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		conn = DriverManager.getConnection(
+				"jdbc:mysql://localhost/ra2_database?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+				"root", "");
+
 		return conn;
 	}
-	
+
 	public static void insert(Object o) throws ClassNotFoundException, SQLException {
-		if(o.getClass()==Student.class) {
-			
-		Student s=(Student) o;
-		PreparedStatement stmt=null;
-		stmt=getConn().prepareStatement("INSERT INTO student VALUES (?,?,?,?,?,?)");
-		stmt.setString(1, s.getDni());
-		stmt.setString(2,s.getName());
-		stmt.setString(3, s.getSecondName());
-		stmt.setString(4, s.getEmail());
-		stmt.setString(5, s.getRouteImg());
-		stmt.setDate(6, s.getBirthdate());
-		stmt.executeUpdate();
-		stmt.close();
-		}
-		else if(o.getClass()==Teacher.class) {
-			Teacher t=(Teacher) o;
-			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("INSERT INTO teachers VALUES (?,?,?,?)");
+		if (o.getClass() == Student.class) {
+
+			Student s = (Student) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("INSERT INTO student VALUES (?,?,?,?,?,?)");
+			stmt.setString(1, s.getDni());
+			stmt.setString(2, s.getName());
+			stmt.setString(3, s.getSecondName());
+			stmt.setString(4, s.getEmail());
+			stmt.setString(5, s.getRouteImg());
+			stmt.setDate(6, s.getBirthdate());
+			stmt.executeUpdate();
+			stmt.close();
+		} else if (o.getClass() == Teacher.class) {
+			Teacher t = (Teacher) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("INSERT INTO teachers VALUES (?,?,?,?)");
 			stmt.setString(1, t.getDni());
-			stmt.setString(2,t.getName());
+			stmt.setString(2, t.getName());
 			stmt.setString(3, t.getSecondName());
 			stmt.setString(4, t.getEmail());
 			stmt.executeUpdate();
 			stmt.close();
-		}
-		else if(o.getClass()==Subject.class) {
-			Subject sub=(Subject)o;
-			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("INSERT INTO subjects VALUES (?,?,?,?)");
+		} else if (o.getClass() == Subject.class) {
+			Subject sub = (Subject) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("INSERT INTO subjects VALUES (?,?,?,?)");
 			stmt.setInt(1, sub.getCod());
 			stmt.setString(2, sub.getName());
 			stmt.setInt(3, sub.getHours());
 			stmt.setString(4, sub.getDniTeacher());
 			stmt.executeUpdate();
 			stmt.close();
-		}
-		else if(o.getClass()==Ra.class) {
-			Ra r=(Ra)o;
-			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("INSERT INTO ra VALUES (?,?,?,?,?)");
+		} else if (o.getClass() == Ra.class) {
+			Ra r = (Ra) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("INSERT INTO ra VALUES (?,?,?,?,?)");
 			stmt.setInt(1, r.getId());
 			stmt.setString(2, r.getName());
 			stmt.setString(3, r.getDescription());
@@ -82,74 +80,74 @@ public class SlqAndFuctions {
 			stmt.setInt(5, r.getCodSubject());
 			stmt.executeUpdate();
 			stmt.close();
-		}
-		else if(o.getClass()==Enrollment.class) {
-			Enrollment en=(Enrollment)o;
-			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("INSERT INTO enrollment VALUES (?,?)");
+		} else if (o.getClass() == Enrollment.class) {
+			Enrollment en = (Enrollment) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("INSERT INTO enrollment VALUES (?,?)");
 			stmt.setString(1, en.getDniStudent());
 			stmt.setInt(2, en.getCodSubject());
 			stmt.executeUpdate();
 			stmt.close();
-		}
-		else if(o.getClass()==Calification.class) {
-			Calification ca=(Calification)o;
-			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("INSERT INTO calification VALUES (?,?,?)");
+		} else if (o.getClass() == Calification.class) {
+			Calification ca = (Calification) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("INSERT INTO calification VALUES (?,?,?)");
 			stmt.setString(1, ca.getDniStudent());
 			stmt.setInt(2, ca.getIdRa());
 			stmt.setFloat(3, ca.getMark());
 		}
-		
-		
+
 	}
-	
+
 	public static void inserUser(Users s) throws ClassNotFoundException, SQLException {
-		PreparedStatement stmt=null;
-		stmt=getConn().prepareStatement("INSERT INTO users VALUES (?,?,?)");
+		PreparedStatement stmt = null;
+		stmt = getConn().prepareStatement("INSERT INTO users VALUES (?,?,?)");
 		stmt.setString(1, s.getDni());
-		stmt.setString(2,s.getPassword());
+		stmt.setString(2, s.getPassword());
 		stmt.setString(3, s.getRol());
 		stmt.executeUpdate();
 		stmt.close();
 	}
-	
+
 	public static ResultSet consultDB(String table) throws ClassNotFoundException, SQLException {
-		String sql="SELECT * FROM "+table;
-		PreparedStatement stmt=getConn().prepareStatement(sql);
-		
-		ResultSet rs=stmt.executeQuery();
-	
+		String sql = "SELECT * FROM " + table;
+		PreparedStatement stmt = getConn().prepareStatement(sql);
+
+		ResultSet rs = stmt.executeQuery();
+
 		return rs;
 	}
-	public <T> ResultSet consultDBSpec(String table,String primarykey,T valor) throws ClassNotFoundException, SQLException {
-		String sql="SELECT * FROM "+table+" WHERE "+primarykey+" = ?;";
-		PreparedStatement stmt=getConn().prepareStatement(sql);
-		if(valor.getClass()==String.class) {
-		stmt.setString(1, (String) valor);
+
+	public <T> ResultSet consultDBSpec(String table, String primarykey, T valor)
+			throws ClassNotFoundException, SQLException {
+		String sql = "SELECT * FROM " + table + " WHERE " + primarykey + " = ?;";
+		PreparedStatement stmt = getConn().prepareStatement(sql);
+		if (valor.getClass() == String.class) {
+			stmt.setString(1, (String) valor);
 		}
-		if(valor.getClass()==Integer.class) {
+		if (valor.getClass() == Integer.class) {
 			stmt.setInt(1, (int) valor);
 		}
-		ResultSet rs=stmt.executeQuery();
-	
+		ResultSet rs = stmt.executeQuery();
+
 		return rs;
 	}
-	
-	public static void delete(String table,String primaryKey,String valor) throws ClassNotFoundException, SQLException {
-		PreparedStatement stmt=null;
-		stmt=getConn().prepareStatement("DELETE FROM "+table+" WHERE "+primaryKey+" = ?");
+
+	public static void delete(String table, String primaryKey, String valor)
+			throws ClassNotFoundException, SQLException {
+		PreparedStatement stmt = null;
+		stmt = getConn().prepareStatement("DELETE FROM " + table + " WHERE " + primaryKey + " = ?");
 		stmt.setString(1, valor);
 		stmt.executeUpdate();
 	}
+
 	public static void Update(Object o) throws ClassNotFoundException, SQLException {
-		if(o.getClass()==Student.class) {
-			
-			Student s=(Student) o;
-			PreparedStatement stmt=null;
-			stmt=getConn().prepareStatement("UPDATE student SET NAME=?,SECOND_NAME=?,EMAIL=?,ROUTE_IMG=?,BIRTHDATE=? WHERE DNI= ?");
-			
-			stmt.setString(1,s.getName());
+		if (o.getClass() == Student.class) {
+			Student s = (Student) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement(
+					"UPDATE student SET NAME=?,SECOND_NAME=?,EMAIL=?,ROUTE_IMG=?,BIRTHDATE=? WHERE DNI= ?");
+			stmt.setString(1, s.getName());
 			stmt.setString(2, s.getSecondName());
 			stmt.setString(3, s.getEmail());
 			stmt.setString(4, s.getRouteImg());
@@ -157,96 +155,79 @@ public class SlqAndFuctions {
 			stmt.setString(6, s.getDni());
 			stmt.executeUpdate();
 			stmt.close();
-			}
-			else if(o.getClass()==Teacher.class) {
-				Teacher t=(Teacher) o;
-				PreparedStatement stmt=null;
-				stmt=getConn().prepareStatement("UPDATE teachers SET DNI=?,NAME=?,SECOND_NAME=?,EMAIL=?");
-				stmt.setString(1, t.getDni());
-				stmt.setString(2,t.getName());
-				stmt.setString(3, t.getSecondName());
-				stmt.setString(4, t.getEmail());
-				stmt.executeUpdate();
-				stmt.close();
-			}
-			else if(o.getClass()==Subject.class) {
-				Subject sub=(Subject)o;
-				PreparedStatement stmt=null;
-				stmt=getConn().prepareStatement("UPDATE  subjects SET COD=?,NAME=?,HOURS=?,DNI_TEACHER=?");
-				stmt.setInt(1, sub.getCod());
-				stmt.setString(2, sub.getName());
-				stmt.setInt(3, sub.getHours());
-				stmt.setString(4, sub.getDniTeacher());
-				stmt.executeUpdate();
-				stmt.close();
-			}
-			else if(o.getClass()==Ra.class) {
-				Ra r=(Ra)o;
-				PreparedStatement stmt=null;
-				stmt=getConn().prepareStatement("UPDATE ra SET ID=?,NAME=?,DESCRIPTION=?,PERCENTAGE=?,COD_SUBJECT=?");
-				stmt.setInt(1, r.getId());
-				stmt.setString(2, r.getName());
-				stmt.setString(3, r.getDescription());
-				stmt.setFloat(4, r.getPercentage());
-				stmt.setInt(5, r.getCodSubject());
-				stmt.executeUpdate();
-				stmt.close();
-			}
-			else if(o.getClass()==Enrollment.class) {
-				Enrollment en=(Enrollment)o;
-				PreparedStatement stmt=null;
-				stmt=getConn().prepareStatement("UPDATE enrollment SET DNI_STUDENT=?,COND_SUBJECT=?");
-				stmt.setString(1, en.getDniStudent());
-				stmt.setInt(2, en.getCodSubject());
-				stmt.executeUpdate();
-				stmt.close();
-			}
-			else if(o.getClass()==Calification.class) {
-				Calification ca=(Calification)o;
-				PreparedStatement stmt=null;
-				stmt=getConn().prepareStatement("UPDATE calification SET DNI_STUDENT=?,ID_RA=?,MARK=?");
-				stmt.setString(1, ca.getDniStudent());
-				stmt.setInt(2, ca.getIdRa());
-				stmt.setFloat(3, ca.getMark());
-			}
-			
+		} else if (o.getClass() == Teacher.class) {
+			Teacher t = (Teacher) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("UPDATE teachers SET NAME=?,SECOND_NAME=?,EMAIL=? WHERE DNI=?");
+			stmt.setString(1, t.getName());
+			stmt.setString(2, t.getSecondName());
+			stmt.setString(3, t.getEmail());
+			stmt.setString(4, t.getDni());
+			stmt.executeUpdate();
+			stmt.close();
+		} else if (o.getClass() == Subject.class) {
+			Subject sub = (Subject) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("UPDATE subjects SET NAME=?,HOURS=? WHERE COD=? AND DNI_TEACHER=?");
+			stmt.setString(1, sub.getName());
+			stmt.setInt(2, sub.getHours());
+			stmt.setInt(3, sub.getCod());
+			stmt.setString(4, sub.getDniTeacher());
+			stmt.executeUpdate();
+			stmt.close();
+		} else if (o.getClass() == Ra.class) {
+			Ra r = (Ra) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("UPDATE ra SET NAME=?,DESCRIPTION=?,PERCENTAGE=? WHERE ID=? AND COD_SUBJECT=?");
+			stmt.setString(1, r.getName());
+			stmt.setString(2, r.getDescription());
+			stmt.setFloat(3, r.getPercentage());
+			stmt.setInt(4, r.getId());
+			stmt.setInt(5, r.getCodSubject());
+			stmt.executeUpdate();
+			stmt.close();
+		} else if (o.getClass() == Calification.class) {
+			Calification ca = (Calification) o;
+			PreparedStatement stmt = null;
+			stmt = getConn().prepareStatement("UPDATE calification SET MARK=? WHERE DNI_STUDENT=? AND ID_RA=?");
+			stmt.setFloat(1, ca.getMark());
+			stmt.setString(2, ca.getDniStudent());
+			stmt.setInt(3, ca.getIdRa());
+		}
+
 	}
+
 	public float getMark(String dni, int codSubject) throws SQLException, ClassNotFoundException {
-		float mark=0;
-		
+		float mark = 0;
+
 		ResultSet res = null;
-		SlqAndFuctions saf=new SlqAndFuctions();
-		
-		PreparedStatement stmt = saf.getConn()
-				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
-		
+		SlqAndFuctions saf = new SlqAndFuctions();
+
+		PreparedStatement stmt = saf.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
+
 		stmt.setInt(1, codSubject);
 		res = stmt.executeQuery();
-		while(res.next()) {
-		
-		ResultSet rs = null;
+		while (res.next()) {
 
-		stmt = saf.getConn()
-				.prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
-		stmt.setString(1, dni);
-		stmt.setInt(2, res.getInt("ID"));
-		rs = stmt.executeQuery();
-		rs.next();
-		ResultSet rst=null;
-		PreparedStatement stm = saf.getConn()
-				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
-		
-		stm.setInt(1, codSubject);
-		stm.setInt(2, res.getInt("ID"));
-		rst = stm.executeQuery();
-		rst.next();
-		mark=rs.getFloat("MARK")*rst.getFloat("PERCENTAGE");
+			ResultSet rs = null;
+
+			stmt = saf.getConn().prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
+			stmt.setString(1, dni);
+			stmt.setInt(2, res.getInt("ID"));
+			rs = stmt.executeQuery();
+			rs.next();
+			ResultSet rst = null;
+			PreparedStatement stm = saf.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
+
+			stm.setInt(1, codSubject);
+			stm.setInt(2, res.getInt("ID"));
+			rst = stm.executeQuery();
+			rst.next();
+			mark = rs.getFloat("MARK") * rst.getFloat("PERCENTAGE");
 		}
-		
+
 		return mark;
-		
+
 	}
-	
-	
 
 }

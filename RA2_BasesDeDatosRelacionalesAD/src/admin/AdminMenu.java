@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import LoginAndRegister.Login;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -23,7 +24,7 @@ public class AdminMenu extends JFrame {
 	public AdminMenu() {
 		super("ADMIN");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 530, 500);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -32,28 +33,53 @@ public class AdminMenu extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 		
-		btnStudents = new JButton("Students");
+		btnStudents = new JButton();
+		btnStudents.setContentAreaFilled(false);
+		btnStudents.setBorderPainted(false);
+		btnStudents.setBackground(Color.DARK_GRAY);
 		btnStudents.setBounds(81, 72, 65, 65);
+		ImageIcon studentIcon=new ImageIcon("icons/student.png");
+		btnStudents.setIcon(studentIcon);
 		contentPane.add(btnStudents);
 		
-		btnTeachers = new JButton("Teachers");
+		btnTeachers = new JButton();
+		btnTeachers.setBackground(Color.DARK_GRAY);
+		btnTeachers.setContentAreaFilled(false);
 		btnTeachers.setBounds(369, 72, 65, 65);
+		ImageIcon teacherIcon=new ImageIcon("icons/teacher.png");
+		btnTeachers.setIcon(teacherIcon);
 		contentPane.add(btnTeachers);
 		
-		btnSubjects = new JButton("Subjects");
+		btnSubjects = new JButton();
+		btnSubjects.setBackground(Color.DARK_GRAY);
+		btnSubjects.setContentAreaFilled(false);
 		btnSubjects.setBounds(81, 201, 65, 65);
+		ImageIcon subjectIcon=new ImageIcon("icons/subjects.png");
+		btnSubjects.setIcon(subjectIcon);
 		contentPane.add(btnSubjects);
 		
-		btnRAs = new JButton("RA's");
+		btnRAs = new JButton();
+		btnRAs.setBackground(Color.DARK_GRAY);
+		btnRAs.setContentAreaFilled(false);
 		btnRAs.setBounds(369, 201, 65, 65);
+		ImageIcon raIcon=new ImageIcon("icons/ras.png");
+		btnRAs.setIcon(raIcon);
 		contentPane.add(btnRAs);
 		
-		btnMatriculate = new JButton("Enrollments");
+		btnMatriculate = new JButton();
+		btnMatriculate.setBackground(Color.DARK_GRAY);
+		btnMatriculate.setContentAreaFilled(false);
 		btnMatriculate.setBounds(81, 331, 65, 65);
+		ImageIcon enrollmentIcon=new ImageIcon("icons/enrollment.png");
+		btnMatriculate.setIcon(enrollmentIcon);
 		contentPane.add(btnMatriculate);
 		
-		btnExit = new JButton("Exit");
+		btnExit = new JButton();
+		btnExit.setBackground(Color.DARK_GRAY);
+		btnExit.setContentAreaFilled(false);
 		btnExit.setBounds(369, 331, 65, 65);
+		ImageIcon exitIcon=new ImageIcon("icons/exitx64.png");
+		btnExit.setIcon(exitIcon);
 		contentPane.add(btnExit);
 		
 		ManEvent mE = new ManEvent();
