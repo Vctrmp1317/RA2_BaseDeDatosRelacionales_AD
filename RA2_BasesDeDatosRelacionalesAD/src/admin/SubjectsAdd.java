@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
 public class SubjectsAdd extends JFrame {
 
@@ -43,6 +44,11 @@ public class SubjectsAdd extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
+		
+		ImageIcon imageIcon;
+		imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 
 		JLabel lblTitle = new JLabel("Enter the data of the subject to add");
 		lblTitle.setForeground(Color.LIGHT_GRAY);

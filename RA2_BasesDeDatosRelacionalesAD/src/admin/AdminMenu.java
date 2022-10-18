@@ -12,6 +12,7 @@ import LoginAndRegister.Login;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Image;
 
 public class AdminMenu extends JFrame {
 
@@ -33,12 +34,17 @@ public class AdminMenu extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 		
+		ImageIcon imageIcon;
+		imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
+		
 		btnStudents = new JButton();
 		btnStudents.setToolTipText("Students");
 		btnStudents.setContentAreaFilled(false);
 		btnStudents.setBorderPainted(false);
 		btnStudents.setBackground(Color.DARK_GRAY);
-		btnStudents.setBounds(81, 72, 65, 65);
+		btnStudents.setBounds(81, 72, 64, 64);
 		ImageIcon studentIcon=new ImageIcon("icons/student.png");
 		btnStudents.setIcon(studentIcon);
 		contentPane.add(btnStudents);
@@ -47,7 +53,8 @@ public class AdminMenu extends JFrame {
 		btnTeachers.setToolTipText("Teachers");
 		btnTeachers.setBackground(Color.DARK_GRAY);
 		btnTeachers.setContentAreaFilled(false);
-		btnTeachers.setBounds(369, 72, 65, 65);
+		btnTeachers.setBorderPainted(false);
+		btnTeachers.setBounds(369, 72, 64, 64);
 		ImageIcon teacherIcon=new ImageIcon("icons/teacher.png");
 		btnTeachers.setIcon(teacherIcon);
 		contentPane.add(btnTeachers);
@@ -57,6 +64,7 @@ public class AdminMenu extends JFrame {
 		btnSubjects.setBackground(Color.DARK_GRAY);
 		btnSubjects.setContentAreaFilled(false);
 		btnSubjects.setBounds(81, 201, 65, 65);
+		btnSubjects.setBorderPainted(false);
 		ImageIcon subjectIcon=new ImageIcon("icons/subjects.png");
 		btnSubjects.setIcon(subjectIcon);
 		contentPane.add(btnSubjects);
@@ -66,6 +74,7 @@ public class AdminMenu extends JFrame {
 		btnRAs.setBackground(Color.DARK_GRAY);
 		btnRAs.setContentAreaFilled(false);
 		btnRAs.setBounds(369, 201, 65, 65);
+		btnRAs.setBorderPainted(false);
 		ImageIcon raIcon=new ImageIcon("icons/ras.png");
 		btnRAs.setIcon(raIcon);
 		contentPane.add(btnRAs);
@@ -75,6 +84,7 @@ public class AdminMenu extends JFrame {
 		btnMatriculate.setBackground(Color.DARK_GRAY);
 		btnMatriculate.setContentAreaFilled(false);
 		btnMatriculate.setBounds(81, 331, 65, 65);
+		btnMatriculate.setBorderPainted(false);
 		ImageIcon enrollmentIcon=new ImageIcon("icons/enrollment.png");
 		btnMatriculate.setIcon(enrollmentIcon);
 		contentPane.add(btnMatriculate);
@@ -84,6 +94,7 @@ public class AdminMenu extends JFrame {
 		btnExit.setBackground(Color.DARK_GRAY);
 		btnExit.setContentAreaFilled(false);
 		btnExit.setBounds(369, 331, 65, 65);
+		btnExit.setBorderPainted(false);
 		ImageIcon exitIcon=new ImageIcon("icons/exitx64.png");
 		btnExit.setIcon(exitIcon);
 		contentPane.add(btnExit);

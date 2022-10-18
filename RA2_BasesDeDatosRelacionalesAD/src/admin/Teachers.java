@@ -17,10 +17,14 @@ import javax.swing.table.DefaultTableModel;
 import Classes.Teacher;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Font;
 
 public class Teachers extends JFrame {
 
@@ -40,12 +44,18 @@ public class Teachers extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 
+		ImageIcon imageIcon;
+		imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
+		 
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
@@ -56,24 +66,42 @@ public class Teachers extends JFrame {
 		contentPane.add(panel1);
 
 		JLabel lblTitle = new JLabel("Teachers");
+		lblTitle.setForeground(Color.LIGHT_GRAY);
+		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 12));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setBounds(264, 23, 58, 28);
 		contentPane.add(lblTitle);
 
-		btnAdd = new JButton("Add");
-		btnAdd.setBounds(44, 396, 85, 21);
+		btnAdd = new JButton();
+		btnAdd.setBackground(Color.DARK_GRAY);
+		btnAdd.setBorderPainted(false);
+		btnAdd.setBounds(63, 396, 33, 33);
+		ImageIcon addIcon =new ImageIcon("icons/add.png");
+		btnAdd.setIcon(addIcon);
 		contentPane.add(btnAdd);
 
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(180, 396, 85, 21);
+		btnUpdate = new JButton();
+		btnUpdate.setBackground(Color.DARK_GRAY);
+		btnUpdate.setBorderPainted(false);
+		btnUpdate.setBounds(187, 396, 33, 33);
+		ImageIcon updateIcon =new ImageIcon("icons/uptadte.png");
+		btnUpdate.setIcon(updateIcon);
 		contentPane.add(btnUpdate);
 
-		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(321, 396, 85, 21);
+		btnDelete = new JButton();
+		btnDelete.setBackground(Color.DARK_GRAY);
+		btnDelete.setBorderPainted(false);
+		btnDelete.setBounds(329, 396, 33, 33);
+		ImageIcon deleteIcon =new ImageIcon("icons/delete.png");
+		btnDelete.setIcon(deleteIcon);
 		contentPane.add(btnDelete);
 
-		btnReturn = new JButton("Return");
-		btnReturn.setBounds(466, 396, 85, 21);
+		btnReturn = new JButton();
+		btnReturn.setBackground(Color.DARK_GRAY);
+		btnReturn.setBorderPainted(false);
+		btnReturn.setBounds(486, 396, 33, 33);
+		ImageIcon returnIcon =new ImageIcon("icons/disconnect.png");
+		btnReturn.setIcon(returnIcon);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();

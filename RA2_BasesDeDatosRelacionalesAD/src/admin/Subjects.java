@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
 public class Subjects extends JFrame {
 
@@ -47,6 +48,11 @@ public class Subjects extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
+		
+		ImageIcon imageIcon;
+		imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
