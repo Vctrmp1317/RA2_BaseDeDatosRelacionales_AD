@@ -197,6 +197,7 @@ public class StudentMenu {
 				// Class to subjects
 				try {
 					Subjects sub = new Subjects();
+					menuFrame.dispose();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

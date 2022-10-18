@@ -5,12 +5,15 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,6 +36,7 @@ public class Marks {
 	private JTextField textField;
 	private JPanel panelMarks;
 	private JTextArea textArea;
+	private JButton btnClose;
 	private float FinalMark;
 
 	public Marks() throws ClassNotFoundException, SQLException {
@@ -189,6 +193,15 @@ public class Marks {
 
 			}
 		});
+		ManEvent mm=new ManEvent();
+		btnClose = new JButton();
+		btnClose.setBackground(Color.DARK_GRAY);
+		btnClose.setBounds(391, 203, 33, 33);
+		btnClose.setBorderPainted(false);
+		ImageIcon iconClose = new ImageIcon("icons/cancel.png");
+		btnClose.setIcon(iconClose);
+		btnClose.addActionListener(mm);
+		markFrame.getContentPane().add(btnClose);
 		
 		
 		
@@ -263,5 +276,24 @@ public class Marks {
 
 			table.setModel(m);
 		}
+	}
+	private class ManEvent implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Object o = e.getSource();
+			if (o == btnClose) {
+				try {
+					new Subjects();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				markFrame.dispose();
+			}
+		}
+
 	}
 }

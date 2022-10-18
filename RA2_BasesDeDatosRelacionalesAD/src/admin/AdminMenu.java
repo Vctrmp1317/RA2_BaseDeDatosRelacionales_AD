@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import LoginAndRegister.Login;
 
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class AdminMenu extends JFrame {
 
@@ -24,6 +25,7 @@ public class AdminMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setResizable(false);
@@ -31,27 +33,27 @@ public class AdminMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnStudents = new JButton("Students");
-		btnStudents.setBounds(81, 72, 120, 50);
+		btnStudents.setBounds(81, 72, 65, 65);
 		contentPane.add(btnStudents);
 		
 		btnTeachers = new JButton("Teachers");
-		btnTeachers.setBounds(369, 72, 120, 50);
+		btnTeachers.setBounds(369, 72, 65, 65);
 		contentPane.add(btnTeachers);
 		
 		btnSubjects = new JButton("Subjects");
-		btnSubjects.setBounds(81, 201, 120, 50);
+		btnSubjects.setBounds(81, 201, 65, 65);
 		contentPane.add(btnSubjects);
 		
 		btnRAs = new JButton("RA's");
-		btnRAs.setBounds(369, 201, 120, 50);
+		btnRAs.setBounds(369, 201, 65, 65);
 		contentPane.add(btnRAs);
 		
 		btnMatriculate = new JButton("Enrollments");
-		btnMatriculate.setBounds(81, 331, 120, 50);
+		btnMatriculate.setBounds(81, 331, 65, 65);
 		contentPane.add(btnMatriculate);
 		
 		btnExit = new JButton("Exit");
-		btnExit.setBounds(369, 331, 120, 50);
+		btnExit.setBounds(369, 331, 65, 65);
 		contentPane.add(btnExit);
 		
 		ManEvent mE = new ManEvent();
