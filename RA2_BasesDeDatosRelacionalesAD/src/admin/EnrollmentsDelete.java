@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +15,9 @@ import javax.swing.border.EmptyBorder;
 
 import Classes.Enrollment;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 public class EnrollmentsDelete extends JFrame {
 
@@ -27,52 +31,80 @@ public class EnrollmentsDelete extends JFrame {
 	 */
 	public EnrollmentsDelete(Enrollment enrollmentSelected) {
 		super("DELETE");
+		setBackground(Color.DARK_GRAY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
+		
 		this.enrollmentSelected = enrollmentSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to delete this enrollment?");
+		lblTitle.setForeground(Color.LIGHT_GRAY);
+		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setBounds(172, 21, 241, 13);
+		lblTitle.setBounds(172, 32, 271, 19);
 		contentPane.add(lblTitle);
 
 		JLabel lblDniStudent = new JLabel("Student's ID:");
+		lblDniStudent.setForeground(Color.LIGHT_GRAY);
+		lblDniStudent.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblDniStudent.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDniStudent.setBounds(50, 144, 85, 13);
+		lblDniStudent.setBounds(38, 147, 113, 13);
 		contentPane.add(lblDniStudent);
 
 		JLabel lblCodSubject = new JLabel("Subject's code:");
+		lblCodSubject.setForeground(Color.LIGHT_GRAY);
+		lblCodSubject.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblCodSubject.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCodSubject.setBounds(50, 268, 85, 13);
+		lblCodSubject.setBounds(38, 271, 113, 13);
 		contentPane.add(lblCodSubject);
 
 		txtDniStudent = new JTextField();
-		txtDniStudent.setBounds(161, 141, 329, 19);
+		txtDniStudent.setBackground(Color.LIGHT_GRAY);
+		txtDniStudent.setBounds(161, 145, 329, 19);
 		txtDniStudent.setText(this.enrollmentSelected.getDniStudent());
 		txtDniStudent.setEditable(false);
 		contentPane.add(txtDniStudent);
 		txtDniStudent.setColumns(10);
 
 		txtCodSubject = new JTextField();
+		txtCodSubject.setBackground(Color.LIGHT_GRAY);
 		txtCodSubject.setColumns(10);
-		txtCodSubject.setBounds(161, 265, 329, 19);
+		txtCodSubject.setBounds(161, 269, 329, 19);
 		txtCodSubject.setText(String.valueOf(this.enrollmentSelected.getCodSubject()));
 		txtCodSubject.setEditable(false);
 		contentPane.add(txtCodSubject);
 		
-		btnConfirm = new JButton("Confirm");
-		btnConfirm.setBounds(121, 390, 85, 21);
+		btnConfirm = new JButton();
+		btnConfirm.setFocusPainted(false);
+		btnConfirm.setContentAreaFilled(false);
+		btnConfirm.setBorderPainted(false);
+		btnConfirm.setToolTipText("Confirm");
+		btnConfirm.setBackground(Color.DARK_GRAY);
+		btnConfirm.setBounds(216, 390, 33, 33);
+		ImageIcon confirmImage = new ImageIcon("icons/accept.png");
+		btnConfirm.setIcon(confirmImage);
 		contentPane.add(btnConfirm);
 
-		btnReturn = new JButton("Return");
-		btnReturn.setBounds(378, 390, 85, 21);
+		btnReturn = new JButton();
+		btnReturn.setFocusPainted(false);
+		btnReturn.setContentAreaFilled(false);
+		btnReturn.setBorderPainted(false);
+		btnReturn.setToolTipText("Return");
+		btnReturn.setBackground(Color.DARK_GRAY);
+		btnReturn.setBounds(369, 390, 33, 33);
+		ImageIcon returnImage = new ImageIcon("icons/cancel.png");
+		btnReturn.setIcon(returnImage);
 		contentPane.add(btnReturn);
 
 		ManEvent mE = new ManEvent();
