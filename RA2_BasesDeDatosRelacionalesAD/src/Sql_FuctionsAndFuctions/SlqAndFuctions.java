@@ -95,6 +95,8 @@ public class SlqAndFuctions {
 			stmt.setString(1, ca.getDniStudent());
 			stmt.setInt(2, ca.getIdRa());
 			stmt.setFloat(3, ca.getMark());
+			stmt.executeUpdate();
+			stmt.close();
 		}
 
 	}
@@ -193,6 +195,8 @@ public class SlqAndFuctions {
 			stmt.setFloat(1, ca.getMark());
 			stmt.setString(2, ca.getDniStudent());
 			stmt.setInt(3, ca.getIdRa());
+			stmt.executeUpdate();
+			stmt.close();
 		}
 
 	}
