@@ -153,6 +153,7 @@ public class AdminMenu extends JFrame {
 				Ras frame = new Ras();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
+				//System.out.println();
 				dispose();
 			} else if(o == btnMatriculate) {
 				Enrollments frame = new Enrollments();
