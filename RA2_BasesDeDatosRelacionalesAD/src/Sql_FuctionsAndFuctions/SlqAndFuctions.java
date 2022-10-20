@@ -222,7 +222,7 @@ public class SlqAndFuctions {
 			stm.setInt(2, res.getInt("ID"));
 			rst = stm.executeQuery();
 			rst.next();
-			mark = rs.getFloat("MARK") * rst.getFloat("PERCENTAGE");
+			mark += rs.getFloat("MARK") * rst.getFloat("PERCENTAGE");
 		}
 
 		return mark;
