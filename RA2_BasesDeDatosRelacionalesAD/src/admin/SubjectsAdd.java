@@ -44,7 +44,7 @@ public class SubjectsAdd extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
@@ -117,7 +117,7 @@ public class SubjectsAdd extends JFrame {
 		btnAdd.setBorderPainted(false);
 		btnAdd.setBackground(Color.DARK_GRAY);
 		btnAdd.setBounds(161, 396, 33, 33);
-		ImageIcon addIcon =new ImageIcon("icons/add.png");
+		ImageIcon addIcon = new ImageIcon("icons/add.png");
 		btnAdd.setIcon(addIcon);
 		contentPane.add(btnAdd);
 
@@ -125,7 +125,7 @@ public class SubjectsAdd extends JFrame {
 		btnReturn.setBorderPainted(false);
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setBounds(457, 396, 33, 33);
-		ImageIcon returnIcon =new ImageIcon("icons/disconnect.png");
+		ImageIcon returnIcon = new ImageIcon("icons/disconnect.png");
 		btnReturn.setIcon(returnIcon);
 		contentPane.add(btnReturn);
 
@@ -141,13 +141,16 @@ public class SubjectsAdd extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			
+
 			if (o == btnAdd) {
 				try {
-					Subject s = new Subject(Integer.parseInt(txtCode.getText()), Integer.parseInt(txtHours.getText()), txtName.getText(), txtDniTeacher.getText());
+					Subject s = new Subject(Integer.parseInt(txtCode.getText()), Integer.parseInt(txtHours.getText()),
+							txtName.getText(), txtDniTeacher.getText());
 					SlqAndFuctions.insert(s);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "The subject could not be added. The teacher's ID does not belong to any teacher in the database or there are missing data to enter. You will return to the previous tab.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"The subject could not be added. The teacher's ID does not belong to any teacher in the database or there are missing data to enter. You will return to the previous tab.",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				Subjects frame = new Subjects();
 				frame.setVisible(true);

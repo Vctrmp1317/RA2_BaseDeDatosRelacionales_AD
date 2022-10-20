@@ -70,14 +70,13 @@ public class Details {
 		detailsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		detailsFrame.getContentPane().setLayout(null);
 		detailsFrame.setLocationRelativeTo(null);
-		
+
 		ImageIcon imageIconWindow;
 		imageIconWindow = new ImageIcon("icons/icon.png");
 		Image imageWindow = imageIconWindow.getImage();
 		detailsFrame.setIconImage(imageWindow);
 
-		
-		 lblImage = new JLabel();
+		lblImage = new JLabel();
 		lblImage.setBounds(286, 11, 108, 124);
 		detailsFrame.getContentPane().add(lblImage);
 
@@ -171,67 +170,68 @@ public class Details {
 		detailsFrame.getContentPane().add(textBirthdate);
 		textBirthdate.setColumns(10);
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		java.sql.Date date=rs.getDate("BIRTHDATE");
+		java.sql.Date date = rs.getDate("BIRTHDATE");
 		textBirthdate.setText(date.toString());
 		textBirthdate.setEditable(false);
-		
-		ManEvent mm=new ManEvent();
+
+		ManEvent mm = new ManEvent();
 
 		btnClose = new JButton();
 		btnClose.setToolTipText("Close");
 		btnClose.setBackground(Color.DARK_GRAY);
 		btnClose.setBounds(450, 174, 33, 33);
 		btnClose.addActionListener(mm);
-		ImageIcon closeIcon=new ImageIcon("icons/cancel.png");
+		ImageIcon closeIcon = new ImageIcon("icons/cancel.png");
 		btnClose.setIcon(closeIcon);
 		btnClose.setBorderPainted(false);
 		detailsFrame.getContentPane().add(btnClose);
-		
+
 		btnUpdate = new JButton();
 		btnUpdate.setToolTipText("Update");
 		btnUpdate.setBackground(Color.DARK_GRAY);
 		btnUpdate.setBounds(301, 174, 25, 25);
 		btnUpdate.addActionListener(mm);
-		ImageIcon updateIcon=new ImageIcon("icons/uptadte.png");
+		ImageIcon updateIcon = new ImageIcon("icons/uptadte.png");
 		btnUpdate.setIcon(updateIcon);
 		btnUpdate.setBorderPainted(false);
 		detailsFrame.getContentPane().add(btnUpdate);
-		
-		 btnSave = new JButton();
-		 btnSave.setToolTipText("Save");
-		 btnSave.setBackground(Color.DARK_GRAY);
+
+		btnSave = new JButton();
+		btnSave.setToolTipText("Save");
+		btnSave.setBackground(Color.DARK_GRAY);
 		btnSave.setBounds(346, 173, 26, 26);
 		btnSave.addActionListener(mm);
 		btnSave.setBorderPainted(false);
-		ImageIcon saveIcon=new ImageIcon("icons/save.png");
+		ImageIcon saveIcon = new ImageIcon("icons/save.png");
 		btnSave.setIcon(saveIcon);
 		detailsFrame.getContentPane().add(btnSave);
-		
+
 		btnUptadteImage = new JButton();
 		btnUptadteImage.setBackground(Color.DARK_GRAY);
 		btnUptadteImage.setToolTipText("Update Image");
 		btnUptadteImage.setBounds(395, 174, 33, 33);
-		ImageIcon updateImageIcon=new ImageIcon("icons/agregar-documento.png");
+		ImageIcon updateImageIcon = new ImageIcon("icons/agregar-documento.png");
 		btnUptadteImage.setIcon(updateImageIcon);
 		btnUptadteImage.addActionListener(mm);
 		btnUptadteImage.setBorderPainted(false);
 		detailsFrame.getContentPane().add(btnUptadteImage);
-		
+
 		Fc = new JFileChooser();
-		
+
 		ImageIcon imageIconUpdate;
 		imageIconUpdate = new ImageIcon("imgs/updateIcon.png");
 		Image imageUpdate = imageIconUpdate.getImage();
 		Image newimgUpdate = imageUpdate.getScaledInstance(108, 124, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIconUpdate1 = new ImageIcon(newimgUpdate);
-		
 
 		detailsFrame.setVisible(true);
 	}
+
 	private void copyFileUsingJava7Files(File source, File dest) throws IOException {
 		Files.copy(source.toPath(), dest.toPath());
 
 	}
+
 	private class ManEvent implements ActionListener {
 
 		@Override
@@ -247,36 +247,30 @@ public class Details {
 					e1.printStackTrace();
 				}
 
-			}else if(o == btnUpdate) {
+			} else if (o == btnUpdate) {
 				JOptionPane.showMessageDialog(detailsFrame, "FIELDS EDITABLES NOW");
 				textName.setEditable(true);
 				textSecondName.setEditable(true);
 				textEmail.setEditable(true);
-				
-				
-			}
-			else if(o == btnUptadteImage) {
-				/*
+
+			} else if (o == btnUptadteImage) {
 				detailsFrame.add(Fc);
 				Fc.setVisible(true);
-				SlqAndFuctions saf=new SlqAndFuctions();
 				int seleccion = Fc.showOpenDialog(null);
 				try {
-				if (APPROVE_OPTION == seleccion) {
-					ResultSet res=	saf.consultDBSpec("student", "DNI", textDni.getText());
-					res.next();
-					File imgn=new File(res.getString("ROUTE_IMG"));
-					imgn.delete();
-				
-					File imagen1 = new File(res.getString("ROUTE_IMG"));
-					try {
-						copyFileUsingJava7Files(Fc.getSelectedFile(), imagen1);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
+					if (APPROVE_OPTION == seleccion) {
+
+						ResultSet res = SlqAndFuctions.consultDBSpec("student", "DNI", textDni.getText());
+						res.next();
+						File imgn = new File(res.getString("ROUTE_IMG"));
+						imgn.delete();
+						File imagen1 = new File(res.getString("ROUTE_IMG"));
+						try {
+							copyFileUsingJava7Files(Fc.getSelectedFile(), imagen1);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						ImageIcon imageIcon;
 						imageIcon = new ImageIcon(res.getString("ROUTE_IMG"));
 						Image image = imageIcon.getImage();
@@ -284,30 +278,21 @@ public class Details {
 						ImageIcon imageIcon2 = new ImageIcon(newimg);
 
 						lblImage.setIcon(imageIcon2);
-					
-					
-					
-				} else if (CANCEL_OPTION == seleccion) {
-					Fc.setVisible(false);
-				}
-				
+					} else if (CANCEL_OPTION == seleccion) {
+						Fc.setVisible(false);
+					}
+
 				} catch (SQLException | ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-			*/
-			}
-			else if(o == btnSave) {
-				SlqAndFuctions saf=new SlqAndFuctions();
-			
-			
-				
+
+			} else if (o == btnSave) {
 				try {
-					ResultSet res=	saf.consultDBSpec("student", "DNI", textDni.getText());
+					ResultSet res = SlqAndFuctions.consultDBSpec("student", "DNI", textDni.getText());
 					res.next();
 					Student s = new Student(textDni.getText(), textName.getText(), textSecondName.getText(),
 							textEmail.getText(), res.getString("ROUTE_IMG"), res.getDate("BIRTHDATE"));
-				saf.Update(s);
+					SlqAndFuctions.Update(s);
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -315,9 +300,8 @@ public class Details {
 				textName.setEditable(false);
 				textSecondName.setEditable(false);
 				textEmail.setEditable(false);
-				
-			
-			
+
+			}
 		}
-	}}
+	}
 }

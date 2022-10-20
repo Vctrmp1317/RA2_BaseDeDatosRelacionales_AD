@@ -69,7 +69,7 @@ public class Register {
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		registerFrame.setIconImage(image);
-		
+
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setFont(new Font("Rockwell", Font.BOLD, 12));
 		lblDni.setForeground(new Color(153, 153, 153));
@@ -144,13 +144,12 @@ public class Register {
 		btnAddImage.setToolTipText("Add Image");
 		btnAddImage.setBackground(new Color(51, 51, 51));
 		btnAddImage.setBounds(174, 185, 33, 33);
-		ImageIcon iconAdd=new ImageIcon("icons/agregar-documento.png");
+		ImageIcon iconAdd = new ImageIcon("icons/agregar-documento.png");
 		btnAddImage.setBorderPainted(false);
 		btnAddImage.setIcon(iconAdd);
-		
+
 		registerFrame.getContentPane().add(btnAddImage);
 
-		
 		lblBirthdate = new JLabel("BIRTHDATE");
 		lblBirthdate.setForeground(new Color(153, 153, 153));
 		lblBirthdate.setFont(new Font("Rockwell", Font.BOLD, 11));
@@ -168,7 +167,7 @@ public class Register {
 		btnCancel.setToolTipText("Cancel");
 		btnCancel.setBackground(new Color(51, 51, 51));
 		btnCancel.setBounds(310, 186, 33, 33);
-		ImageIcon iconCancel=new ImageIcon("icons/cancel.png");
+		ImageIcon iconCancel = new ImageIcon("icons/cancel.png");
 		btnCancel.setIcon(iconCancel);
 		btnCancel.setBorderPainted(false);
 		registerFrame.getContentPane().add(btnCancel);
@@ -177,14 +176,14 @@ public class Register {
 		btnAccept.setToolTipText("Accept");
 		btnAccept.setBackground(new Color(51, 51, 51));
 		btnAccept.setBounds(363, 186, 33, 33);
-		ImageIcon iconAccept=new ImageIcon("icons/accept.png");
+		ImageIcon iconAccept = new ImageIcon("icons/accept.png");
 		btnAccept.setIcon(iconAccept);
 		btnAccept.setBorderPainted(false);
 		registerFrame.getContentPane().add(btnAccept);
 
 		Fc = new JFileChooser();
 		registerFrame.setVisible(true);
-		
+
 		ManEven man = new ManEven();
 		btnAddImage.addActionListener(man);
 		btnCancel.addActionListener(man);
@@ -203,8 +202,7 @@ public class Register {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if (o == btnAddImage) {/*
-
+			if (o == btnAddImage) {
 				registerFrame.add(Fc);
 				Fc.setVisible(true);
 
@@ -222,17 +220,16 @@ public class Register {
 
 				} else if (CANCEL_OPTION == seleccion) {
 					Fc.setVisible(false);
-				}*/
+				}
 
 			} else if (o == btnAccept) {
 				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 				String route = "imgs/" + textDni.getText() + textName.getText() + ".jpg";
 				Date birthDate;
 				try {
-					SlqAndFuctions saf=new SlqAndFuctions();
-					ResultSet rs=saf.consultDB("users");
-					
-					while(rs.next()) {
+					ResultSet rs = SlqAndFuctions.consultDB("users");
+
+					while (rs.next()) {
 						rs.getString("DNI").equals(textDni.getText());
 					}
 					birthDate = new Date(format.parse(textBirthdate.getText()).getTime());
@@ -252,7 +249,7 @@ public class Register {
 
 			} else if (o == btnCancel) {
 				File imagen1 = new File("imgs/" + textDni.getText() + textName.getText() + ".jpg");
-				if(imagen1.exists())
+				if (imagen1.exists())
 					imagen1.delete();
 				Login frame = null;
 				try {

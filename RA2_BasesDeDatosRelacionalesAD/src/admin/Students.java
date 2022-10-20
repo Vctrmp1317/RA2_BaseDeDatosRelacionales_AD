@@ -49,7 +49,7 @@ public class Students extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
@@ -131,13 +131,15 @@ public class Students extends JFrame {
 							String route = rs.getString("ROUTE_IMG");
 							Date birthdate = rs.getDate("BIRTHDATE");
 
-							if (dniSelected.equals(dni) && nameSelected.equals(name) && secondNameSelected.equals(secondName) && emailSelected.equals(email) && birthdateSelected.equals(birthdate)) {
+							if (dniSelected.equals(dni) && nameSelected.equals(name)
+									&& secondNameSelected.equals(secondName) && emailSelected.equals(email)
+									&& birthdateSelected.equals(birthdate)) {
 								studentSelected = new Student(dni, name, secondName, email, route, birthdate);
 							}
 						}
 					} catch (Exception ex) {
 					}
-				} else if(Mouse_evt.getClickCount() == 2) {
+				} else if (Mouse_evt.getClickCount() == 2) {
 					StudentsDetails frame = new StudentsDetails(studentSelected);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
@@ -175,7 +177,7 @@ public class Students extends JFrame {
 		}
 
 	}
-	
+
 	private class MyModel extends DefaultTableModel {
 
 		public boolean isCellEditable(int filas, int columnas) {
@@ -203,7 +205,8 @@ public class Students extends JFrame {
 
 					model.addRow(fila);
 				}
-			}catch(Exception ex) {}
+			} catch (Exception ex) {
+			}
 		}
 	}
 }

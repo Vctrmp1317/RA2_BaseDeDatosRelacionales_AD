@@ -1,13 +1,10 @@
 package Sql_FuctionsAndFuctions;
 
-import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.ImageIcon;
 
 import Classes.Calification;
 import Classes.Enrollment;
@@ -16,9 +13,6 @@ import Classes.Student;
 import Classes.Subject;
 import Classes.Teacher;
 import Classes.Users;
-
-import LoginAndRegister.Login;
-import Student.Subjects;
 
 public class SlqAndFuctions {
 
@@ -120,7 +114,7 @@ public class SlqAndFuctions {
 		return rs;
 	}
 
-	public <T> ResultSet consultDBSpec(String table, String primarykey, T valor)
+	public static <T> ResultSet consultDBSpec(String table, String primarykey, T valor)
 			throws ClassNotFoundException, SQLException {
 		String sql = "SELECT * FROM " + table + " WHERE " + primarykey + " = ?;";
 		PreparedStatement stmt = getConn().prepareStatement(sql);
@@ -180,7 +174,8 @@ public class SlqAndFuctions {
 		} else if (o.getClass() == Ra.class) {
 			Ra r = (Ra) o;
 			PreparedStatement stmt = null;
-			stmt = getConn().prepareStatement("UPDATE ra SET NAME=?,DESCRIPTION=?,PERCENTAGE=? WHERE ID=? AND COD_SUBJECT=?");
+			stmt = getConn()
+					.prepareStatement("UPDATE ra SET NAME=?,DESCRIPTION=?,PERCENTAGE=? WHERE ID=? AND COD_SUBJECT=?");
 			stmt.setString(1, r.getName());
 			stmt.setString(2, r.getDescription());
 			stmt.setFloat(3, r.getPercentage());
@@ -201,13 +196,12 @@ public class SlqAndFuctions {
 
 	}
 
-	public float getMark(String dni, int codSubject) throws SQLException, ClassNotFoundException {
+	public static float getMark(String dni, int codSubject) throws SQLException, ClassNotFoundException {
 		float mark = 0;
 
 		ResultSet res = null;
-		SlqAndFuctions saf = new SlqAndFuctions();
 
-		PreparedStatement stmt = saf.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
+		PreparedStatement stmt = SlqAndFuctions.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
 
 		stmt.setInt(1, codSubject);
 		res = stmt.executeQuery();
@@ -215,14 +209,14 @@ public class SlqAndFuctions {
 
 			ResultSet rs = null;
 
-			stmt = saf.getConn().prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
+			stmt = SlqAndFuctions.getConn().prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
 			stmt.setString(1, dni);
 			stmt.setInt(2, res.getInt("ID"));
 			rs = stmt.executeQuery();
 			rs.next();
-			
+
 			ResultSet rst = null;
-			PreparedStatement stm = saf.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
+			PreparedStatement stm = SlqAndFuctions.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
 
 			stm.setInt(1, codSubject);
 			stm.setInt(2, res.getInt("ID"));

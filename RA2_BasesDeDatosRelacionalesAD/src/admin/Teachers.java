@@ -36,8 +36,9 @@ public class Teachers extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
+	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
 	public Teachers() {
 		super("TEACHERS");
@@ -55,7 +56,7 @@ public class Teachers extends JFrame {
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		 
+
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(63, 61, 456, 278);
 		table = new JTable();
@@ -76,7 +77,7 @@ public class Teachers extends JFrame {
 		btnAdd.setBackground(Color.DARK_GRAY);
 		btnAdd.setBorderPainted(false);
 		btnAdd.setBounds(63, 396, 33, 33);
-		ImageIcon addIcon =new ImageIcon("icons/add.png");
+		ImageIcon addIcon = new ImageIcon("icons/add.png");
 		btnAdd.setIcon(addIcon);
 		contentPane.add(btnAdd);
 
@@ -84,7 +85,7 @@ public class Teachers extends JFrame {
 		btnUpdate.setBackground(Color.DARK_GRAY);
 		btnUpdate.setBorderPainted(false);
 		btnUpdate.setBounds(187, 396, 33, 33);
-		ImageIcon updateIcon =new ImageIcon("icons/uptadte.png");
+		ImageIcon updateIcon = new ImageIcon("icons/uptadte.png");
 		btnUpdate.setIcon(updateIcon);
 		contentPane.add(btnUpdate);
 
@@ -92,7 +93,7 @@ public class Teachers extends JFrame {
 		btnDelete.setBackground(Color.DARK_GRAY);
 		btnDelete.setBorderPainted(false);
 		btnDelete.setBounds(329, 396, 33, 33);
-		ImageIcon deleteIcon =new ImageIcon("icons/delete.png");
+		ImageIcon deleteIcon = new ImageIcon("icons/delete.png");
 		btnDelete.setIcon(deleteIcon);
 		contentPane.add(btnDelete);
 
@@ -100,7 +101,7 @@ public class Teachers extends JFrame {
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setBorderPainted(false);
 		btnReturn.setBounds(486, 396, 33, 33);
-		ImageIcon returnIcon =new ImageIcon("icons/disconnect.png");
+		ImageIcon returnIcon = new ImageIcon("icons/disconnect.png");
 		btnReturn.setIcon(returnIcon);
 		contentPane.add(btnReturn);
 
@@ -136,7 +137,7 @@ public class Teachers extends JFrame {
 						}
 					} catch (Exception ex) {
 					}
-				} else if(Mouse_evt.getClickCount() == 2) {
+				} else if (Mouse_evt.getClickCount() == 2) {
 					TeachersDetails frame = new TeachersDetails(teacherSelected);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
@@ -144,7 +145,7 @@ public class Teachers extends JFrame {
 				}
 			}
 		});
-		
+
 	}
 
 	private class ManEvent implements ActionListener {
@@ -205,7 +206,8 @@ public class Teachers extends JFrame {
 
 					model.addRow(fila);
 				}
-			}catch(Exception ex) {}
+			} catch (Exception ex) {
+			}
 		}
 	}
 }

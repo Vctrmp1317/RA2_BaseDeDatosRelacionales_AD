@@ -47,7 +47,7 @@ public class TeachersAdd extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
@@ -120,7 +120,7 @@ public class TeachersAdd extends JFrame {
 		btnAdd.setBorderPainted(false);
 		btnAdd.setBackground(Color.DARK_GRAY);
 		btnAdd.setBounds(161, 396, 33, 33);
-		ImageIcon addIcon =new ImageIcon("icons/add.png");
+		ImageIcon addIcon = new ImageIcon("icons/add.png");
 		btnAdd.setIcon(addIcon);
 		contentPane.add(btnAdd);
 
@@ -128,17 +128,17 @@ public class TeachersAdd extends JFrame {
 		btnReturn.setBorderPainted(false);
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setBounds(457, 396, 33, 33);
-		ImageIcon returnIcon =new ImageIcon("icons/disconnect.png");
+		ImageIcon returnIcon = new ImageIcon("icons/disconnect.png");
 		btnReturn.setIcon(returnIcon);
 		contentPane.add(btnReturn);
-		
+
 		lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.LIGHT_GRAY);
 		lblPassword.setFont(new Font("Rockwell", Font.BOLD, 12));
 		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setBounds(50, 310, 85, 13);
 		contentPane.add(lblPassword);
-		
+
 		txtPassword = new JPasswordField();
 		txtPassword.setFont(new Font("Rockwell", Font.BOLD, 11));
 		txtPassword.setBackground(Color.GRAY);
@@ -157,15 +157,18 @@ public class TeachersAdd extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			
+
 			if (o == btnAdd) {
 				try {
-					Teacher t = new Teacher(txtDni.getText(), txtName.getText(), txtSecondName.getText(), txtEmail.getText());
+					Teacher t = new Teacher(txtDni.getText(), txtName.getText(), txtSecondName.getText(),
+							txtEmail.getText());
 					Users u = new Users(txtDni.getText(), txtPassword.getText(), "Teacher");
 					SlqAndFuctions.insert(t);
 					SlqAndFuctions.inserUser(u);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "The teacher could not be added. Missing data to enter. You will return to the previous tab.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"The teacher could not be added. Missing data to enter. You will return to the previous tab.",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				AdminMenu frame = new AdminMenu();
 				frame.setVisible(true);

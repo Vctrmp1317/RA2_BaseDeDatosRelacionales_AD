@@ -41,7 +41,6 @@ public class StudentsUpdate extends JFrame {
 	private JLabel lblImagen = new JLabel();
 	private JFileChooser Fc;
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -57,13 +56,13 @@ public class StudentsUpdate extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.studentSelected = studentSelected;
-		
+
 		JLabel lblTitle = new JLabel("Are you sure to update this student?");
 		lblTitle.setForeground(Color.LIGHT_GRAY);
 		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
@@ -98,7 +97,7 @@ public class StudentsUpdate extends JFrame {
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setBounds(26, 196, 109, 13);
 		contentPane.add(lblEmail);
-		
+
 		JLabel lblBirthdate = new JLabel("Birthdate:");
 		lblBirthdate.setForeground(Color.LIGHT_GRAY);
 		lblBirthdate.setFont(new Font("Rockwell", Font.BOLD, 13));
@@ -134,7 +133,7 @@ public class StudentsUpdate extends JFrame {
 		txtEmail.setBounds(161, 193, 329, 19);
 		txtEmail.setText(this.studentSelected.getEmail());
 		contentPane.add(txtEmail);
-		
+
 		txtBirthdate = new JTextField();
 		txtBirthdate.setBackground(Color.LIGHT_GRAY);
 		String parseDate = sqlDate(String.valueOf(this.studentSelected.getBirthdate()));
@@ -142,7 +141,7 @@ public class StudentsUpdate extends JFrame {
 		txtBirthdate.setColumns(10);
 		txtBirthdate.setBounds(161, 236, 329, 19);
 		contentPane.add(txtBirthdate);
-		
+
 		try {
 			ImageIcon img = createImage();
 			lblImagen.setIcon(img);
@@ -150,7 +149,7 @@ public class StudentsUpdate extends JFrame {
 		} catch (InstantiationException e) {
 		}
 		contentPane.add(lblImagen);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setFocusPainted(false);
 		btnConfirm.setContentAreaFilled(false);
@@ -172,7 +171,7 @@ public class StudentsUpdate extends JFrame {
 		ImageIcon returnImage = new ImageIcon("icons/cancel.png");
 		btnReturn.setIcon(returnImage);
 		contentPane.add(btnReturn);
-		
+
 		btnAddImage = new JButton();
 		btnAddImage.setFocusPainted(false);
 		btnAddImage.setContentAreaFilled(false);
@@ -180,20 +179,20 @@ public class StudentsUpdate extends JFrame {
 		btnAddImage.setBackground(Color.DARK_GRAY);
 		btnAddImage.setToolTipText("Choose");
 		btnAddImage.setBounds(324, 317, 33, 33);
-		ImageIcon iconAdd=new ImageIcon("icons/agregar-documento.png");
+		ImageIcon iconAdd = new ImageIcon("icons/agregar-documento.png");
 		btnAddImage.setIcon(iconAdd);
 		contentPane.add(btnAddImage);
-		
+
 		Fc = new JFileChooser();
 
 		ManEvent mE = new ManEvent();
 		btnAddImage.addActionListener(mE);
 		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
-		
-	}	
-	
-	private class ManEvent implements ActionListener{
+
+	}
+
+	private class ManEvent implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -220,34 +219,35 @@ public class StudentsUpdate extends JFrame {
 					Fc.setVisible(false);
 				}
 
-			} else if(o == btnConfirm) {
+			} else if (o == btnConfirm) {
 				try {
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 					Date birthDate = new Date(format.parse(txtBirthdate.getText()).getTime() + 85400000);
-					SlqAndFuctions.Update(new Student(txtDni.getText(), txtName.getText(), txtSecondName.getText(), txtEmail.getText(), studentSelected.getRouteImg(), birthDate));
+					SlqAndFuctions.Update(new Student(txtDni.getText(), txtName.getText(), txtSecondName.getText(),
+							txtEmail.getText(), studentSelected.getRouteImg(), birthDate));
 				} catch (Exception ex) {
-					
+
 				}
 				Students frame = new Students();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if(o == btnReturn) {
+			} else if (o == btnReturn) {
 				Students frame = new Students();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 			}
-			 
+
 		}
-		
+
 	}
-	
+
 	private void copyFileUsingJava7Files(File source, File dest) throws IOException {
 		Files.copy(source.toPath(), dest.toPath());
 
 	}
-	
+
 	private ImageIcon createImage() throws InstantiationException {
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon(studentSelected.getRouteImg());
@@ -257,10 +257,10 @@ public class StudentsUpdate extends JFrame {
 		return imageIcon2;
 
 	}
-	
+
 	private String sqlDate(String javaDate) {
-		   String[] date= new String[3];
-		   date = javaDate.split("-");
-		   return date[2] + "/" + date[1] + "/" + date[0];
-		}
+		String[] date = new String[3];
+		date = javaDate.split("-");
+		return date[2] + "/" + date[1] + "/" + date[0];
+	}
 }

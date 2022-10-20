@@ -30,7 +30,6 @@ public class StudentsDetails extends JFrame {
 	private JTextField txtBirthdate;
 	private JLabel lblImagen = new JLabel();
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -46,13 +45,13 @@ public class StudentsDetails extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.studentSelected = studentSelected;
-		
+
 		JLabel lblTitle = new JLabel("These are the details of the student");
 		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblTitle.setForeground(Color.LIGHT_GRAY);
@@ -87,7 +86,7 @@ public class StudentsDetails extends JFrame {
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setBounds(25, 196, 110, 13);
 		contentPane.add(lblEmail);
-		
+
 		JLabel lblBirthdate = new JLabel("Birthdate:");
 		lblBirthdate.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblBirthdate.setForeground(Color.LIGHT_GRAY);
@@ -126,7 +125,7 @@ public class StudentsDetails extends JFrame {
 		txtEmail.setText(this.studentSelected.getEmail());
 		txtEmail.setEditable(false);
 		contentPane.add(txtEmail);
-		
+
 		txtBirthdate = new JTextField();
 		txtBirthdate.setBackground(Color.LIGHT_GRAY);
 		txtBirthdate.setText(String.valueOf(this.studentSelected.getBirthdate()));
@@ -134,7 +133,7 @@ public class StudentsDetails extends JFrame {
 		txtBirthdate.setColumns(10);
 		txtBirthdate.setBounds(161, 236, 329, 19);
 		contentPane.add(txtBirthdate);
-		
+
 		try {
 			ImageIcon img = createImage();
 			lblImagen.setFont(new Font("Rockwell", Font.BOLD, 13));
@@ -158,27 +157,27 @@ public class StudentsDetails extends JFrame {
 
 		ManEvent mE = new ManEvent();
 		btnReturn.addActionListener(mE);
-		
-	}	
-	
-	private class ManEvent implements ActionListener{
+
+	}
+
+	private class ManEvent implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			
-			  if(o == btnReturn) {
-				  Students frame = new Students();
-				  frame.setVisible(true);
-				  frame.setLocationRelativeTo(null);
-				  dispose();
-			  }
-			 
+
+			if (o == btnReturn) {
+				Students frame = new Students();
+				frame.setVisible(true);
+				frame.setLocationRelativeTo(null);
+				dispose();
+			}
+
 		}
-		
+
 	}
-	
+
 	public ImageIcon createImage() throws InstantiationException {
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon(studentSelected.getRouteImg());

@@ -48,7 +48,7 @@ public class Ras extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
@@ -141,9 +141,8 @@ public class Ras extends JFrame {
 							String description = rs.getString("DESCRIPTION");
 							float percentage = rs.getFloat("PERCENTAGE");
 
-							if (idSelected == id && codSubjectSelected == codSubject
-									&& nameSelected.equals(name) && descriptionSelected.equals(description)
-									&& percentageSelected == percentage) {
+							if (idSelected == id && codSubjectSelected == codSubject && nameSelected.equals(name)
+									&& descriptionSelected.equals(description) && percentageSelected == percentage) {
 								raSelected = new Ra(id, codSubject, name, description, percentage);
 							}
 						}
@@ -193,7 +192,7 @@ public class Ras extends JFrame {
 		}
 
 	}
-	
+
 	private class MyModel extends DefaultTableModel {
 
 		public boolean isCellEditable(int filas, int columnas) {
@@ -221,7 +220,8 @@ public class Ras extends JFrame {
 
 					model.addRow(fila);
 				}
-			}catch(Exception ex) {}
+			} catch (Exception ex) {
+			}
 		}
 	}
 }

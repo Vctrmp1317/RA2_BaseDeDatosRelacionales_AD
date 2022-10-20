@@ -48,7 +48,7 @@ public class Enrollments extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
@@ -169,7 +169,7 @@ public class Enrollments extends JFrame {
 		}
 
 	}
-	
+
 	private class MyModel extends DefaultTableModel {
 
 		public boolean isCellEditable(int filas, int columnas) {
@@ -191,7 +191,8 @@ public class Enrollments extends JFrame {
 
 					model.addRow(fila);
 				}
-			}catch(Exception ex) {}
+			} catch (Exception ex) {
+			}
 		}
 	}
 }

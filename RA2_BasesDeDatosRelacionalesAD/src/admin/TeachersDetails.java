@@ -42,13 +42,12 @@ public class TeachersDetails extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
 
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.teacherSelected = teacherSelected;
 
 		JLabel lblTitle = new JLabel("These are the details of the teacher");
@@ -126,7 +125,7 @@ public class TeachersDetails extends JFrame {
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setBounds(457, 417, 33, 33);
 		btnReturn.setBorderPainted(false);
-		ImageIcon returnIcon =new ImageIcon("icons/cancel.png");
+		ImageIcon returnIcon = new ImageIcon("icons/cancel.png");
 		btnReturn.setIcon(returnIcon);
 		contentPane.add(btnReturn);
 

@@ -45,11 +45,11 @@ public class RasDelete extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.raSelected = raSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to delete this RA?");
@@ -86,7 +86,7 @@ public class RasDelete extends JFrame {
 		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDescription.setBounds(39, 252, 108, 13);
 		contentPane.add(lblDescription);
-		
+
 		JLabel lblPercentage = new JLabel("Percentage:");
 		lblPercentage.setForeground(Color.LIGHT_GRAY);
 		lblPercentage.setFont(new Font("Rockwell", Font.BOLD, 13));
@@ -125,7 +125,7 @@ public class RasDelete extends JFrame {
 		txtDescription.setText(this.raSelected.getDescription());
 		txtDescription.setEditable(false);
 		contentPane.add(txtDescription);
-		
+
 		txtPercentage = new JTextField();
 		txtPercentage.setBackground(Color.LIGHT_GRAY);
 		txtPercentage.setText(String.valueOf(this.raSelected.getPercentage()));
@@ -133,7 +133,7 @@ public class RasDelete extends JFrame {
 		txtPercentage.setColumns(10);
 		txtPercentage.setBounds(161, 306, 329, 19);
 		contentPane.add(txtPercentage);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setToolTipText("Confirm");
 		btnConfirm.setFocusPainted(false);

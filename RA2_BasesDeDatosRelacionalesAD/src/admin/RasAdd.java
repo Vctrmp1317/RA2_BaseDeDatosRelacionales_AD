@@ -45,7 +45,7 @@ public class RasAdd extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
@@ -84,7 +84,7 @@ public class RasAdd extends JFrame {
 		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDescription.setBounds(39, 259, 109, 13);
 		contentPane.add(lblDescription);
-		
+
 		JLabel lblPercentage = new JLabel("Percentage:");
 		lblPercentage.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblPercentage.setForeground(Color.LIGHT_GRAY);
@@ -115,7 +115,7 @@ public class RasAdd extends JFrame {
 		txtDescription.setColumns(100);
 		txtDescription.setBounds(161, 256, 329, 19);
 		contentPane.add(txtDescription);
-		
+
 		txtPercentage = new JTextField();
 		txtPercentage.setBackground(Color.LIGHT_GRAY);
 		txtPercentage.setBounds(161, 320, 329, 19);
@@ -155,13 +155,16 @@ public class RasAdd extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			
+
 			if (o == btnAdd) {
 				try {
-					Ra r = new Ra(Integer.parseInt(txtId.getText()), Integer.parseInt(txtCodSubject.getText()), txtName.getText(), txtDescription.getText(), Float.parseFloat(txtPercentage.getText()));
+					Ra r = new Ra(Integer.parseInt(txtId.getText()), Integer.parseInt(txtCodSubject.getText()),
+							txtName.getText(), txtDescription.getText(), Float.parseFloat(txtPercentage.getText()));
 					SlqAndFuctions.insert(r);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "The RA could not be added. The subject's code does not belong to any RA in the database or there are missing data to enter. You will return to the previous tab.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"The RA could not be added. The subject's code does not belong to any RA in the database or there are missing data to enter. You will return to the previous tab.",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				Ras frame = new Ras();
 				frame.setVisible(true);

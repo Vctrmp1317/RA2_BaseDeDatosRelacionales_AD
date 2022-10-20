@@ -46,12 +46,12 @@ public class TeachersDelete extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.teacherSelected = teacherSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to delete this teacher?");
@@ -124,21 +124,21 @@ public class TeachersDelete extends JFrame {
 		txtEmail.setText(this.teacherSelected.getEmail());
 		txtEmail.setEditable(false);
 		contentPane.add(txtEmail);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setBackground(Color.DARK_GRAY);
 		btnConfirm.setToolTipText("Confirm");
 		btnConfirm.setBounds(152, 390, 33, 33);
-		ImageIcon confirmIcon=new ImageIcon("icons/accept.png");
+		ImageIcon confirmIcon = new ImageIcon("icons/accept.png");
 		btnConfirm.setIcon(confirmIcon);
 		btnConfirm.setBorderPainted(false);
 		contentPane.add(btnConfirm);
-		
+
 		btnReturn = new JButton();
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setToolTipText("Return");
 		btnReturn.setBounds(457, 390, 33, 33);
-		ImageIcon cancelIcon=new ImageIcon("icons/cancel.png");
+		ImageIcon cancelIcon = new ImageIcon("icons/cancel.png");
 		btnReturn.setIcon(cancelIcon);
 		btnReturn.setBorderPainted(false);
 		contentPane.add(btnReturn);
@@ -157,8 +157,8 @@ public class TeachersDelete extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					PreparedStatement stmt=null;
-					stmt=SlqAndFuctions.getConn().prepareStatement("UPDATE subjects SET DNI_TEACHER=?");
+					PreparedStatement stmt = null;
+					stmt = SlqAndFuctions.getConn().prepareStatement("UPDATE subjects SET DNI_TEACHER=?");
 					stmt.setString(1, "null");
 					stmt.executeUpdate();
 					SlqAndFuctions.delete("TEACHERS", "DNI", txtDni.getText());

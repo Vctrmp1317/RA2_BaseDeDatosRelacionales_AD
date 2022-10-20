@@ -41,11 +41,11 @@ public class EnrollmentsDelete extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.enrollmentSelected = enrollmentSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to delete this enrollment?");
@@ -84,7 +84,7 @@ public class EnrollmentsDelete extends JFrame {
 		txtCodSubject.setText(String.valueOf(this.enrollmentSelected.getCodSubject()));
 		txtCodSubject.setEditable(false);
 		contentPane.add(txtCodSubject);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setFocusPainted(false);
 		btnConfirm.setContentAreaFilled(false);
@@ -121,8 +121,9 @@ public class EnrollmentsDelete extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					PreparedStatement stmt=null;
-					stmt=SlqAndFuctions.getConn().prepareStatement("DELETE FROM ENROLLMENT WHERE DNI_STUDENT = ? AND COD_SUBJECT = ?");
+					PreparedStatement stmt = null;
+					stmt = SlqAndFuctions.getConn()
+							.prepareStatement("DELETE FROM ENROLLMENT WHERE DNI_STUDENT = ? AND COD_SUBJECT = ?");
 					stmt.setString(1, txtDniStudent.getText());
 					stmt.setInt(2, Integer.parseInt(txtCodSubject.getText()));
 					stmt.executeUpdate();
@@ -142,6 +143,5 @@ public class EnrollmentsDelete extends JFrame {
 		}
 
 	}
-	
 
 }

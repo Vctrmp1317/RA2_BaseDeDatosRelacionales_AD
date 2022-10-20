@@ -10,8 +10,8 @@ public class test {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-				 new Login();
-					
+					new Login();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

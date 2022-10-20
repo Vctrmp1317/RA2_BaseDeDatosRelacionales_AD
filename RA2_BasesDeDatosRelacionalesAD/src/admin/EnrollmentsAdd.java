@@ -42,7 +42,7 @@ public class EnrollmentsAdd extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
@@ -114,13 +114,15 @@ public class EnrollmentsAdd extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			
+
 			if (o == btnAdd) {
 				try {
 					Enrollment e2 = new Enrollment(txtDniStudent.getText(), Integer.parseInt(txtCodSubject.getText()));
 					SlqAndFuctions.insert(e2);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "The enrollment could not be added. The student's ID or the subject's code does not belong to any enrollment in the database or there are missing data to enter. You will return to the previous tab.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"The enrollment could not be added. The student's ID or the subject's code does not belong to any enrollment in the database or there are missing data to enter. You will return to the previous tab.",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
 				}
 				Enrollments frame = new Enrollments();
 				frame.setVisible(true);

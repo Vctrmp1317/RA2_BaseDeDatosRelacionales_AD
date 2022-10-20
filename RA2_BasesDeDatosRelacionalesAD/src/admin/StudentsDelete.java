@@ -32,7 +32,6 @@ public class StudentsDelete extends JFrame {
 	private JTextField txtBirthdate;
 	private JLabel lblImagen = new JLabel();
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -48,13 +47,13 @@ public class StudentsDelete extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.studentSelected = studentSelected;
-		
+
 		JLabel lblTitle = new JLabel("Are you sure to delete this student?");
 		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblTitle.setForeground(Color.LIGHT_GRAY);
@@ -89,7 +88,7 @@ public class StudentsDelete extends JFrame {
 		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setBounds(22, 196, 113, 13);
 		contentPane.add(lblEmail);
-		
+
 		JLabel lblBirthdate = new JLabel("Birthdate:");
 		lblBirthdate.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblBirthdate.setForeground(Color.LIGHT_GRAY);
@@ -128,7 +127,7 @@ public class StudentsDelete extends JFrame {
 		txtEmail.setText(this.studentSelected.getEmail());
 		txtEmail.setEditable(false);
 		contentPane.add(txtEmail);
-		
+
 		txtBirthdate = new JTextField();
 		txtBirthdate.setBackground(Color.LIGHT_GRAY);
 		txtBirthdate.setText(String.valueOf(this.studentSelected.getBirthdate()));
@@ -136,7 +135,7 @@ public class StudentsDelete extends JFrame {
 		txtBirthdate.setColumns(10);
 		txtBirthdate.setBounds(161, 236, 329, 19);
 		contentPane.add(txtBirthdate);
-		
+
 		try {
 			ImageIcon img = createImage();
 			lblImagen.setFont(new Font("Rockwell", Font.PLAIN, 13));
@@ -146,7 +145,7 @@ public class StudentsDelete extends JFrame {
 		} catch (InstantiationException e) {
 		}
 		contentPane.add(lblImagen);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setFocusPainted(false);
 		btnConfirm.setContentAreaFilled(false);
@@ -172,16 +171,16 @@ public class StudentsDelete extends JFrame {
 		ManEvent mE = new ManEvent();
 		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
-		
-	}	
-	
-	private class ManEvent implements ActionListener{
+
+	}
+
+	private class ManEvent implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if(o == btnConfirm) {
+			if (o == btnConfirm) {
 				try {
 					SlqAndFuctions.delete("STUDENT", "DNI", txtDni.getText());
 					SlqAndFuctions.delete("USERS", "DNI", txtDni.getText());
@@ -193,17 +192,17 @@ public class StudentsDelete extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if(o == btnReturn) {
+			} else if (o == btnReturn) {
 				Students frame = new Students();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
 			}
-			 
+
 		}
-		
+
 	}
-	
+
 	public ImageIcon createImage() throws InstantiationException {
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon(studentSelected.getRouteImg());

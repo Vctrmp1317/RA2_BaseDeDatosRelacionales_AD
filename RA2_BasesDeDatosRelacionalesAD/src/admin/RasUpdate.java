@@ -45,11 +45,11 @@ public class RasUpdate extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.raSelected = raSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to update this RA?");
@@ -86,7 +86,7 @@ public class RasUpdate extends JFrame {
 		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDescription.setBounds(26, 252, 109, 13);
 		contentPane.add(lblDescription);
-		
+
 		JLabel lblPercentage = new JLabel("Percentage:");
 		lblPercentage.setForeground(Color.LIGHT_GRAY);
 		lblPercentage.setFont(new Font("Rockwell", Font.BOLD, 13));
@@ -123,14 +123,14 @@ public class RasUpdate extends JFrame {
 		txtDescription.setBounds(161, 249, 329, 19);
 		txtDescription.setText(this.raSelected.getDescription());
 		contentPane.add(txtDescription);
-		
+
 		txtPercentage = new JTextField();
 		txtPercentage.setBackground(Color.LIGHT_GRAY);
 		txtPercentage.setText(String.valueOf(this.raSelected.getPercentage()));
 		txtPercentage.setColumns(10);
 		txtPercentage.setBounds(161, 306, 329, 19);
 		contentPane.add(txtPercentage);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setToolTipText("Confirm");
 		btnConfirm.setFocusPainted(false);
@@ -167,7 +167,9 @@ public class RasUpdate extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					SlqAndFuctions.Update(new Ra(Integer.parseInt(txtId.getText()), Integer.parseInt(txtCodSubject.getText()), txtName.getText(), txtDescription.getText(), Float.parseFloat(txtPercentage.getText())));
+					SlqAndFuctions.Update(new Ra(Integer.parseInt(txtId.getText()),
+							Integer.parseInt(txtCodSubject.getText()), txtName.getText(), txtDescription.getText(),
+							Float.parseFloat(txtPercentage.getText())));
 				} catch (Exception ex) {
 					System.out.println(ex);
 				}

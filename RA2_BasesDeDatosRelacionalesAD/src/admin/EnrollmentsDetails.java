@@ -41,11 +41,11 @@ public class EnrollmentsDetails extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.enrollmentSelected = enrollmentSelected;
 
 		JLabel lblTitle = new JLabel("These are the details of the enrollment");

@@ -1,30 +1,22 @@
 package Student;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import LoginAndRegister.Login;
-import LoginAndRegister.Register;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
-import Teacher.TeacherMenu;
-import admin.AdminMenu;
 
-import java.awt.FlowLayout;
 import javax.swing.JButton;
 
 public class Subjects {
@@ -74,8 +66,6 @@ public class Subjects {
 
 				if (e.getClickCount() == 2) {
 					try {
-
-						SlqAndFuctions saf = new SlqAndFuctions();
 						codSub = (int) table.getValueAt(table.getSelectedRow(), 1);
 						new Marks();
 						subjectsFrame.dispose();
@@ -115,21 +105,20 @@ public class Subjects {
 			String[] columns = { "NAME", "COD" };
 			MyModel m = new MyModel();
 			m.setColumnIdentifiers(columns);
-			SlqAndFuctions saf = new SlqAndFuctions();
-			
+
 			String dni = Login.dni;
 
-			ResultSet rs = saf.consultDBSpec("enrollment", "DNI_STUDENT", dni);
+			ResultSet rs = SlqAndFuctions.consultDBSpec("enrollment", "DNI_STUDENT", dni);
 			ResultSet res = null;
 			codSub = 0;
 			while (rs.next()) {
 				codSub = rs.getInt("COD_SUBJECT");
-				res = saf.consultDBSpec("subjects", "COD", codSub);
+				res = SlqAndFuctions.consultDBSpec("subjects", "COD", codSub);
 				res.next();
 				m.addRow(new Object[] { res.getString("NAME"), res.getInt("COD") });
 
 			}
-			
+
 			table.setModel(m);
 		}
 	}

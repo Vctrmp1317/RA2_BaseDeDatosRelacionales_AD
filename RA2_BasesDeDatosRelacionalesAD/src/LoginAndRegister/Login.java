@@ -20,7 +20,6 @@ import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;

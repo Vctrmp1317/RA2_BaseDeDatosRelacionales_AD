@@ -45,12 +45,12 @@ public class TeachersUpdate extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.teacherSelected = teacherSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to update this teacher?");
@@ -120,25 +120,25 @@ public class TeachersUpdate extends JFrame {
 		txtEmail.setBounds(161, 306, 329, 19);
 		txtEmail.setText(this.teacherSelected.getEmail());
 		contentPane.add(txtEmail);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setBackground(Color.DARK_GRAY);
 		btnConfirm.setToolTipText("Confirm");
 		btnConfirm.setBounds(152, 390, 33, 33);
-		ImageIcon confirmIcon=new ImageIcon("icons/accept.png");
+		ImageIcon confirmIcon = new ImageIcon("icons/accept.png");
 		btnConfirm.setIcon(confirmIcon);
 		btnConfirm.setBorderPainted(false);
 		contentPane.add(btnConfirm);
-		
+
 		btnReturn = new JButton();
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setToolTipText("Return");
 		btnReturn.setBounds(457, 390, 33, 33);
-		ImageIcon cancelIcon=new ImageIcon("icons/cancel.png");
+		ImageIcon cancelIcon = new ImageIcon("icons/cancel.png");
 		btnReturn.setIcon(cancelIcon);
 		btnReturn.setBorderPainted(false);
 		contentPane.add(btnReturn);
-		
+
 		ManEvent mE = new ManEvent();
 		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
@@ -153,7 +153,8 @@ public class TeachersUpdate extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					SlqAndFuctions.Update(new Teacher(txtDni.getText(), txtName.getText(), txtSecondName.getText(), txtEmail.getText()));
+					SlqAndFuctions.Update(new Teacher(txtDni.getText(), txtName.getText(), txtSecondName.getText(),
+							txtEmail.getText()));
 				} catch (ClassNotFoundException | SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();

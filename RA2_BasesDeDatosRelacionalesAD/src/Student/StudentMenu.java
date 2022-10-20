@@ -34,7 +34,7 @@ public class StudentMenu {
 	private JMenu menu1, menu2, menu3;
 	private JMenuItem mi1, mi2, mi3;
 	public static JTable table;
-	private JButton btnClose, btnViewMarks;
+	private JButton btnClose;
 
 	public StudentMenu() throws ClassNotFoundException, SQLException {
 		initialize();
@@ -54,26 +54,25 @@ public class StudentMenu {
 		menuFrame.setBounds(100, 100, 328, 313);
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuFrame.setLocationRelativeTo(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		menuFrame.setIconImage(image);
 
-		
 		ManMenu mm = new ManMenu();
 		mb = new JMenuBar();
 		mb.setBorderPainted(false);
 		mb.setBackground(new Color(102, 102, 102));
 		mb.setForeground(new Color(102, 102, 102));
 		menuFrame.setJMenuBar(mb);
-		
+
 		menu1 = new JMenu();
 		menu1.setBackground(new Color(102, 102, 102));
 		ImageIcon menuIcon = new ImageIcon("icons/menu.png");
 		menu1.setIcon(menuIcon);
 		mb.add(menu1);
-		
+
 		menu2 = new JMenu("Profile");
 		menu2.setForeground(new Color(0, 0, 0));
 		menu2.setFont(new Font("Rockwell", Font.BOLD, 12));
@@ -81,12 +80,12 @@ public class StudentMenu {
 		ImageIcon profileIcon = new ImageIcon("icons/perfil.png");
 		menu2.setIcon(profileIcon);
 		menu1.add(menu2);
-		
+
 		menu3 = new JMenu("Connection Options");
 		menu3.setForeground(new Color(0, 0, 0));
 		menu3.setFont(new Font("Rockwell", Font.BOLD, 12));
 		menu3.setBackground(new Color(255, 255, 255));
-		ImageIcon optionsIcon=new ImageIcon("icons/options.png");
+		ImageIcon optionsIcon = new ImageIcon("icons/options.png");
 		menu3.setIcon(optionsIcon);
 		menu1.add(menu3);
 
@@ -104,12 +103,11 @@ public class StudentMenu {
 		menu2.add(mi2);
 		mi2.addActionListener(mm);
 
-
 		mi3 = new JMenuItem("Disconnect");
 		mi3.setForeground(new Color(0, 0, 0));
 		mi3.setBackground(new Color(255, 255, 255));
 		mi3.setFont(new Font("Rockwell", Font.BOLD, 12));
-		ImageIcon disconnectIcon=new ImageIcon("icons/disconnect.png");
+		ImageIcon disconnectIcon = new ImageIcon("icons/disconnect.png");
 		mi3.setIcon(disconnectIcon);
 		menu3.add(mi3);
 		menuFrame.getContentPane().setLayout(null);
@@ -126,7 +124,7 @@ public class StudentMenu {
 		table.setFont(new Font("Segoe UI Symbol", Font.BOLD, 11));
 		table.setForeground(new Color(0, 0, 0));
 		table.setBackground(Color.LIGHT_GRAY);
-		MyModel m=new MyModel();
+		MyModel m = new MyModel();
 		m.Model();
 		scrollPane.setViewportView(table);
 
@@ -137,10 +135,9 @@ public class StudentMenu {
 		btnClose.addActionListener(mm);
 		btnClose.setBorderPainted(false);
 		btnClose.setIcon(disconnectIcon);
-		
+
 		menuFrame.getContentPane().add(btnClose);
-		
-	
+
 		menuFrame.setVisible(true);
 	}
 
@@ -153,33 +150,31 @@ public class StudentMenu {
 		private void Model() throws ClassNotFoundException, SQLException {
 			String[] columns = { "SUBJECT", "MARK" };
 			float mark = 0;
-			int codSub=0;
+			int codSub = 0;
 			MyModel m = new MyModel();
 			m.setColumnIdentifiers(columns);
-			SlqAndFuctions saf = new SlqAndFuctions();
-			
+
 			String dni = Login.dni;
 			try {
-			ResultSet rs = saf.consultDBSpec("enrollment", "DNI_STUDENT", dni);
-			ResultSet res = null;
-			codSub = 0;
-			while (rs.next()) {
-				codSub = rs.getInt("COD_SUBJECT");
-				res = saf.consultDBSpec("subjects", "COD", codSub);
-				if(res.next()) {
-					if(saf.getMark(dni, codSub)==0) {
-						m.addRow(new Object[] { res.getString("NAME"),0 });
+				ResultSet rs = SlqAndFuctions.consultDBSpec("enrollment", "DNI_STUDENT", dni);
+				ResultSet res = null;
+				codSub = 0;
+				while (rs.next()) {
+					codSub = rs.getInt("COD_SUBJECT");
+					res = SlqAndFuctions.consultDBSpec("subjects", "COD", codSub);
+					if (res.next()) {
+						if (SlqAndFuctions.getMark(dni, codSub) == 0) {
+							m.addRow(new Object[] { res.getString("NAME"), 0 });
+						} else
+							m.addRow(new Object[] { res.getString("NAME"), SlqAndFuctions.getMark(dni, codSub) });
 					}
-					else
-						m.addRow(new Object[] { res.getString("NAME"), saf.getMark(dni, codSub) });
 				}
+			} catch (SQLException e1) {
+
 			}
-			}catch(SQLException e1) {
-				
-			}
-			
+
 			table.setModel(m);
-			
+
 		}
 	}
 
@@ -207,7 +202,7 @@ public class StudentMenu {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			
+
 			} else if (o == mi3) {
 				try {
 					new Login();

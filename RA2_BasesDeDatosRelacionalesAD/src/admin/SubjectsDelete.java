@@ -44,15 +44,14 @@ public class SubjectsDelete extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		this.subjectSelected = subjectSelected;
 
-		
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		JLabel lblTitle = new JLabel("Are you sure to delete this subject?");
 		lblTitle.setForeground(Color.LIGHT_GRAY);
 		lblTitle.setFont(new Font("Rockwell", Font.BOLD, 12));
@@ -123,21 +122,21 @@ public class SubjectsDelete extends JFrame {
 		txtDniTeacher.setText(this.subjectSelected.getDniTeacher());
 		txtDniTeacher.setEditable(false);
 		contentPane.add(txtDniTeacher);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setBackground(Color.DARK_GRAY);
 		btnConfirm.setToolTipText("Confirm");
 		btnConfirm.setBounds(152, 390, 33, 33);
-		ImageIcon confirmIcon=new ImageIcon("icons/accept.png");
+		ImageIcon confirmIcon = new ImageIcon("icons/accept.png");
 		btnConfirm.setIcon(confirmIcon);
 		btnConfirm.setBorderPainted(false);
 		contentPane.add(btnConfirm);
-		
+
 		btnReturn = new JButton();
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setToolTipText("Return");
 		btnReturn.setBounds(457, 390, 33, 33);
-		ImageIcon cancelIcon=new ImageIcon("icons/cancel.png");
+		ImageIcon cancelIcon = new ImageIcon("icons/cancel.png");
 		btnReturn.setIcon(cancelIcon);
 		btnReturn.setBorderPainted(false);
 		contentPane.add(btnReturn);

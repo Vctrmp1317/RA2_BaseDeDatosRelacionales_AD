@@ -1,10 +1,8 @@
 package Student;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -61,13 +59,12 @@ public class Marks {
 		markFrame.setLocationRelativeTo(null);
 		markFrame.getContentPane().setLayout(null);
 		markFrame.setLocationRelativeTo(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		markFrame.setIconImage(image);
 
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 158, 239);
 		markFrame.getContentPane().add(scrollPane);
@@ -97,7 +94,6 @@ public class Marks {
 		textRaMark.setEditable(false);
 		textRaMark.setBorder(null);
 		textRaMark.setBackground(new Color(102, 102, 102));
-		
 
 		lblPercentage = new JLabel("PERCENTAGE");
 		lblPercentage.setFont(new Font("Rockwell", Font.BOLD, 11));
@@ -109,7 +105,7 @@ public class Marks {
 		textPercentage.setColumns(10);
 		textPercentage.setBorder(null);
 		textPercentage.setBackground(new Color(102, 102, 102));
-	
+
 		textPercentage.setEditable(false);
 
 		lblDescription = new JLabel("DESCRIPTION");
@@ -154,7 +150,6 @@ public class Marks {
 			public void mousePressed(MouseEvent e) {
 				JTable source = (JTable) e.getSource();
 				source.getSelectedRow();
-				SlqAndFuctions saf = new SlqAndFuctions();
 
 				String dni = Login.dni;
 
@@ -162,7 +157,7 @@ public class Marks {
 
 					ResultSet res = null;
 					String nameRa = (String) table.getValueAt(table.getSelectedRow(), 0);
-					PreparedStatement stmt = saf.getConn()
+					PreparedStatement stmt = SlqAndFuctions.getConn()
 							.prepareStatement("SELECT * FROM ra WHERE NAME =? AND COD_SUBJECT=?");
 					stmt.setString(1, nameRa);
 					stmt.setInt(2, Subjects.codSub);
@@ -170,7 +165,7 @@ public class Marks {
 					res.next();
 					ResultSet rs = null;
 
-					stmt = saf.getConn()
+					stmt = SlqAndFuctions.getConn()
 							.prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
 					stmt.setString(1, Login.dni);
 					stmt.setInt(2, res.getInt("ID"));
@@ -180,9 +175,9 @@ public class Marks {
 					textPercentage.setText(String.valueOf(res.getFloat("PERCENTAGE")));
 					textArea.setText(res.getString("DESCRIPTION"));
 					textArea.setVisible(true);
+					markFrame.repaint();
 				} catch (ClassNotFoundException | SQLException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 				lblDescription.setVisible(true);
 				lblPercentage.setVisible(true);
@@ -194,7 +189,7 @@ public class Marks {
 
 			}
 		});
-		ManEvent mm=new ManEvent();
+		ManEvent mm = new ManEvent();
 		btnClose = new JButton();
 		btnClose.setBackground(Color.DARK_GRAY);
 		btnClose.setBounds(391, 203, 33, 33);
@@ -203,48 +198,42 @@ public class Marks {
 		btnClose.setIcon(iconClose);
 		btnClose.addActionListener(mm);
 		markFrame.getContentPane().add(btnClose);
-		
-		
-		
+
 		MyModel m = new MyModel();
 		m.Model();
 		textField.setText(String.valueOf(MarkFinal()));
 		markFrame.setVisible(true);
 	}
-	
+
 	private float MarkFinal() throws ClassNotFoundException, SQLException {
-		FinalMark=0;
+		FinalMark = 0;
 		ResultSet res = null;
-		SlqAndFuctions saf=new SlqAndFuctions();
-		
-		PreparedStatement stmt = saf.getConn()
-				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
-		
+
+		PreparedStatement stmt = SlqAndFuctions.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT=?");
+
 		stmt.setInt(1, Subjects.codSub);
 		res = stmt.executeQuery();
-		while(res.next()) {
-		
-		ResultSet rs = null;
+		while (res.next()) {
 
-		stmt = saf.getConn()
-				.prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
-		stmt.setString(1, Login.dni);
-		stmt.setInt(2, res.getInt("ID"));
-		rs = stmt.executeQuery();
-		rs.next();
-		ResultSet rst=null;
-		PreparedStatement stm = saf.getConn()
-				.prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
-		
-		stm.setInt(1, Subjects.codSub);
-		stm.setInt(2, res.getInt("ID"));
-		rst = stm.executeQuery();
-		rst.next();
-		FinalMark=rs.getFloat("MARK")*rst.getFloat("PERCENTAGE");
+			ResultSet rs = null;
+
+			stmt = SlqAndFuctions.getConn().prepareStatement("SELECT * FROM calification WHERE DNI_STUDENT =? AND ID_RA=?");
+			stmt.setString(1, Login.dni);
+			stmt.setInt(2, res.getInt("ID"));
+			rs = stmt.executeQuery();
+			rs.next();
+			ResultSet rst = null;
+			PreparedStatement stm = SlqAndFuctions.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
+
+			stm.setInt(1, Subjects.codSub);
+			stm.setInt(2, res.getInt("ID"));
+			rst = stm.executeQuery();
+			rst.next();
+			FinalMark = rs.getFloat("MARK") * rst.getFloat("PERCENTAGE");
 		}
-		
+
 		return FinalMark;
-		
+
 	}
 
 	private class MyModel extends DefaultTableModel {
@@ -257,7 +246,6 @@ public class Marks {
 			String[] columns = { "NAME", "PERCENTAGE" };
 			MyModel m = new MyModel();
 			m.setColumnIdentifiers(columns);
-			SlqAndFuctions saf = new SlqAndFuctions();
 
 			String dni = Login.dni;
 
@@ -267,7 +255,7 @@ public class Marks {
 
 			codRa = Subjects.codSub;
 
-			res = saf.consultDBSpec("ra", "COD_SUBJECT", codRa);
+			res = SlqAndFuctions.consultDBSpec("ra", "COD_SUBJECT", codRa);
 
 			while (res.next()) {
 
@@ -278,6 +266,7 @@ public class Marks {
 			table.setModel(m);
 		}
 	}
+
 	private class ManEvent implements ActionListener {
 
 		@Override

@@ -44,12 +44,12 @@ public class SubjectsUpdate extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.subjectSelected = subjectSelected;
 
 		JLabel lblTitle = new JLabel("Are you sure to update this subject?");
@@ -120,25 +120,25 @@ public class SubjectsUpdate extends JFrame {
 		txtDniTeacher.setText(this.subjectSelected.getDniTeacher());
 		txtDniTeacher.setEditable(false);
 		contentPane.add(txtDniTeacher);
-		
+
 		btnConfirm = new JButton();
 		btnConfirm.setBackground(Color.DARK_GRAY);
 		btnConfirm.setToolTipText("Confirm");
 		btnConfirm.setBounds(152, 390, 33, 33);
-		ImageIcon confirmIcon=new ImageIcon("icons/accept.png");
+		ImageIcon confirmIcon = new ImageIcon("icons/accept.png");
 		btnConfirm.setIcon(confirmIcon);
 		btnConfirm.setBorderPainted(false);
 		contentPane.add(btnConfirm);
-		
+
 		btnReturn = new JButton();
 		btnReturn.setBackground(Color.DARK_GRAY);
 		btnReturn.setToolTipText("Return");
 		btnReturn.setBounds(457, 390, 33, 33);
-		ImageIcon cancelIcon=new ImageIcon("icons/cancel.png");
+		ImageIcon cancelIcon = new ImageIcon("icons/cancel.png");
 		btnReturn.setIcon(cancelIcon);
 		btnReturn.setBorderPainted(false);
 		contentPane.add(btnReturn);
-		
+
 		ManEvent mE = new ManEvent();
 		btnConfirm.addActionListener(mE);
 		btnReturn.addActionListener(mE);
@@ -153,7 +153,8 @@ public class SubjectsUpdate extends JFrame {
 			Object o = e.getSource();
 			if (o == btnConfirm) {
 				try {
-					SlqAndFuctions.Update(new Subject(Integer.parseInt(txtCode.getText()), Integer.parseInt(txtHours.getText()), txtName.getText(), txtDniTeacher.getText()));
+					SlqAndFuctions.Update(new Subject(Integer.parseInt(txtCode.getText()),
+							Integer.parseInt(txtHours.getText()), txtName.getText(), txtDniTeacher.getText()));
 				} catch (ClassNotFoundException | SQLException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();

@@ -44,11 +44,11 @@ public class RasDetails extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
-		
+
 		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		this.raSelected = raSelected;
 
 		JLabel lblTitle = new JLabel("These are the details of the RA");
@@ -85,7 +85,7 @@ public class RasDetails extends JFrame {
 		lblDescription.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDescription.setBounds(27, 252, 108, 13);
 		contentPane.add(lblDescription);
-		
+
 		JLabel lblPercentage = new JLabel("Percentage:");
 		lblPercentage.setFont(new Font("Rockwell", Font.BOLD, 13));
 		lblPercentage.setForeground(Color.LIGHT_GRAY);
@@ -124,7 +124,7 @@ public class RasDetails extends JFrame {
 		txtDescription.setText(this.raSelected.getDescription());
 		txtDescription.setEditable(false);
 		contentPane.add(txtDescription);
-		
+
 		txtPercentage = new JTextField();
 		txtPercentage.setBackground(Color.LIGHT_GRAY);
 		txtPercentage.setText(String.valueOf(this.raSelected.getPercentage()));

@@ -36,11 +36,10 @@ public class AdminMenu extends JFrame {
 
 		ImageIcon imageIcon;
 		imageIcon = new ImageIcon("icons/icon.png");
-		
 
 		Image image = imageIcon.getImage();
 		setIconImage(image);
-		
+
 		btnStudents = new JButton();
 		btnStudents.setFocusPainted(false);
 		btnStudents.setContentAreaFilled(false);
@@ -48,10 +47,10 @@ public class AdminMenu extends JFrame {
 		btnStudents.setToolTipText("Students");
 		btnStudents.setBackground(Color.DARK_GRAY);
 		btnStudents.setBounds(81, 72, 64, 64);
-		ImageIcon studentIcon=new ImageIcon("icons/student.png");
+		ImageIcon studentIcon = new ImageIcon("icons/student.png");
 		btnStudents.setIcon(studentIcon);
 		contentPane.add(btnStudents);
-		
+
 		btnTeachers = new JButton();
 		btnTeachers.setFocusPainted(false);
 		btnTeachers.setContentAreaFilled(false);
@@ -64,10 +63,10 @@ public class AdminMenu extends JFrame {
 		btnTeachers.setBounds(369, 72, 64, 64);
 
 		btnTeachers.setBounds(369, 72, 65, 65);
-		ImageIcon teacherIcon=new ImageIcon("icons/teacher.png");
+		ImageIcon teacherIcon = new ImageIcon("icons/teacher.png");
 		btnTeachers.setIcon(teacherIcon);
 		contentPane.add(btnTeachers);
-		
+
 		btnSubjects = new JButton();
 		btnSubjects.setFocusPainted(false);
 		btnSubjects.setContentAreaFilled(false);
@@ -76,10 +75,10 @@ public class AdminMenu extends JFrame {
 		btnSubjects.setBackground(Color.DARK_GRAY);
 		btnSubjects.setBounds(81, 201, 65, 65);
 		btnSubjects.setBorderPainted(false);
-		ImageIcon subjectIcon=new ImageIcon("icons/subjects.png");
+		ImageIcon subjectIcon = new ImageIcon("icons/subjects.png");
 		btnSubjects.setIcon(subjectIcon);
 		contentPane.add(btnSubjects);
-		
+
 		btnRAs = new JButton();
 		btnRAs.setFocusPainted(false);
 		btnRAs.setContentAreaFilled(false);
@@ -88,10 +87,10 @@ public class AdminMenu extends JFrame {
 		btnRAs.setBackground(Color.DARK_GRAY);
 		btnRAs.setBounds(369, 201, 65, 65);
 		btnRAs.setBorderPainted(false);
-		ImageIcon raIcon=new ImageIcon("icons/ras.png");
+		ImageIcon raIcon = new ImageIcon("icons/ras.png");
 		btnRAs.setIcon(raIcon);
 		contentPane.add(btnRAs);
-		
+
 		btnMatriculate = new JButton();
 		btnMatriculate.setFocusPainted(false);
 		btnMatriculate.setContentAreaFilled(false);
@@ -100,10 +99,10 @@ public class AdminMenu extends JFrame {
 		btnMatriculate.setBackground(Color.DARK_GRAY);
 		btnMatriculate.setBounds(81, 331, 65, 65);
 		btnMatriculate.setBorderPainted(false);
-		ImageIcon enrollmentIcon=new ImageIcon("icons/enrollment.png");
+		ImageIcon enrollmentIcon = new ImageIcon("icons/enrollment.png");
 		btnMatriculate.setIcon(enrollmentIcon);
 		contentPane.add(btnMatriculate);
-		
+
 		btnExit = new JButton();
 		btnExit.setFocusPainted(false);
 		btnExit.setContentAreaFilled(false);
@@ -112,10 +111,10 @@ public class AdminMenu extends JFrame {
 		btnExit.setBackground(Color.DARK_GRAY);
 		btnExit.setBounds(369, 331, 65, 65);
 		btnExit.setBorderPainted(false);
-		ImageIcon exitIcon=new ImageIcon("icons/exitx64.png");
+		ImageIcon exitIcon = new ImageIcon("icons/exitx64.png");
 		btnExit.setIcon(exitIcon);
 		contentPane.add(btnExit);
-		
+
 		ManEvent mE = new ManEvent();
 		btnStudents.addActionListener(mE);
 		btnTeachers.addActionListener(mE);
@@ -123,51 +122,52 @@ public class AdminMenu extends JFrame {
 		btnRAs.addActionListener(mE);
 		btnMatriculate.addActionListener(mE);
 		btnExit.addActionListener(mE);
-		
+
 		setVisible(true);
-		
+
 	}
-	
-	private class ManEvent implements ActionListener{
+
+	private class ManEvent implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			Object o = e.getSource();
-			if(o == btnStudents) {
+			if (o == btnStudents) {
 				Students frame = new Students();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if(o == btnTeachers) {
+			} else if (o == btnTeachers) {
 				Teachers frame = new Teachers();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if(o == btnSubjects) {
+			} else if (o == btnSubjects) {
 				Subjects frame = new Subjects();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if(o == btnRAs) {
+			} else if (o == btnRAs) {
 				Ras frame = new Ras();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
-				//System.out.println();
+				// System.out.println();
 				dispose();
-			} else if(o == btnMatriculate) {
+			} else if (o == btnMatriculate) {
 				Enrollments frame = new Enrollments();
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 				dispose();
-			} else if(o == btnExit) {
+			} else if (o == btnExit) {
 				Login frame = null;
 				try {
 					frame = new Login();
 					dispose();
-				} catch (Exception ex) {}
+				} catch (Exception ex) {
+				}
 			}
 		}
-		
+
 	}
 }
