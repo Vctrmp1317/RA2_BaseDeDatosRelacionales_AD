@@ -220,6 +220,7 @@ public class SlqAndFuctions {
 			stmt.setInt(2, res.getInt("ID"));
 			rs = stmt.executeQuery();
 			rs.next();
+			
 			ResultSet rst = null;
 			PreparedStatement stm = saf.getConn().prepareStatement("SELECT * FROM ra WHERE COD_SUBJECT = ? AND ID = ?");
 

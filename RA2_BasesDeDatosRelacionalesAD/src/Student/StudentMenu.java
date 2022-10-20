@@ -126,6 +126,8 @@ public class StudentMenu {
 		table.setFont(new Font("Segoe UI Symbol", Font.BOLD, 11));
 		table.setForeground(new Color(0, 0, 0));
 		table.setBackground(Color.LIGHT_GRAY);
+		MyModel m=new MyModel();
+		m.Model();
 		scrollPane.setViewportView(table);
 
 		btnClose = new JButton("");
@@ -138,9 +140,7 @@ public class StudentMenu {
 		
 		menuFrame.getContentPane().add(btnClose);
 		
-			
-		MyModel m=new MyModel();
-		m.Model();
+	
 		menuFrame.setVisible(true);
 	}
 
@@ -153,29 +153,33 @@ public class StudentMenu {
 		private void Model() throws ClassNotFoundException, SQLException {
 			String[] columns = { "SUBJECT", "MARK" };
 			float mark = 0;
-			int count=0;
+			int codSub=0;
 			MyModel m = new MyModel();
 			m.setColumnIdentifiers(columns);
 			SlqAndFuctions saf = new SlqAndFuctions();
-
+			
 			String dni = Login.dni;
-			ResultSet rs = saf.consultDB("subjects");
-			
 			try {
-				
-			
-				 rs = saf.consultDB("subjects");
+			ResultSet rs = saf.consultDBSpec("enrollment", "DNI_STUDENT", dni);
+			ResultSet res = null;
+			codSub = 0;
 			while (rs.next()) {
-				mark = saf.getMark(dni, rs.getInt("COD"));
-				String name = rs.getString("NAME");
-				m.addRow(new Object[] { name, mark });
-
+				codSub = rs.getInt("COD_SUBJECT");
+				res = saf.consultDBSpec("subjects", "COD", codSub);
+				if(res.next()) {
+					if(saf.getMark(dni, codSub)==0) {
+						m.addRow(new Object[] { res.getString("NAME"),0 });
+					}
+					else
+						m.addRow(new Object[] { res.getString("NAME"), saf.getMark(dni, codSub) });
+				}
 			}
 			}catch(SQLException e1) {
-				JOptionPane.showMessageDialog(menuFrame, "THIS USER HAS NOT SUBJECTS");
+				
 			}
-
+			
 			table.setModel(m);
+			
 		}
 	}
 

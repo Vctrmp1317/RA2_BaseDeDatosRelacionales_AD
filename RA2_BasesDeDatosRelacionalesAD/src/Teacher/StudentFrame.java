@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 import Classes.Calification;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 @SuppressWarnings("serial")
 public class StudentFrame extends JFrame {
@@ -27,6 +31,7 @@ public class StudentFrame extends JFrame {
 	public StudentFrame(int subjectCodeInput,String studentDniInput,String subjectNameInput)
 	{
 		super("STUDENT");
+		getContentPane().setBackground(Color.DARK_GRAY);
 		
 		subjectCode=subjectCodeInput;
 		studentDni=studentDniInput;
@@ -35,14 +40,21 @@ public class StudentFrame extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setSize(500,600);
-		setLayout(new FlowLayout());
+		setSize(503,538);
 		setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 		
 		
 		JLabel labelLocation=new JLabel();
+		labelLocation.setForeground(Color.LIGHT_GRAY);
+		labelLocation.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelLocation.setBounds(74, 11, 307, 14);
 		labelLocation.setText("SUBJECT: "+subjectName+"  STUDENT: "+studentDni);
-		add(labelLocation);
+		getContentPane().add(labelLocation);
 		
 		
 		String col[]={"RA","Calification"};
@@ -51,7 +63,8 @@ public class StudentFrame extends JFrame {
 		JTable table=new JTable(tableModel);
 		table.setDefaultEditor(Object.class,null);
 		JScrollPane scrollPane = new JScrollPane(table);
-		add(scrollPane);
+		scrollPane.setBounds(16, 36, 452, 415);
+		getContentPane().add(scrollPane);
 		
 		califications=new ArrayList<Calification>();
 		{
@@ -116,10 +129,16 @@ public class StudentFrame extends JFrame {
 		}
 		
 		JLabel labelFinalMark=new JLabel();
+		labelFinalMark.setForeground(Color.LIGHT_GRAY);
+		labelFinalMark.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelFinalMark.setBounds(16, 462, 337, 14);
 		labelFinalMark.setText("FINAL MARK: "+String.valueOf(finalMark));
-		add(labelFinalMark);
+		getContentPane().add(labelFinalMark);
 		
 		JButton buttonMark=new JButton();
+		buttonMark.setFont(new Font("Rockwell", Font.BOLD, 11));
+		buttonMark.setBackground(Color.GRAY);
+		buttonMark.setBounds(166, 458, 154, 23);
 		buttonMark.setText("Mark/Modify mark");
 		buttonMark.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,16 +150,20 @@ public class StudentFrame extends JFrame {
 				}
 			}
 		});
-		add(buttonMark);
+		getContentPane().add(buttonMark);
 		
 		JButton buttonBack=new JButton();
-		buttonBack.setText("Back");
+		buttonBack.setBackground(Color.DARK_GRAY);
+		buttonBack.setBounds(435, 455, 33, 33);
+		ImageIcon backIcon =new ImageIcon("icons/cancel.png");
+		buttonBack.setIcon(backIcon);
+		buttonBack.setBorderPainted(false);
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new SubjectFrame(subjectCode).setVisible(true);
 				dispose();
 			}
 		});
-		add(buttonBack);
+		getContentPane().add(buttonBack);
 	}
 }

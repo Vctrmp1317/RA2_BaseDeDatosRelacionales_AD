@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 import Classes.Subject;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 @SuppressWarnings("serial")
 public class SubjectFrame extends JFrame {
@@ -25,14 +29,14 @@ public class SubjectFrame extends JFrame {
 	public SubjectFrame(int subjectCodeInput)
 	{
 		super("SUBJECT");
+		getContentPane().setBackground(Color.DARK_GRAY);
 		
 		subjectCode=subjectCodeInput;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setSize(500,600);
-		setLayout(new FlowLayout());
+		setSize(507,546);
 		setLocationRelativeTo(null);
 		
 		
@@ -60,11 +64,19 @@ public class SubjectFrame extends JFrame {
 				e.printStackTrace();
 			}
 		}
+		getContentPane().setLayout(null);
+		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 		
 		
 		JLabel labelName=new JLabel();
+		labelName.setBounds(175, 5, 141, 16);
+		labelName.setForeground(Color.LIGHT_GRAY);
+		labelName.setFont(new Font("Rockwell", Font.BOLD, 13));
 		labelName.setText("SUBJECT: "+subject.getName());
-		add(labelName);
+		getContentPane().add(labelName);
 		
 		
 		String col[]={"Student"};
@@ -73,7 +85,8 @@ public class SubjectFrame extends JFrame {
 		JTable table=new JTable(tableModel);
 		table.setDefaultEditor(Object.class,null);
 		JScrollPane scrollPane = new JScrollPane(table);
-		add(scrollPane);
+		scrollPane.setBounds(19, 26, 452, 427);
+		getContentPane().add(scrollPane);
 		
 		studentDnis=new ArrayList<String>();
 		ResultSet res;
@@ -95,6 +108,9 @@ public class SubjectFrame extends JFrame {
 		
 		
 		JButton buttonSelect=new JButton();
+		buttonSelect.setBounds(194, 469, 122, 23);
+		buttonSelect.setFont(new Font("Rockwell", Font.BOLD, 11));
+		buttonSelect.setBackground(Color.GRAY);
 		buttonSelect.setText("Select student");
 		buttonSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,17 +123,21 @@ public class SubjectFrame extends JFrame {
 				}
 			}
 		});
-		add(buttonSelect);
+		getContentPane().add(buttonSelect);
 		
 		
 		JButton buttonBack=new JButton();
-		buttonBack.setText("Back");
+		buttonBack.setBackground(Color.DARK_GRAY);
+		buttonBack.setBounds(438, 464, 33, 33);
+		ImageIcon backIcon =new ImageIcon("icons/cancel.png");
+		buttonBack.setIcon(backIcon);
+		buttonBack.setBorderPainted(false);
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new TeacherMenu();
 				dispose();
 			}
 		});
-		add(buttonBack);
+		getContentPane().add(buttonBack);
 	}
 }

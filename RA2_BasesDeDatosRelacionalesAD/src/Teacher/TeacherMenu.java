@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +19,8 @@ import javax.swing.JTextField;
 import Classes.Teacher;
 import LoginAndRegister.Login;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import java.awt.Color;
+import java.awt.Font;
 
 public class TeacherMenu {
 	private JFrame menuFrame;
@@ -32,11 +35,11 @@ public class TeacherMenu {
 	
 	private void initialize() {
 		menuFrame = new JFrame("TEACHER");
+		menuFrame.getContentPane().setBackground(Color.DARK_GRAY);
 		menuFrame.setResizable(false);
-		menuFrame.setSize(500,500);
+		menuFrame.setSize(500,278);
 		menuFrame.setLocationRelativeTo(null);
 		menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menuFrame.setLayout(new FlowLayout());
 		
 		
 		Teacher teacher=null;
@@ -68,8 +71,12 @@ public class TeacherMenu {
 		subjectItems=new ArrayList<JMenuItem>();
 		
 		JMenuBar menuBar=new JMenuBar();
+		menuBar.setForeground(Color.LIGHT_GRAY);
+		menuBar.setBackground(Color.GRAY);
 		JMenu menu=new JMenu("Subjects");
-		
+		menu.setForeground(new Color(0, 0, 0));
+		ImageIcon menuIcon = new ImageIcon("icons/menu.png");
+		menu.setIcon(menuIcon);
 		ResultSet res;
 		try {
 			res = SlqAndFuctions.consultDB("subjects");
@@ -104,54 +111,83 @@ public class TeacherMenu {
 		
 		menuBar.add(menu);
 		menuFrame.setJMenuBar(menuBar);
+		menuFrame.getContentPane().setLayout(null);
 		
 		
 		JLabel labelDni=new JLabel();
+		labelDni.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelDni.setForeground(Color.LIGHT_GRAY);
+		labelDni.setBounds(10, 36, 43, 14);
 		labelDni.setText("DNI:");
-		menuFrame.add(labelDni);
+		menuFrame.getContentPane().add(labelDni);
 		
 		JTextField textDni=new JTextField();
+		textDni.setBackground(Color.GRAY);
+		textDni.setFont(new Font("Rockwell", Font.BOLD, 11));
+		textDni.setBounds(90, 34, 168, 20);
 		textDni.setEditable(false);
 		textDni.setColumns(10);
 		textDni.setText(teacher.getDni());
-		menuFrame.add(textDni);
+		menuFrame.getContentPane().add(textDni);
 		
 		
 		JLabel labelName=new JLabel();
+		labelName.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelName.setForeground(Color.LIGHT_GRAY);
+		labelName.setBounds(10, 77, 43, 14);
 		labelName.setText("Name:");
-		menuFrame.add(labelName);
+		menuFrame.getContentPane().add(labelName);
 		
 		JTextField textName=new JTextField();
+		textName.setBackground(Color.GRAY);
+		textName.setFont(new Font("Rockwell", Font.BOLD, 11));
+		textName.setBounds(99, 75, 159, 20);
 		textName.setEditable(false);
 		textName.setColumns(10);
 		textName.setText(teacher.getName());
-		menuFrame.add(textName);
+		menuFrame.getContentPane().add(textName);
 		
 		
 		JLabel labelSecondName=new JLabel();
+		labelSecondName.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelSecondName.setForeground(Color.LIGHT_GRAY);
+		labelSecondName.setBounds(10, 118, 93, 14);
 		labelSecondName.setText("Second name:");
-		menuFrame.add(labelSecondName);
+		menuFrame.getContentPane().add(labelSecondName);
 		
 		JTextField textSecondName=new JTextField();
+		textSecondName.setBackground(Color.GRAY);
+		textSecondName.setFont(new Font("Rockwell", Font.BOLD, 11));
+		textSecondName.setBounds(109, 116, 149, 20);
 		textSecondName.setEditable(false);
 		textSecondName.setColumns(10);
 		textSecondName.setText(teacher.getSecondName());
-		menuFrame.add(textSecondName);
+		menuFrame.getContentPane().add(textSecondName);
 		
 		
 		JLabel labelEmail=new JLabel();
+		labelEmail.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelEmail.setForeground(Color.LIGHT_GRAY);
+		labelEmail.setBounds(10, 156, 59, 14);
 		labelEmail.setText("Email:");
-		menuFrame.add(labelEmail);
+		menuFrame.getContentPane().add(labelEmail);
 		
 		JTextField textEmail=new JTextField();
+		textEmail.setBackground(Color.GRAY);
+		textEmail.setFont(new Font("Rockwell", Font.BOLD, 11));
+		textEmail.setBounds(96, 154, 162, 20);
 		textEmail.setEditable(false);
 		textEmail.setColumns(10);
 		textEmail.setText(teacher.getEmail());
-		menuFrame.add(textEmail);
+		menuFrame.getContentPane().add(textEmail);
 		
 		
 		JButton buttonBack=new JButton();
-		buttonBack.setText("Exit");
+		buttonBack.setBackground(Color.DARK_GRAY);
+		buttonBack.setBounds(411, 152, 33, 33);
+		ImageIcon backIcon =new ImageIcon("icons/cancel.png");
+		buttonBack.setIcon(backIcon);
+		buttonBack.setBorderPainted(false);
 		buttonBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -166,7 +202,7 @@ public class TeacherMenu {
 				}
 			}
 		});
-		menuFrame.add(buttonBack);
+		menuFrame.getContentPane().add(buttonBack);
 		
 		
 		menuFrame.setVisible(true);

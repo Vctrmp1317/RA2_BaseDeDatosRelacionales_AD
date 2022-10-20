@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +15,9 @@ import javax.swing.JTextField;
 
 import Classes.Calification;
 import Sql_FuctionsAndFuctions.SlqAndFuctions;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 @SuppressWarnings("serial")
 public class MarkFrame extends JFrame{
@@ -25,6 +29,7 @@ public class MarkFrame extends JFrame{
 	public MarkFrame(int subjectCodeInput,String studentDniInput,int raIdInput,String subjectNameInput)
 	{
 		super("MARK");
+		getContentPane().setBackground(Color.DARK_GRAY);
 		
 		subjectCode=subjectCodeInput;
 		studentDni=studentDniInput;
@@ -34,8 +39,7 @@ public class MarkFrame extends JFrame{
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setSize(500,600);
-		setLayout(new FlowLayout());
+		setSize(476,209);
 		setLocationRelativeTo(null);
 		
 		
@@ -57,34 +61,56 @@ public class MarkFrame extends JFrame{
 				e.printStackTrace();
 			}
 		}
+		getContentPane().setLayout(null);
+		
+		ImageIcon imageIcon = new ImageIcon("icons/icon.png");
+		Image image = imageIcon.getImage();
+		setIconImage(image);
 		
 		JLabel labelLocation=new JLabel();
+		labelLocation.setForeground(Color.LIGHT_GRAY);
+		labelLocation.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelLocation.setBounds(42, 26, 396, 14);
 		labelLocation.setText("SUBJECT: "+subjectName+"  STUDENT: "+studentDni+"  RA: "+raName);
-		add(labelLocation);
+		getContentPane().add(labelLocation);
 		
 		
 		JLabel labelMark=new JLabel();
+		labelMark.setForeground(Color.LIGHT_GRAY);
+		labelMark.setFont(new Font("Rockwell", Font.BOLD, 13));
+		labelMark.setBounds(42, 72, 50, 14);
 		labelMark.setText("Mark:");
-		add(labelMark);
+		getContentPane().add(labelMark);
 		
 		textMark=new JTextField();
+		textMark.setFont(new Font("Rockwell", Font.BOLD, 11));
+		textMark.setBackground(Color.GRAY);
+		textMark.setBounds(102, 70, 86, 20);
 		textMark.setEditable(true);
 		textMark.setColumns(10);
-		add(textMark);
+		getContentPane().add(textMark);
 		
 		
 		JButton buttonCancel=new JButton();
-		buttonCancel.setText("Cancel");
+		buttonCancel.setBackground(Color.DARK_GRAY);
+		buttonCancel.setBounds(405, 120, 33, 33);
+		ImageIcon cancelIcon=new ImageIcon("icons/cancel.png");
+		buttonCancel.setIcon(cancelIcon);
+		buttonCancel.setBorderPainted(false);
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new StudentFrame(subjectCode,studentDni,subjectName).setVisible(true);
 				dispose();
 			}
 		});
-		add(buttonCancel);
+		getContentPane().add(buttonCancel);
 		
 		JButton buttonAccept=new JButton();
-		buttonAccept.setText("Accept");
+		buttonAccept.setBackground(Color.DARK_GRAY);
+		buttonAccept.setBounds(42, 120, 33, 33);
+		ImageIcon acceptIcon=new ImageIcon("icons/accept.png");
+		buttonAccept.setIcon(acceptIcon);
+		buttonAccept.setBorderPainted(false);
 		buttonAccept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text=textMark.getText();
@@ -145,6 +171,7 @@ public class MarkFrame extends JFrame{
 				dispose();
 			}
 		});
-		add(buttonAccept);
+		getContentPane().add(buttonAccept);
+		setVisible(true);
 	}
 }

@@ -132,7 +132,7 @@ public class Login {
 
 						String pass = passwordField.getText();
 						ResultSet res = SlqAndFuctions.consultDB("users");
-
+						
 						boolean bol = res.next();
 						boolean incorrect = false;
 						while (bol) {
@@ -140,10 +140,8 @@ public class Login {
 							String dniQuery = res.getString("DNI");
 							if (pass.equals(pass2) && textDni.getText().equals(dniQuery)) {
 								bol = false;
-							} else if ((textDni.getText().equalsIgnoreCase("admin")
-									&& passwordField.getText().equalsIgnoreCase("admin"))) {
-								bol = false;
-							} else {
+							} 
+							else {
 								res.next();
 								incorrect = true;
 							}
